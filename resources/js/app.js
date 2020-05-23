@@ -5,7 +5,8 @@ import router from './router';
 import store from './store';
 // ルートコンポーネントをインポートする
 import App from './App.vue';
-
+// Axios ライブラリの設定
+import './bootstrap'
 
 new Vue({
   el: '#app',
