@@ -3318,12 +3318,14 @@ var render = function() {
     "footer",
     { staticClass: "footer" },
     [
-      _c("button", { staticClass: "button button--link" }, [_vm._v("Logout")]),
+      _c("button", { staticClass: "button button--link" }, [
+        _vm._v("ログアウト")
+      ]),
       _vm._v(" "),
       _c(
         "RouterLink",
         { staticClass: "button button--link", attrs: { to: "/login" } },
-        [_vm._v("\n    Login / Register\n  ")]
+        [_vm._v("\n    ログイン / 新規登録\n  ")]
       )
     ],
     1
@@ -3373,7 +3375,7 @@ var render = function() {
             _c(
               "RouterLink",
               { staticClass: "button button--link", attrs: { to: "/login" } },
-              [_vm._v("\n        Login / Register\n      ")]
+              [_vm._v("\n        ログイン / 新規登録\n      ")]
             )
           ],
           1
@@ -20466,7 +20468,7 @@ function getCookieValue(searchKey) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\homestead\Laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/code/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })
