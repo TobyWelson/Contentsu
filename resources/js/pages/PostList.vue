@@ -1,3 +1,3 @@
 <template>
-  <h1>Post List</h1>
+  <h1>転載記事一覧</h1>
 </template>
