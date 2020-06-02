@@ -1,20 +1,5 @@
 <template>
   <footer class="footer">
-    <button class="button button--link" @click="logout">ログアウト</button>
-    <RouterLink class="button button--link" to="/login">
-      ログイン / 新規登録
-    </RouterLink>
+    <span>Copyright © 2013-2014 LLC. Jiamoriksu All Rights Reserved.</span>
   </footer>
 </template>
-
-<script>
-export default {
-  methods: {
-    async logout () {
-      await this.$store.dispatch('auth/logout')
-
-      this.$router.push('/login')
-    }
-  }
-}
-</script>

@@ -5,12 +5,12 @@
         class="tab__item"
         :class="{'tab__item--active': tab === 1 }"
         @click="tab = 1"
-    >Login</li>
+    >ログイン</li>
     <li
         class="tab__item"
         :class="{'tab__item--active': tab === 2 }"
         @click="tab = 2"
-    >Register</li>
+    >登録</li>
     </ul>
     <div class="panel" v-show="tab === 1">
         <form class="form" @submit.prevent="login">
@@ -58,6 +58,11 @@ export default {
       }
     }
   },
+  computed: {
+    apiStatus () {
+      return this.$store.state.auth.apiStatus
+    }
+  },
   methods: {
     async register () {
       // authストアのresigterアクションを呼び出す
@@ -70,8 +75,10 @@ export default {
       // authストアのloginアクションを呼び出す
       await this.$store.dispatch('auth/login', this.loginForm)
 
-      // トップページに移動する
-      this.$router.push('/')
+      if (this.apiStatus) {
+        // トップページに移動する
+        this.$router.push('/')
+      }
     }
   }
 }

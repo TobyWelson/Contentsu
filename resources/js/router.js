@@ -4,6 +4,10 @@ import VueRouter from 'vue-router';
 // ページコンポーネントをインポートする
 import PostList from './pages/PostList.vue';
 import Login from './pages/Login.vue';
+import SystemError from './pages/errors/System.vue'
+
+// ナビゲーションガード
+import store from './store'
 
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
@@ -17,7 +21,18 @@ const routes = [
   },
   {
     path: '/login',
-    component: Login
+    component: Login,
+    beforeEnter (to, from, next) {
+      if (store.getters['auth/check']) {
+        next('/')
+      } else {
+        next()
+      }
+    }
+  },
+  {
+    path: '/500',
+    component: SystemError
   }
 ];
 
