@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 import PostList from './pages/PostList.vue';
 import Login from './pages/Login.vue';
 import SystemError from './pages/errors/System.vue'
+import PostDetail from './pages/PostDetail.vue'
 
 // ナビゲーションガード
 import store from './store'
@@ -18,6 +19,11 @@ const routes = [
   {
     path: '/',
     component: PostList
+  },
+  {
+    path: '/posts/:id',
+    component: PostDetail,
+    props: true
   },
   {
     path: '/login',

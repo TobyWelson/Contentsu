@@ -29,3 +29,9 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 // ログインユーザー
 Route::get('/user', fn() => Auth::user())->name('user');
+
+// 転載記事投稿
+Route::post('/posts', 'PostController@create')->name('post.create');
+
+// 転載記事一覧
+Route::get('/posts', 'PostController@index')->name('post.index');
