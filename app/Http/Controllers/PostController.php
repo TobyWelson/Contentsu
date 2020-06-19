@@ -14,7 +14,7 @@ class PostController extends Controller
     public function __construct()
     {
         // 認証が必要
-        $this->middleware('auth')->except(['index']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -26,7 +26,6 @@ class PostController extends Controller
     {
         $post = new Post();
 
-        // タイトル名を設定する
         $post->title = $request->title;
         $post->category = $request->category;
         $post->url = $request->url;
@@ -59,5 +58,16 @@ class PostController extends Controller
 
         return $posts;
     }
-    
+
+    /**
+     * 転載記事詳細
+     * @param string $id
+     * @return Post
+     */
+    public function show(string $id)
+    {
+        $post = Post::where('id', $id)->with(['owner'])->first();
+
+        return $post ?? abort(404);
+    }
 }

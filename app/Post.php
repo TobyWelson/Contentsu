@@ -10,6 +10,11 @@ class Post extends Model
     /** プライマリキーの型 */
     protected $keyType = 'string';
 
+    /** JSONに含める属性 */
+    protected $visible = [
+        'id', 'owner', 'title', 'url', 'view_count', 'category',
+    ];
+
     /** IDの桁数 */
     const ID_LENGTH = 12;
 
@@ -58,5 +63,14 @@ class Post extends Model
     public function owner()
     {
         return $this->belongsTo('App\User', 'user_id', 'id', 'users');
+    }
+
+    /**
+     * アクセサ - url
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return $this->attributes['id'];
     }
 }

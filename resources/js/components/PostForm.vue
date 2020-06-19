@@ -9,10 +9,10 @@
         <ul v-if="errors.title">
           <li v-for="msg in errors.title" :key="msg">{{ msg }}</li>
         </ul>
-        <ul v-if="errors.title">
+        <ul v-if="errors.category">
           <li v-for="msg in errors.category" :key="msg">{{ msg }}</li>
         </ul>
-        <ul v-if="errors.title">
+        <ul v-if="errors.url">
           <li v-for="msg in errors.url" :key="msg">{{ msg }}</li>
         </ul>
       </div>

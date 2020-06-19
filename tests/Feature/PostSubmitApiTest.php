@@ -111,7 +111,6 @@ class PostSubmitApiTest extends TestCase
     {
         // $response = $this->actingAs($this->user)
         //     ->json('POST', route('post.create'), [
-        //         'title' => '面白いyoutuber１',
         //         'category' => 'ゲーム実況',
         //         'url' => 'https://youtu.be/ySQIOtjSHIc'
         //     ]);

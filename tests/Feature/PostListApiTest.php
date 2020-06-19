@@ -30,17 +30,16 @@ class PostListApiTest extends TestCase
         // data項目の期待値
         $expected_data = $posts->map(function ($post) {
             return [
-                'category' => $post->category,
-                'created_at' => $post->created_at,
                 'id' => $post->id,
+                'title' => $post->title,
+                'category' => $post->category,
+                'url' => $post->url,
+                'view_count' => $post->view_count,
                 'owner' => [
                     'name' => $post->owner->name,
                 ],
-                'title' => $post->title,
-                'updated_at' => $post->updated_at,
-                'url' => $post->url,
-                'user_id' => $post->user_id,
-                'view_count' => $post->view_count,
+                
+                
             ];
         })
         ->all();
