@@ -11,15 +11,17 @@
       <p>タイトル：{{ post.title }}</p>
       <p>カテゴリ：{{ post.category }}</p>
       <p>URL：{{ post.url }}</p>
+
+      <youtube :video-id="videoId" />
       
       <figcaption>Posted by {{ post.owner.name }}</figcaption>
     </figure>
     <div class="post-detail__pane">
       <button class="button button--like" title="Like post">
-        <i class="icon ion-md-heart"></i>12
+        <i class="icon ion-md-heart"></i>
       </button>
       <h2 class="post-detail__title">
-        <i class="icon ion-md-chatboxes"></i>Comments
+        <i class="icon ion-md-chatboxes"></i>コメント
       </h2>
     </div>
   </div>
@@ -27,6 +29,10 @@
 
 <script>
 import { OK } from '../util'
+import Vue from 'vue'
+import VueYoutube from 'vue-youtube'
+
+Vue.use(VueYoutube)
 
 export default {
   props: {
@@ -38,7 +44,8 @@ export default {
   data () {
     return {
       post: null,
-      fullWidth: false
+      fullWidth: false,
+      videoId: 'Q3nYKYhwEy4'
     }
   },
   methods: {
@@ -51,6 +58,13 @@ export default {
       }
 
       this.post = response.data
+      // var youbeResult = this.post.url.match(/youtu\.be/);
+      // var youtubeResult = this.post.url.match(/youtube\.com/);
+      // if (youbeResult != null) {
+      //   videoId = this.post.url.match(/\=.*/);
+      // } else if (youtubeResult != null) {
+      //   videoId = this.post.url.match(/=.*/);
+      // }
     }
   },
   watch: {

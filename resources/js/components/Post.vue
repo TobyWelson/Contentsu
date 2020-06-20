@@ -13,10 +13,13 @@
           class="post__action post__action--like"
           title="Like post"
         >
-          <i class="icon ion-md-heart"></i>12
+          <i class="icon ion-md-heart"></i>
         </button>
       </div>
     </RouterLink>
+    <div class="post__viewcount">
+      {{ item.view }}
+    </div>
     <figure class="post__wrapper　post__username">
         <p>{{item.owner.name}}</p>
     </figure>

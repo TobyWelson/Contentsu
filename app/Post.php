@@ -71,6 +71,6 @@ class Post extends Model
      */
     public function getUrlAttribute()
     {
-        return $this->attributes['id'];
+        return $this->attributes['url'];
     }
 }

@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "http-proxy": "^1.18.1",
+        "vue-youtube": "^1.4.0",
         "yargs-parser": "^18.1.3"
     }
 }
