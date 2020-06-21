@@ -2150,6 +2150,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _YoutubeThum_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./YoutubeThum.vue */ "./resources/js/components/YoutubeThum.vue");
 //
 //
 //
@@ -2178,7 +2179,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    YoutubeThum: _YoutubeThum_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: {
     item: {
       type: Object,
@@ -2342,6 +2348,92 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Youtube.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Youtube.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_youtube__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-youtube */ "./node_modules/vue-youtube/dist/vue-youtube.js");
+/* harmony import */ var vue_youtube__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_youtube__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
+//
+//
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_youtube__WEBPACK_IMPORTED_MODULE_2___default.a);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['videoUrl'],
+  data: function data() {
+    return {
+      videoId: ''
+    };
+  },
+  computed: {
+    getId: function getId() {
+      var youbeResult = this.videoUrl.match(/youtu\.be/);
+      var youtubeResult = this.videoUrl.match(/youtube\.com/);
+
+      if (youbeResult != null) {
+        this.videoId = this.videoUrl.split('/')[3];
+      } else if (youtubeResult != null) {
+        this.videoId = this.videoUrl.split('v=')[1];
+      }
+
+      return this.videoId;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/YoutubeThum.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/YoutubeThum.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['videoUrl'],
+  data: function data() {
+    return {
+      videoId: ''
+    };
+  },
+  computed: {
+    getThumURL: function getThumURL() {
+      var youbeResult = this.videoUrl.match(/youtu\.be/);
+      var youtubeResult = this.videoUrl.match(/youtube\.com/);
+
+      if (youbeResult != null) {
+        this.videoId = this.videoUrl.split('/')[3];
+      } else if (youtubeResult != null) {
+        this.videoId = this.videoUrl.split('v=')[1];
+      }
+
+      return "http://img.youtube.com/vi/" + this.videoId + "/mqdefault.jpg";
     }
   }
 });
@@ -2563,10 +2655,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue_youtube__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-youtube */ "./node_modules/vue-youtube/dist/vue-youtube.js");
-/* harmony import */ var vue_youtube__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_youtube__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_Youtube_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Youtube.vue */ "./resources/js/components/Youtube.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2604,9 +2693,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_youtube__WEBPACK_IMPORTED_MODULE_3___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Youtube: _components_Youtube_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   props: {
     id: {
       type: String,
@@ -2616,8 +2706,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_youtube__WEBPACK_IMPORTED_MOD
   data: function data() {
     return {
       post: null,
-      fullWidth: false,
-      videoId: 'Q3nYKYhwEy4'
+      fullWidth: false
     };
   },
   methods: {
@@ -2646,13 +2735,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_youtube__WEBPACK_IMPORTED_MOD
                 return _context.abrupt("return", false);
 
               case 6:
-                _this.post = response.data; // var youbeResult = this.post.url.match(/youtu\.be/);
-                // var youtubeResult = this.post.url.match(/youtube\.com/);
-                // if (youbeResult != null) {
-                //   videoId = this.post.url.match(/\=.*/);
-                // } else if (youtubeResult != null) {
-                //   videoId = this.post.url.match(/=.*/);
-                // }
+                _this.post = response.data;
 
               case 7:
               case "end":
@@ -4511,7 +4594,14 @@ var render = function() {
     { staticClass: "navbar" },
     [
       _c("RouterLink", { staticClass: "navbar__brand", attrs: { to: "/" } }, [
-        _vm._v("\n    コン転ツ\n  ")
+        _c("img", {
+          attrs: {
+            src: __webpack_require__(/*! ../../img/logo_contents2.jpg */ "./resources/img/logo_contents2.jpg"),
+            alt: "コン転ツ",
+            width: "180",
+            height: "80"
+          }
+        })
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "navbar__menu" }, [
@@ -4680,8 +4770,11 @@ var render = function() {
               },
               [_c("i", { staticClass: "icon ion-md-heart" })]
             )
-          ])
-        ]
+          ]),
+          _vm._v(" "),
+          _c("YoutubeThum", { attrs: { videoUrl: _vm.item.url } })
+        ],
+        1
       ),
       _vm._v(" "),
       _c("div", { staticClass: "post__viewcount" }, [
@@ -4896,6 +4989,54 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Youtube.vue?vue&type=template&id=5a2fe9f0&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Youtube.vue?vue&type=template&id=5a2fe9f0& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("youtube", { attrs: { "video-id": _vm.getId } })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/YoutubeThum.vue?vue&type=template&id=41b82134&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/YoutubeThum.vue?vue&type=template&id=41b82134& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("img", { attrs: { src: _vm.getThumURL, alt: "alt here..." } })
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -5301,7 +5442,7 @@ var render = function() {
               _vm._v(" "),
               _c("p", [_vm._v("URL：" + _vm._s(_vm.post.url))]),
               _vm._v(" "),
-              _c("youtube", { attrs: { "video-id": _vm.videoId } }),
+              _c("Youtube", { attrs: { videoUrl: _vm.post.url } }),
               _vm._v(" "),
               _c("figcaption", [
                 _vm._v("Posted by " + _vm._s(_vm.post.owner.name))
@@ -22744,6 +22885,17 @@ function coerce(val) {
 
 /***/ }),
 
+/***/ "./resources/img/logo_contents2.jpg":
+/*!******************************************!*\
+  !*** ./resources/img/logo_contents2.jpg ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/logo_contents2.jpg?2d3b7bbf9914726fbed1d16fd15bd47a";
+
+/***/ }),
+
 /***/ "./resources/js/App.vue":
 /*!******************************!*\
   !*** ./resources/js/App.vue ***!
@@ -23379,6 +23531,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostForm_vue_vue_type_template_id_13277cef___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostForm_vue_vue_type_template_id_13277cef___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Youtube.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Youtube.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Youtube_vue_vue_type_template_id_5a2fe9f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Youtube.vue?vue&type=template&id=5a2fe9f0& */ "./resources/js/components/Youtube.vue?vue&type=template&id=5a2fe9f0&");
+/* harmony import */ var _Youtube_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Youtube.vue?vue&type=script&lang=js& */ "./resources/js/components/Youtube.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Youtube_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Youtube_vue_vue_type_template_id_5a2fe9f0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Youtube_vue_vue_type_template_id_5a2fe9f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Youtube.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Youtube.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Youtube.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Youtube_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Youtube.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Youtube.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Youtube_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Youtube.vue?vue&type=template&id=5a2fe9f0&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Youtube.vue?vue&type=template&id=5a2fe9f0& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Youtube_vue_vue_type_template_id_5a2fe9f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Youtube.vue?vue&type=template&id=5a2fe9f0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Youtube.vue?vue&type=template&id=5a2fe9f0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Youtube_vue_vue_type_template_id_5a2fe9f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Youtube_vue_vue_type_template_id_5a2fe9f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/YoutubeThum.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/YoutubeThum.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _YoutubeThum_vue_vue_type_template_id_41b82134___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./YoutubeThum.vue?vue&type=template&id=41b82134& */ "./resources/js/components/YoutubeThum.vue?vue&type=template&id=41b82134&");
+/* harmony import */ var _YoutubeThum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./YoutubeThum.vue?vue&type=script&lang=js& */ "./resources/js/components/YoutubeThum.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _YoutubeThum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _YoutubeThum_vue_vue_type_template_id_41b82134___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _YoutubeThum_vue_vue_type_template_id_41b82134___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/YoutubeThum.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/YoutubeThum.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/YoutubeThum.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_YoutubeThum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./YoutubeThum.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/YoutubeThum.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_YoutubeThum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/YoutubeThum.vue?vue&type=template&id=41b82134&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/YoutubeThum.vue?vue&type=template&id=41b82134& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_YoutubeThum_vue_vue_type_template_id_41b82134___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./YoutubeThum.vue?vue&type=template&id=41b82134& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/YoutubeThum.vue?vue&type=template&id=41b82134&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_YoutubeThum_vue_vue_type_template_id_41b82134___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_YoutubeThum_vue_vue_type_template_id_41b82134___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

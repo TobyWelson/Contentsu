@@ -16,6 +16,7 @@
           <i class="icon ion-md-heart"></i>
         </button>
       </div>
+      <YoutubeThum :videoUrl="item.url"></YoutubeThum>
     </RouterLink>
     <div class="post__viewcount">
       {{ item.view }}
@@ -27,7 +28,12 @@
 </template>
 
 <script>
+import YoutubeThum from './YoutubeThum.vue'
+
 export default {
+  components: {
+    YoutubeThum
+  },
   props: {
     item: {
       type: Object,

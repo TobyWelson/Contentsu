@@ -12,7 +12,7 @@
       <p>カテゴリ：{{ post.category }}</p>
       <p>URL：{{ post.url }}</p>
 
-      <youtube :video-id="videoId" />
+      <Youtube :videoUrl="post.url"/>
       
       <figcaption>Posted by {{ post.owner.name }}</figcaption>
     </figure>
@@ -29,12 +29,12 @@
 
 <script>
 import { OK } from '../util'
-import Vue from 'vue'
-import VueYoutube from 'vue-youtube'
-
-Vue.use(VueYoutube)
+import Youtube from '../components/Youtube.vue'
 
 export default {
+  components: {
+    Youtube
+  },
   props: {
     id: {
       type: String,
@@ -44,8 +44,7 @@ export default {
   data () {
     return {
       post: null,
-      fullWidth: false,
-      videoId: 'Q3nYKYhwEy4'
+      fullWidth: false
     }
   },
   methods: {
@@ -58,13 +57,6 @@ export default {
       }
 
       this.post = response.data
-      // var youbeResult = this.post.url.match(/youtu\.be/);
-      // var youtubeResult = this.post.url.match(/youtube\.com/);
-      // if (youbeResult != null) {
-      //   videoId = this.post.url.match(/\=.*/);
-      // } else if (youtubeResult != null) {
-      //   videoId = this.post.url.match(/=.*/);
-      // }
     }
   },
   watch: {
