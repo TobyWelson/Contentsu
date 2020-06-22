@@ -13,9 +13,14 @@
       <v-btn icon>
         <v-icon>mdi-heart</v-icon>
       </v-btn>
+      {{ item.likes_count }}
     </v-card-actions>
     <div class="post__viewcount">
       {{ item.view }}
+    </div>
+       <div class="post__remarks">
+      閲覧者数: {{ item.view_count }}<br/>
+      転載者: {{item.owner.name}}
     </div>
   </v-card>
 </v-flex>
@@ -32,6 +37,14 @@ export default {
     item: {
       type: Object,
       required: true
+    }
+  },
+  methods : {
+    like () {
+      this.$emit('like', {
+        id: this.item.id,
+        liked: this.item.liked_by_user
+      })
     }
   }
 }
