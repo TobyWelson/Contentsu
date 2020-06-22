@@ -1,16 +1,18 @@
 <template>
-  <div id="app">
-    <header>
-      <Navbar />
-    </header>
-    <main>
-      <div class="container">
-        <Message />
-        <RouterView />
-      </div>
-    </main>
-    <Footer />
-  </div>
+    <v-app>
+      <header>
+        <Navbar />
+      </header>
+      <main>
+        <v-container>
+        <!-- <div class="container"> -->
+          <Message />
+          <RouterView />
+        <!-- </div> -->
+        </v-container>
+      </main>
+      <Footer />
+    </v-app>
 </template>
 
 <script>
@@ -45,3 +47,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.theme--light.v-application {
+  height:100%;
+  background: linear-gradient(#fdad00, #251b70);
+}
+@media screen and (max-width:600px){
+  .container {
+    padding: 5px;
+}
+}
+</style>

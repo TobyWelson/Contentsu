@@ -1,19 +1,16 @@
 <template>
-  <div class="post-list">
-    <div class="grid">
-      <Post
-        class="grid__item"
-        v-for="post in posts"
-        :key="post.id"
-        :item="post"
-      />
-    </div>
-    <Pagination :current-page="currentPage" :last-page="lastPage" />
-  </div>
+  <v-layout wrap>
+    <Post  
+      v-for="post in posts"
+      :key="post.id"
+      :item="post"
+    />
+<Pagination :current-page="currentPage" :last-page="lastPage" />
+  </v-layout>
+      
 </template>
 
 <script>
-import { OK } from '../util'
 import Post from '../components/Post.vue'
 import Pagination from '../components/Pagination.vue'
 
@@ -36,24 +33,14 @@ export default {
       lastPage: 0
     }
   },
-    methods: {
-    async fetchPosts () {
-      const response = await axios.get(`/api/posts/?page=${this.page}`)
-
-      if (response.status !== OK) {
-        this.$store.commit('error/setCode', response.status)
-        return false
-      }
-
-      this.posts = response.data.data
-      this.currentPage = response.data.current_page
-      this.lastPage = response.data.last_page
-    }
-  },
   watch: {
     $route: {
       async handler () {
-        await this.fetchPosts()
+      const posts = await this.$store.dispatch('post/fetchPage', this.page)
+
+      this.posts = posts.data
+      this.currentPage = posts.current_page
+      this.lastPage = posts.last_page
       },
       immediate: true
     }

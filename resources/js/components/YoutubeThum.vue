@@ -1,5 +1,5 @@
 <template>
-    <img :src="getThumURL" alt="alt here..." />
+    <v-img :src="getThumURL" alt="alt here..." />
 </template>
 
 <script>

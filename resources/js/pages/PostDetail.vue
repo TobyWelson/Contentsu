@@ -2,12 +2,10 @@
   <div
     v-if="post"
     class="post-detail"
-    :class="{ 'post-detail--column': fullWidth }"
-  >
+    :class="{ 'post-detail--column': fullWidth }">
     <figure
       class="post-detail__pane post-detail__image"
-      @click="fullWidth = ! fullWidth"
-    >
+      @click="fullWidth = ! fullWidth">
       <p>タイトル：{{ post.title }}</p>
       <p>カテゴリ：{{ post.category }}</p>
       <p>URL：{{ post.url }}</p>
@@ -28,7 +26,6 @@
 </template>
 
 <script>
-import { OK } from '../util'
 import Youtube from '../components/Youtube.vue'
 
 export default {
@@ -50,12 +47,6 @@ export default {
   methods: {
     async fetchPost () {
       const response = await axios.get(`/api/posts/${this.id}`)
-
-      if (response.status !== OK) {
-        this.$store.commit('error/setCode', response.status)
-        return false
-      }
-
       this.post = response.data
     }
   },
