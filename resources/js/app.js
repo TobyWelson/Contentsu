@@ -7,6 +7,8 @@ import store from './store';
 import App from './App.vue';
 // Axios ライブラリの設定
 import './bootstrap';
+// vuetify ライブラリの設定
+import vuetify from 'vuetify';
 
 const createApp = async () => {
   await store.dispatch('auth/currentUser')
@@ -15,6 +17,7 @@ const createApp = async () => {
     el: '#app',
     router,
     store,
+    vuetify,
     components: { App },
     template: '<App />'
   })

@@ -9,21 +9,14 @@
         {{ item.title }}
       </div>
       <div class="post__controls">
-        <button
-          class="post__action post__action--like"
-          title="Like post"
-        >
-          <i class="icon ion-md-heart"></i>
-        </button>
       </div>
       <YoutubeThum :videoUrl="item.url"></YoutubeThum>
     </RouterLink>
-    <div class="post__viewcount">
-      {{ item.view }}
+    <i class="icon ion-md-heart"></i>{{ item.likes_count }}
+    <div class="post__remarks">
+      閲覧者数: {{ item.view_count }}<br/>
+      転載者: {{item.owner.name}}
     </div>
-    <figure class="post__wrapper　post__username">
-        <p>{{item.owner.name}}</p>
-    </figure>
   </div>
 </template>
 
@@ -38,6 +31,14 @@ export default {
     item: {
       type: Object,
       required: true
+    }
+  },
+  methods : {
+    like () {
+      this.$emit('like', {
+        id: this.item.id,
+        liked: this.item.liked_by_user
+      })
     }
   }
 }
