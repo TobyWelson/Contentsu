@@ -36,7 +36,7 @@
             {{ comment.content }}
           </p>
           <p class="post-detail__commentInfo">
-            {{ comment.author.name }}
+            転載者名: {{ comment.author.name }}
           </p>
         </li>
       </ul>
