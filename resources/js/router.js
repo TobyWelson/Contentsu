@@ -10,6 +10,7 @@ import Vuetify from '../../node_modules/vuetify/'
 
 // ナビゲーションガード
 import store from './store'
+import NotFound from './pages/errors/NotFound.vue'
 
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
@@ -20,7 +21,11 @@ Vue.use(Vuetify);
 const routes = [
   {
     path: '/',
-    component: PostList
+    component: PostList,
+    props: route => {
+      const page = route.query.page
+      return { page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1 }
+    }
   },
   {
     path: '/posts/:id',
@@ -41,14 +46,21 @@ const routes = [
   {
     path: '/500',
     component: SystemError
+  },
+  {
+    path: '*',
+    component: NotFound
   }
 ];
 
 // VueRouterインスタンスを作成する
 const router = new VueRouter({
-    mode: 'history', // ★ 追加
-    routes
-});
+  mode: 'history',
+  scrollBehavior () {
+    return { x: 0, y: 0 }
+  },
+  routes
+})
 
 // VueRouterインスタンスをエクスポートする
 // app.jsでインポートするため

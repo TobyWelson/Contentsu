@@ -38,3 +38,19 @@ Route::get('/posts', 'PostController@index')->name('post.index');
 
 // 転載記事詳細
 Route::get('/posts/{id}', 'PostController@show')->name('post.show');
+
+// コメント
+Route::post('/posts/{post}/comments', 'PostController@addComment')->name('post.comment');
+
+// いいね
+Route::put('/posts/{id}/like', 'PostController@like')->name('post.like');
+
+// いいね解除
+Route::delete('/posts/{id}/like', 'PostController@unlike');
+
+// トークンリフレッシュ
+Route::get('/reflesh-token', function (Illuminate\Http\Request $request) {
+    $request->session()->regenerateToken();
+
+    return response()->json();
+});

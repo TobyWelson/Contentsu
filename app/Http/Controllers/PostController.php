@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Http\Requests\StoreComment;
 use App\Http\Requests\StorePost;
 use App\Post;
 use Illuminate\Http\Request;
@@ -53,9 +55,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['owner'])
+        $posts = Post::with(['owner', 'likes'])
             ->orderBy(Post::CREATED_AT, 'desc')->paginate();
-
+    
         return $posts;
     }
 
@@ -66,8 +68,65 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        $post = Post::where('id', $id)->with(['owner'])->first();
+        $post = Post::where('id', $id)
+        ->with(['owner', 'comments.author', 'likes'])->first();
 
         return $post ?? abort(404);
+    }
+
+    /**
+     * コメント投稿
+     * @param Post $post
+     * @param StoreComment $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addComment(Post $post, StoreComment $request)
+    {
+        $comment = new Comment();
+        $comment->content = $request->get('content');
+        $comment->user_id = Auth::user()->id;
+        $post->comments()->save($comment);
+
+        // authorリレーションをロードするためにコメントを取得しなおす
+        $new_comment = Comment::where('id', $comment->id)->with('author')->first();
+
+        return response($new_comment, 201);
+    }
+
+    /**
+     * いいね
+     * @param string $id
+     * @return array
+     */
+    public function like(string $id)
+    {
+        $post = Post::where('id', $id)->with('likes')->first();
+
+        if (! $post) {
+            abort(404);
+        }
+
+        $post->likes()->detach(Auth::user()->id);
+        $post->likes()->attach(Auth::user()->id);
+
+        return ["post_id" => $id];
+    }
+
+    /**
+     * いいね解除
+     * @param string $id
+     * @return array
+     */
+    public function unlike(string $id)
+    {
+        $post = Post::where('id', $id)->with('likes')->first();
+
+        if (! $post) {
+            abort(404);
+        }
+
+        $post->likes()->detach(Auth::user()->id);
+
+        return ["post_id" => $id];
     }
 }

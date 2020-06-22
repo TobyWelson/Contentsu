@@ -38,8 +38,8 @@ class PostListApiTest extends TestCase
                 'owner' => [
                     'name' => $post->owner->name,
                 ],
-                
-                
+                'liked_by_user' => false,
+                'likes_count' => 0,
             ];
         })
         ->all();

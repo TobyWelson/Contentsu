@@ -17,5 +17,6 @@ const mix = require('laravel-mix')
 
 mix.browserSync('192.168.10.10')
   .js('resources/js/app.js', 'public/js')
+  .sass('resources/sass/app.scss', 'public/css').sourceMaps()
   .version()
   
