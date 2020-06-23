@@ -12,8 +12,8 @@
       </div>
       <YoutubeThum :videoUrl="item.url"></YoutubeThum>
     </RouterLink>
-    <i class="icon ion-md-heart"></i>{{ item.likes_count }}
     <div class="post__remarks">
+      <i class="icon ion-md-heart"></i>{{ item.likes_count }}<br/>
       閲覧者数: {{ item.view_count }}<br/>
       転載者: {{item.owner.name}}
     </div>
