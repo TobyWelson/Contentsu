@@ -6,6 +6,7 @@ import PostList from './pages/PostList.vue';
 import Login from './pages/Login.vue';
 import SystemError from './pages/errors/System.vue'
 import PostDetail from './pages/PostDetail.vue'
+import Vuetify from '../../node_modules/vuetify/'
 
 // ナビゲーションガード
 import store from './store'
@@ -14,6 +15,7 @@ import NotFound from './pages/errors/NotFound.vue'
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
 Vue.use(VueRouter);
+Vue.use(Vuetify);
 
 // パスとコンポーネントのマッピング
 const routes = [

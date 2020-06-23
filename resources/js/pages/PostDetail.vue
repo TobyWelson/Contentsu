@@ -1,11 +1,9 @@
 <template>
   <div
     v-if="post"
-    class="post-detail"
-  >
+    class="post-detail">
     <figure
-      class="post-detail__pane post-detail__image"
-    >
+      class="post-detail__pane post-detail__image">
       <p>タイトル：{{ post.title }}</p>
       <p>カテゴリ：{{ post.category }}</p>
       <p>URL：{{ post.url }}</p>
@@ -78,16 +76,6 @@ export default {
     }
   },
   methods: {
-    async fetchPost () {
-      const response = await axios.get(`/api/posts/${this.id}`)
-
-      if (response.status !== OK) {
-        this.$store.commit('error/setCode', response.status)
-        return false
-      }
-
-      this.post = response.data
-    },
     async addComment () {
 
       const response = await axios.post(`/api/posts/${this.id}/comments`, {
@@ -157,7 +145,7 @@ export default {
   watch: {
     $route: {
       async handler () {
-        await this.fetchPost()
+        this.post = await this.$store.dispatch('post/fetch', this.id)
       },
       immediate: true
     }
