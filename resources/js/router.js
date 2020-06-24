@@ -21,11 +21,7 @@ Vue.use(Vuetify);
 const routes = [
   {
     path: '/',
-    component: PostList,
-    props: route => {
-      const page = route.query.page
-      return { page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1 }
-    }
+    component: PostList
   },
   {
     path: '/posts/:id',
@@ -54,11 +50,12 @@ const routes = [
 ];
 
 // VueRouterインスタンスを作成する
+// ページ遷移した後のスクロール位置をコントロールする箇所
 const router = new VueRouter({
   mode: 'history',
-  scrollBehavior () {
-    return { x: 0, y: 0 }
-  },
+  // scrollBehavior () {
+  //   return { x: 0, y: 0 }
+  // },
   routes
 })
 

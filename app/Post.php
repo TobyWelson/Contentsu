@@ -22,8 +22,6 @@ class Post extends Model
         'likes_count', 'liked_by_user',
     ];
 
-    /** 1ページあたりの項目数を制御する */
-    protected $perPage = 15;
 
     /** IDの桁数 */
     const ID_LENGTH = 12;
