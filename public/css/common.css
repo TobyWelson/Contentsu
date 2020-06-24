@@ -1,0 +1,39 @@
+/* 共通 */
+.v-application {background: #fafafa!important;}
+a {
+  text-decoration: none;
+  color: #222!important;
+}
+.hover-orange:hover {
+  color: #FFA500;
+  transition: color .3s;
+}
+.over-text {
+  overflow: hidden;
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* post */
+.v-card__title {
+    display: -webkit-box!important;
+    max-height: 5rem!important;
+    font-size: 1.1rem!important;
+    padding: 10px!important;
+}
+
+@media screen and (max-width:600px){
+  .v-application .py-2 {
+      padding-top: 4px!important;
+      padding-bottom: 4px!important;
+  }
+  .v-application .px-2 {
+      padding-right: 4px!important;
+      padding-left: 4px!important;
+  }
+  .container {
+    padding: 5px!important;
+    }
+}

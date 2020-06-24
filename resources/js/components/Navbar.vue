@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <RouterLink class="navbar__brand" to="/">
-      <img src="../../img/logo_contents2.jpg" alt="コン転ツ" width="180" height="80"/>
+      <img src="../../img/logo_contents.jpg" alt="コン転ツ" width="180" height="80"/>
     </RouterLink>
     <div class="navbar__menu">
       <div v-if="isLogin" class="navbar__item">

@@ -5,10 +5,8 @@
       </header>
       <main>
         <v-container>
-        <!-- <div class="container"> -->
           <Message />
           <RouterView />
-        <!-- </div> -->
         </v-container>
       </main>
       <Footer />
@@ -50,15 +48,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.theme--light.v-application {
-  height:100%;
-  background: linear-gradient(#fdad00, #251b70);
-}
-@media screen and (max-width:600px){
-  .container {
-    padding: 5px;
-}
-}
-</style>
