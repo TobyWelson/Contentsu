@@ -15,9 +15,8 @@
       </span>
       <button v-if="isLogin" class="navbar__item button button--link" @click="logout">ログアウト</button>
       <div v-else class="navbar__item">
-        <RouterLink class="button button--link" to="/login">
-          ログイン / 新規登録
-        </RouterLink>
+        <v-btn @click="showLogin">ログイン / 新規登録</v-btn>
+        <LoginForm ref="dlg"></LoginForm>
       </div>
     </div>
     <PostForm v-model="showForm" />
@@ -26,14 +25,16 @@
 
 <script>
 import PostForm from './PostForm.vue'
+import LoginForm from './LoginForm.vue'
 
 export default {
   components: {
-    PostForm
+    PostForm,
+    LoginForm
   },
   data () {
     return {
-      showForm: false
+      showForm: false,
     }
   },
   computed: {
@@ -47,8 +48,10 @@ export default {
   methods: {
     async logout () {
       await this.$store.dispatch('auth/logout')
-
-      this.$router.push('/login')
+      // this.$router.push('/')
+    },
+    showLogin() {
+      this.$refs.dlg.isDialogShow = true
     }
   }
 }

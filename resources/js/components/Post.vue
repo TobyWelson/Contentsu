@@ -1,6 +1,6 @@
 <template>
-<v-flex xs6 sm6 md4 lg4 xl4　px-2 py-2>
-  <v-card link tile>
+<v-flex xs6 sm6 md4 lg4 xl4>
+  <v-card flat link >
     <RouterLink
       class="post__overlay"
       :to="`/posts/${item.id}`">

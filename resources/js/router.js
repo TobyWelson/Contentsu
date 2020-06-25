@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 
 // ページコンポーネントをインポートする
 import PostList from './pages/PostList.vue';
-import Login from './pages/Login.vue';
+import Regist from './pages/Regist.vue';
 import SystemError from './pages/errors/System.vue'
 import PostDetail from './pages/PostDetail.vue'
 import Vuetify from '../../node_modules/vuetify/'
@@ -33,8 +33,8 @@ const routes = [
     props: true
   },
   {
-    path: '/login',
-    component: Login,
+    path: '/regist',
+    component: Regist,
     beforeEnter (to, from, next) {
       if (store.getters['auth/check']) {
         next('/')
