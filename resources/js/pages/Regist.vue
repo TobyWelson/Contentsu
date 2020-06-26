@@ -1,63 +1,59 @@
 <template>
-  <div class="container--small">
-    <ul class="tab">
-    <li
-        class="tab__item"
-        :class="{'tab__item--active': tab === 1 }"
-        @click="tab = 1"
-    >ログイン</li>
-    <li
-        class="tab__item"
-        :class="{'tab__item--active': tab === 2 }"
-        @click="tab = 2"
-    >登録</li>
-    </ul>
-    <div class="panel" v-show="tab === 1">
-        <form class="form" @submit.prevent="login">
-          <div v-if="loginErrors" class="errors">
-            <ul v-if="loginErrors.email">
-              <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
-            </ul>
-            <ul v-if="loginErrors.password">
-              <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
-            </ul>
-          </div>
-          <label for="login-email">メールアドレス</label>
-          <input type="text" class="form__item" id="login-email" v-model="loginForm.email">
-          <label for="login-password">パスワード</label>
-          <input type="password" class="form__item" id="login-password" v-model="loginForm.password">
-          <div class="form__button">
-          <button type="submit" class="button button--inverse">ログイン</button>
-          </div>
-        </form>
-    </div>
-    <div class="panel" v-show="tab === 2">
-      <form class="form" @submit.prevent="register">
-        <div v-if="registerErrors" class="errors">
-          <ul v-if="registerErrors.name">
-            <li v-for="msg in registerErrors.name" :key="msg">{{ msg }}</li>
-          </ul>
-          <ul v-if="registerErrors.email">
-            <li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li>
-          </ul>
-          <ul v-if="registerErrors.password">
-            <li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li>
-          </ul>
-        </div>
-        <label for="username">ニックネーム</label>
-        <input type="text" class="form__item" id="username" v-model="registerForm.name">
-        <label for="email">メールアドレス</label>
-        <input type="text" class="form__item" id="email" v-model="registerForm.email">
-        <label for="password">パスワード</label>
-        <input type="password" class="form__item" id="password" v-model="registerForm.password">
-        <label for="password-confirmation">パスワード (確認)</label>
-        <input type="password" class="form__item" id="password-confirmation" v-model="registerForm.password_confirmation">
-        <div class="form__button">
-          <button type="submit" class="button button--inverse">登録</button>
-        </div>
-      </form>
-    </div>
-  </div>
+  <v-container max-width="600px">
+    <v-card flat color="amber lighten-5">
+      <v-container>
+        <v-layout justify-center class="display-1">SIGN UP</v-layout>
+        <v-layout justify-center class="mb-1">新規登録</v-layout>
+      </v-container>
+      <v-container v-if="registerErrors" class="errors">
+        <ul v-if="registerErrors.name"><li v-for="msg in registerErrors.name" :key="msg">{{ msg }}</li></ul>
+        <ul v-if="registerErrors.email"><li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li></ul>
+        <ul v-if="registerErrors.password"><li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li></ul>
+      </v-container>
+      <v-form @submit.prevent="register">
+        <v-container class="login-dialog-input" py-10>
+          <v-container>
+            <v-text-field
+              id="username"
+              label="ニックネーム"
+              prepend-icon="mdi-account"
+              v-model="registerForm.name"
+              outlined
+              placeholder="xxx"/>
+            <v-text-field
+              id="email"
+              label="ID（メールアドレス）"
+              prepend-icon="mdi-email"
+              v-model="registerForm.email"
+              outlined
+              placeholder="xxx@xxx.com"/>
+            <v-text-field
+              id="password"
+              :type="'password'"
+              label="パスワード"
+              v-model="registerForm.password"
+              width="80%"
+              prepend-icon="mdi-lock"
+              outlined
+              placeholder="英数字 8桁以上"/>
+            <v-text-field
+              id="password-confirmation"
+              :type="'password'"
+              label="パスワード (確認)"
+              v-model="registerForm.password_confirmation"
+              width="80%"
+              prepend-icon="mdi-lock-reset"
+              outlined
+              placeholder="英数字 8桁以上"/>
+          </v-container>
+          <v-row justify="center" align-content="center">
+            <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="register">登録</v-btn>
+          </v-row>
+        </v-container>
+        <v-card-actions>&nbsp;</v-card-actions>
+      </v-form>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -66,11 +62,6 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      tab: 1,
-      loginForm: {
-        email: '',
-        password: ''
-      },
       registerForm: {
         name: '',
         email: '',
@@ -82,7 +73,6 @@ export default {
   computed: {
     ...mapState({
     apiStatus: state => state.auth.apiStatus,
-    loginErrors: state => state.auth.loginErrorMessages,
     registerErrors: state => state.auth.registerErrorMessages
   }),
   ...mapGetters({
@@ -91,15 +81,6 @@ export default {
   },
 
   methods: {
-    async login () {
-      // authストアのloginアクションを呼び出す
-      await this.$store.dispatch('auth/login', this.loginForm)
-
-      if (this.apiStatus) {
-        // トップページに移動する
-        this.$router.push('/')
-      }
-    },
     async register () {
       // authストアのresigterアクションを呼び出す
       await this.$store.dispatch('auth/register', this.registerForm)

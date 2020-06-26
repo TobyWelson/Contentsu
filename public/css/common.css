@@ -1,5 +1,8 @@
 /* 共通 */
-.v-application {background: #fcf7ea!important;}
+.v-application {
+  background-color: #fff8e1!important;
+  border-color: #fff8e1!important;
+}
 a {
   text-decoration: none;
   color: #222!important;

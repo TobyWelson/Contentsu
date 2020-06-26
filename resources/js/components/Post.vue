@@ -7,7 +7,7 @@
       <YoutubeThum :videoUrl="item.url"></YoutubeThum>
       <v-card-title class="hover-orange over-text font-weight-bold">{{ item.title }}</v-card-title>
       <v-card-actions>
-        <v-icon small>mdi-account-edit</v-icon>{{item.owner.name}}
+        <v-icon small>mdi-account</v-icon>{{item.owner.name}}
         <v-spacer></v-spacer>
         <v-icon small>mdi-heart</v-icon>{{ item.likes_count }}&nbsp;&nbsp;
         <v-icon small>mdi-eye</v-icon>{{ item.likes_count }}

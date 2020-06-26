@@ -1,7 +1,10 @@
 <template>
   <v-dialog v-model="isDialogShow" max-width="600px">
-    <v-card color="#fcf7ea">
-      <v-card-title class="headline">ログイン</v-card-title>
+    <v-card color="amber lighten-5">
+      <v-container>
+        <v-layout justify-center class="display-1">LOGIN</v-layout>
+        <v-layout justify-center class="mb-1">ログイン</v-layout>
+      </v-container>
       <v-container v-if="loginErrors" class="errors">
         <ul v-if="loginErrors.email"><li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li></ul>
         <ul v-if="loginErrors.password"><li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li></ul>
@@ -29,7 +32,7 @@
               placeholder="英数字 8桁以上"/>
           </v-container>
           <v-row justify="center" align-content="center">
-            <v-btn depressed rounded width="90%" height="45" color="warning" v-on:click="login">Login</v-btn>
+            <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="login">ログイン</v-btn>
           </v-row>
           <v-row justify="center" align-content="center" class="mt-5">
             <v-btn text v-on:click="regist">新規登録はこちら</v-btn>
