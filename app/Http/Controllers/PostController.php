@@ -56,7 +56,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with(['owner', 'likes'])
-            ->orderBy(Post::CREATED_AT, 'desc')->get();
+            ->orderBy(Post::CREATED_AT, 'desc')->paginate();
     
         return $posts;
     }
