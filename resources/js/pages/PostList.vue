@@ -1,49 +1,60 @@
 <template>
-  <v-layout wrap>
-    <Post  
-      v-for="post in posts"
-      :key="post.id"
-      :item="post"
-    />
-<Pagination :current-page="currentPage" :last-page="lastPage" />
-  </v-layout>
-      
+  <section class="container">
+    <div>
+      <v-layout wrap>
+        <Post  
+          v-for="post in postsview"
+          :key="post.id"
+          :item="post"
+        />
+      </v-layout>
+      <infinite-loading ref="infiniteLoading" spinner="circle" @infinite="infiniteLoad">
+        // ステータスがcompleteに更新されると下記が表示される
+        <span slot="no-more">-----検索結果は以上です-----</span>
+        // 結果が存在しない場合下記が表示される
+        <span slot="no-results">-----検索結果はありません-----</span>
+      </infinite-loading>
+    </div>
+  </section>
 </template>
+
+
 
 <script>
 import Post from '../components/Post.vue'
-import Pagination from '../components/Pagination.vue'
+import InfiniteLoading from 'vue-infinite-loading';
 
 export default {
   components: {
     Post,
-    Pagination
-  },
-  props: {
-    page: {
-      type: Number,
-      required: false,
-      default: 1
-    }
+    InfiniteLoading
   },
   data () {
     return {
       posts: [],
-      currentPage: 0,
+      postsview: [],
+      page: 1,
       lastPage: 0
     }
   },
-  watch: {
-    $route: {
-      async handler () {
+  methods: {
+  /*
+   * infiniteLoad
+   * 自動実行されるmethod  
+   */
+    async infiniteLoad() {
       const posts = await this.$store.dispatch('post/fetchPage', this.page)
-
       this.posts = posts.data
-      this.currentPage = posts.current_page
       this.lastPage = posts.last_page
-      },
-      immediate: true
+      for (let i=0;i<this.posts.length;i++) {
+        this.postsview.push(this.posts[i]);
+      }
+      this.$refs.infiniteLoading.stateChanger.loaded();
+      if (this.lastPage == this.page) {
+        this.$refs.infiniteLoading.stateChanger.complete();
+      }
+      this.page = this.page + 1;
     }
-  }
+  },
 }
 </script>
