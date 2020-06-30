@@ -1,21 +1,19 @@
 <template>
-  <section class="container">
-    <div>
-      <v-layout wrap>
-        <Post  
-          v-for="post in postsview"
-          :key="post.id"
-          :item="post"
-        />
-      </v-layout>
-      <infinite-loading ref="infiniteLoading" spinner="circle" @infinite="infiniteLoad">
-        // ステータスがcompleteに更新されると下記が表示される
-        <span slot="no-more">-----検索結果は以上です-----</span>
-        // 結果が存在しない場合下記が表示される
-        <span slot="no-results">-----検索結果はありません-----</span>
-      </infinite-loading>
-    </div>
-  </section>
+  <div>
+    <v-layout wrap>
+      <Post  
+        v-for="post in postsview"
+        :key="post.id"
+        :item="post"
+      />
+    </v-layout>
+    <infinite-loading ref="infiniteLoading" spinner="circle" @infinite="infiniteLoad">
+      // ステータスがcompleteに更新されると下記が表示される
+      <span slot="no-more">-----検索結果は以上です-----</span>
+      // 結果が存在しない場合下記が表示される
+      <span slot="no-results">-----検索結果はありません-----</span>
+    </infinite-loading>
+  </div>
 </template>
 
 

@@ -10,7 +10,7 @@
         <ul v-if="loginErrors.password"><li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li></ul>
       </v-container>
       <v-form @submit.prevent="login">
-        <v-container class="login-dialog-input" py-10>
+        <v-container class="login-dialog-input" py-9>
           <v-container>
             <v-text-field
               id="login-email"
@@ -35,7 +35,7 @@
             <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="login">ログイン</v-btn>
           </v-row>
           <v-row justify="center" align-content="center" class="mt-5">
-            <v-btn text v-on:click="regist">新規登録はこちら</v-btn>
+            <v-btn text v-on:click="regist">パスワードを忘れた方はこちら</v-btn>
           </v-row>
         </v-container>
         <v-card-actions>&nbsp;</v-card-actions>
@@ -69,6 +69,10 @@ export default {
     async login () {
       // authストアのloginアクションを呼び出す
       await this.$store.dispatch('auth/login', this.loginForm)
+      this.$store.commit('message/setContent', {
+        content: 'ログインしました',
+        timeout: 4000
+      })
     },
     regist () {
       this.isDialogShow = false
