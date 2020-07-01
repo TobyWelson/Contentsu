@@ -36,8 +36,11 @@ Route::post('/posts', 'PostController@create')->name('post.create');
 // 転載記事一覧
 Route::get('/posts', 'PostController@index')->name('post.index');
 
-// 転載記事詳細
-Route::get('/posts/{id}', 'PostController@show')->name('post.show');
+// 転載記事詳細(認証必須)
+Route::get('/posts/{id}/authshow', 'PostController@authshow')->name('post.authshow');
+
+// 転載記事詳細(認証不要)
+Route::get('/posts/{id}/show', 'PostController@show')->name('post.show');
 
 // コメント
 Route::post('/posts/{post}/comments', 'PostController@addComment')->name('post.comment');

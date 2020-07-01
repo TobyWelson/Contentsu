@@ -24,6 +24,7 @@
       <h2 class="post-detail__title">
         <i class="icon ion-md-chatboxes"></i>コメント
       </h2>
+      <p>閲覧者数: {{ post.view_count }}</p>
       <ul v-if="post.comments.length > 0" class="post-detail__comments">
         <li
           v-for="comment in post.comments"
@@ -140,12 +141,16 @@ export default {
   computed: {
     isLogin () {
       return this.$store.getters['auth/check']
-    }
-  },
+      }
+    },
   watch: {
     $route: {
       async handler () {
-        this.post = await this.$store.dispatch('post/fetch', this.id)
+        if (this.isLogin) {
+          this.post = await this.$store.dispatch('post/authfetch', this.id)
+        } else {
+          this.post = await this.$store.dispatch('post/fetch', this.id)
+        }
       },
       immediate: true
     }

@@ -10,7 +10,7 @@
         <v-icon small>mdi-account</v-icon>{{item.owner.name}}
         <v-spacer></v-spacer>
         <v-icon small>mdi-heart</v-icon>{{ item.likes_count }}&nbsp;&nbsp;
-        <v-icon small>mdi-eye</v-icon>{{ item.likes_count }}
+        <v-icon small>mdi-eye</v-icon>{{ item.view_count }}
       </v-card-actions>
     </RouterLink>
   </v-card>
