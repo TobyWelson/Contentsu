@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
-    <RouterLink class="navbar__brand" to="/">
-      <img src="../../img/logo_contents_1.png" alt="コン転ツ" width="180" height="80"/>
+    <RouterLink id="logo" class="navbar__brand" to="/">
+      <img src="../../img/logo_contents_1.png" alt="コン転ツ" width="75px"/>
     </RouterLink>
     <div class="navbar__menu">
       <div v-if="isLogin" class="navbar__item">
@@ -15,11 +15,13 @@
       </span>
       <button v-if="isLogin" class="navbar__item button button--link" @click="logout">ログアウト</button>
       <div v-else class="navbar__item">
-        <v-btn @click="showLogin">ログイン / 新規登録</v-btn>
+        <v-btn depressed rounded @click="showLogin">ログイン</v-btn>
         <LoginForm ref="dlg"></LoginForm>
+        <v-btn depressed rounded color="warning" class="font-weight-bold " @click="regist">新規登録</v-btn>
       </div>
     </div>
     <PostForm v-model="showForm" />
+    
   </nav>
 </template>
 
@@ -48,7 +50,13 @@ export default {
   methods: {
     async logout () {
       await this.$store.dispatch('auth/logout')
-      // this.$router.push('/')
+      this.$store.commit('message/setContent', {
+        content: 'ログアウトしました',
+        timeout: 2000
+      })
+    },
+    regist () {
+      this.$router.push('/Regist')
     },
     showLogin() {
       this.$refs.dlg.isDialogShow = true
