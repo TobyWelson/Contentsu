@@ -1,4 +1,4 @@
-import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../util'
+import { OK, CREATED, UNPROCESSABLE_ENTITY, SUCCESS, FAILURE } from '../util'
 
 
 /**
@@ -33,7 +33,7 @@ const actions = {
     if (response.status === OK) {
       context.commit('setApiStatus', true)
       context.commit('setUser', response.data)
-      return false
+      return SUCCESS
     }
     context.commit('setApiStatus', false)
     if (response.status === UNPROCESSABLE_ENTITY) {
@@ -41,6 +41,7 @@ const actions = {
     } else {
       context.commit('error/setCode', response.status, { root: true })
     }
+    return FAILURE
   },
 
   // ログアウト
@@ -51,11 +52,12 @@ const actions = {
     if (response.status === OK) {
       context.commit('setApiStatus', true)
       context.commit('setUser', null)
-      return false
+      return SUCCESS
     }
 
     context.commit('setApiStatus', false)
     context.commit('error/setCode', response.status, { root: true })
+    return FAILURE
   },
 
   // ログインユーザーチェック

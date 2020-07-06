@@ -9,6 +9,9 @@ export const UNPROCESSABLE_ENTITY = 422
 export const UNAUTHORIZED = 419
 export const NOT_FOUND = 404
 
+export const SUCCESS = true
+export const FAILURE = false
+
 /**
  * クッキーの値を取得する
  * @param {String} searchKey 検索するキー

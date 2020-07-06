@@ -13,6 +13,11 @@
       // 結果が存在しない場合下記が表示される
       <span slot="no-results">-----検索結果はありません-----</span>
     </infinite-loading>
+
+    <v-btn id="addPost" v-if="isLogin" fab color="warning" class="button hidden-md-and-up" @click="showForm = ! showForm">
+      <v-icon>mdi-feather</v-icon>
+    </v-btn>
+    <PostForm v-model="showForm" />
   </div>
 </template>
 
@@ -21,14 +26,17 @@
 <script>
 import Post from '../components/Post.vue'
 import InfiniteLoading from 'vue-infinite-loading';
+import PostForm from '../components/PostForm.vue'
 
 export default {
   components: {
+    PostForm,
     Post,
     InfiniteLoading
   },
   data () {
     return {
+      showForm: false,
       posts: [],
       postsview: [],
       page: 1,
@@ -52,6 +60,11 @@ export default {
         this.$refs.infiniteLoading.stateChanger.complete();
       }
       this.page = this.page + 1;
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/check']
     }
   },
 }

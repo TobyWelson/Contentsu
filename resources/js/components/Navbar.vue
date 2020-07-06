@@ -1,33 +1,52 @@
 <template>
-  <nav class="navbar">
-    <RouterLink id="logo" class="navbar__brand" to="/">
-      <img src="../../img/logo_contents_1.png" alt="コン転ツ" width="75px"/>
-    </RouterLink>
-    <div class="navbar__menu">
-      <div v-if="isLogin" class="navbar__item">
-        <button class="button" @click="showForm = ! showForm">
-          <i class="icon ion-md-add"></i>
-          URL転載
-        </button>
+  <div>
+    <v-navigation-drawer v-model="drawer" fixed temporary>
+      <v-container>
+        <v-list-item v-if="isLogin">
+          <v-list-item-content>
+            <v-list-item-title class="title grey--text text--darken-2"><v-icon>mdi-account</v-icon>{{ username }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-btn v-if="isLogin" outlined rounded @click="logout" class="font-weight-bold mb-3" width="100%" color="warning">ログアウト</v-btn>
+        <v-btn v-if="!isLogin" outlined rounded @click="showLogin" class="font-weight-bold mb-2 mt-1" width="100%" color="warning">ログイン</v-btn>
+        <v-btn v-if="!isLogin" depressed rounded @click="regist" class="font-weight-bold mb-3" width="100%" color="warning">新規登録</v-btn>
+        <v-divider></v-divider>
+      <v-list nav dense>
+        <v-list-item v-for="item in items" :key="item.title" :to="item.to">
+          <v-list-item-content><v-list-item-title v-text="item.title"/></v-list-item-content>
+        </v-list-item>
+      </v-list>
+      </v-container>
+    </v-navigation-drawer>
+    <v-toolbar class="nav-tool">
+      <div id="logo">
+        <RouterLink class="navbar__brand" to="/">
+          <img src="../../img/logo_contents_1.png" alt="コン転ツ" width="60px" height="55px"/>
+        </RouterLink>
       </div>
-      <span v-if="isLogin" class="navbar__item">
-        {{ username }}
-      </span>
-      <button v-if="isLogin" class="navbar__item button button--link" @click="logout">ログアウト</button>
-      <div v-else class="navbar__item">
-        <v-btn depressed rounded @click="showLogin">ログイン</v-btn>
-        <LoginForm ref="dlg"></LoginForm>
-        <v-btn depressed rounded color="warning" class="font-weight-bold " @click="regist">新規登録</v-btn>
+      <div v-if="isLogin" class="hidden-sm-and-down">
+        <v-icon>mdi-account</v-icon>{{ username }}
       </div>
-    </div>
+      <v-spacer></v-spacer>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"/>
+      <div class="hidden-sm-and-down">
+        <v-btn v-if="isLogin" depressed rounded color="warning" class="font-weight-bold mx-1" @click="showForm = ! showForm">
+          <v-icon small>ion-md-add</v-icon>転載
+        </v-btn>
+        <v-btn v-if="isLogin" outlined rounded color="warning" class="font-weight-bold" @click="logout">ログアウト</v-btn>
+        <v-btn v-if="!isLogin" outlined rounded color="warning" class="font-weight-bold" @click="showLogin">ログイン</v-btn>  
+        <v-btn v-if="!isLogin" depressed rounded color="warning" class="font-weight-bold" @click="regist">新規登録</v-btn>
+      </div>
+    </v-toolbar>
     <PostForm v-model="showForm" />
-    
-  </nav>
+    <LoginForm ref="dlg"></LoginForm>
+  </div>
 </template>
 
 <script>
 import PostForm from './PostForm.vue'
 import LoginForm from './LoginForm.vue'
+import { SUCCESS } from '../util'
 
 export default {
   components: {
@@ -37,6 +56,15 @@ export default {
   data () {
     return {
       showForm: false,
+      drawer: null,
+      items: [
+        { title: "TOP", to: "/"},
+        { title: "FAQ", to: "/Regist"},
+        { title: "利用規約", to: "/Regist"},
+        { title: "特定商取引法に基づく表記", to: "/Regist"},
+        { title: "プライバシーポリシー", to: "/Regist"},
+        { title: "お問い合わせ", to: "/Regist"},
+      ]
     }
   },
   computed: {
@@ -49,11 +77,14 @@ export default {
   },
   methods: {
     async logout () {
-      await this.$store.dispatch('auth/logout')
-      this.$store.commit('message/setContent', {
-        content: 'ログアウトしました',
-        timeout: 2000
-      })
+      var result = await this.$store.dispatch('auth/logout')
+      if (result == SUCCESS) {
+        this.drawer = false
+        this.$store.commit('message/setContent', {
+          content: 'ログアウトしました',
+          timeout: 2000
+        })
+      }
     },
     regist () {
       this.$router.push('/Regist')

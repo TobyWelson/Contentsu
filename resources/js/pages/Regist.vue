@@ -1,17 +1,17 @@
 <template>
-  <v-container max-width="600px">
-    <v-card flat color="amber lighten-5">
-      <v-container>
+  <v-container id="regist">
+    <v-card flat>
+      <div>
         <v-layout justify-center class="display-1">SIGN UP</v-layout>
-        <v-layout justify-center class="mb-1">新規登録</v-layout>
-      </v-container>
-      <v-container v-if="registerErrors" class="errors">
+        <v-layout justify-center>新規登録</v-layout>
+      </div>
+      <div v-if="registerErrors" class="errors mt-2">
         <ul v-if="registerErrors.name"><li v-for="msg in registerErrors.name" :key="msg">{{ msg }}</li></ul>
         <ul v-if="registerErrors.email"><li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li></ul>
         <ul v-if="registerErrors.password"><li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li></ul>
-      </v-container>
+      </div>
       <v-form @submit.prevent="register">
-        <v-container class="login-dialog-input" py-10>
+        <div class="login-dialog-input mt-2">
           <v-container>
             <v-text-field
               id="username"
@@ -49,8 +49,7 @@
           <v-row justify="center" align-content="center">
             <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="register">登録</v-btn>
           </v-row>
-        </v-container>
-        <v-card-actions>&nbsp;</v-card-actions>
+        </div>
       </v-form>
     </v-card>
   </v-container>

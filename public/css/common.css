@@ -1,16 +1,31 @@
 /* 共通 */
-#logo{display: flex;}
-.v-application {
-  background-color: #fff8e1!important;
-  border-color: #fff8e1!important;
+#logo{
+  left: 50%;
+  position: absolute;
+  top: 50%;
+}
+#logo img{transform: translate(-50%,-50%);}
+.nav-tool{
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 3;
+}
+.nav-tool>div{
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 a {
   text-decoration: none;
   color: #222!important;
 }
-.hover-orange:hover {
-  color: #FFA500;
-  transition: color .3s;
+.post-hover a {
+  display: block;
+}
+.post-hover a:hover {
+  background-color: #ffeac3;
 }
 .title-over-text {
   overflow: hidden;
@@ -27,7 +42,16 @@ a {
 }
 .login-dialog-input {
   background-color: white;
-  width: 90%!important;
+}
+#addPost {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+/* regist */
+#regist {
+  max-width: 600px;
 }
 
 /* post */
@@ -40,6 +64,13 @@ a {
     line-height: normal!important;
 }
 
-@media screen and (max-width:600px){
+@media screen and (max-width:959px){
   .v-btn:not(.v-btn--round).v-size--default {padding: 0 10px!important;}
+
+}
+@media screen and  (min-width: 1264px) {
+.nav-tool>div{max-width: 1185px}
+}
+@media screen and  (min-width: 960px) and (max-width:1263px){
+.nav-tool>div{max-width: 900px}
 }
