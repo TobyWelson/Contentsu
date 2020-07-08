@@ -1,5 +1,8 @@
 <template>
-    <v-img :src="getThumURL" alt="alt here..." />
+    <div class="thumb">
+      <v-img :src="getThumURL" alt="alt here..." />
+      <div class="gard" />
+    </div>
 </template>
 
 <script>
