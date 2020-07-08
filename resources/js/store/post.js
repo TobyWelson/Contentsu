@@ -1,21 +1,16 @@
 import { OK } from '../util'
 
- // 転載記事 API を呼び出す アクション
+// 転載記事 API を呼び出す アクション
 const actions = {
-   // 投稿内容取得(認証必須)
-  async authfetch (context, data) {
-    const response = await axios.get(`/api/posts/${data}/authshow`)
-    
-    if (response.status === OK) {
-      return response.data
+   // 投稿内容取得
+  async fetch (context, data) {
+    var res = null;
+    if (data.isLogin === true) {
+      res = await axios.get(`/api/posts/${data.id}/authshow`)
     } else {
-        context.commit('error/setCode', response.status, { root: true })
+      res = await axios.get(`/api/posts/${data.id}/show`)
     }
-  },
-   // 投稿内容取得(認証不要)
-   async fetch (context, data) {
-    const response = await axios.get(`/api/posts/${data}/show`)
-    
+    const response = res;
     if (response.status === OK) {
       return response.data
     } else {
@@ -24,8 +19,7 @@ const actions = {
   },
   // 投稿内容取得
   async fetchPage (context, data) {
-    const response = await axios.get(`/api/posts/?page=${data}`)
-
+    const response = await axios.get(`/api/posts/${data.category}/?page=${data.page}`)
     if (response.status === OK) {
       return response.data
     } else {
@@ -34,7 +28,26 @@ const actions = {
   }
 };
 
+// category ステートの値を更新する setUser ミューテーション
+const mutations = {
+  setPosts(state, viewposts) {
+    state.viewposts = viewposts;
+  }
+};
+
+// 検索機能のカテゴリ状態を保持する category ステート
+const state = {
+  viewposts: [],
+};
+
+const getter = {
+  viewposts: state => state.viewposts,
+}
+
 export default {
   namespaced: true,
-  actions
+  actions,
+  mutations,
+  state,
+  getter
 };

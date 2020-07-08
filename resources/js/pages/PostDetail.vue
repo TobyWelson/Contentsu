@@ -139,18 +139,18 @@ export default {
     },
   },
   computed: {
-    isLogin () {
-      return this.$store.getters['auth/check']
+      isLogin () {
+        return this.$store.getters['auth/check']
       }
     },
   watch: {
     $route: {
       async handler () {
-        if (this.isLogin) {
-          this.post = await this.$store.dispatch('post/authfetch', this.id)
-        } else {
-          this.post = await this.$store.dispatch('post/fetch', this.id)
+        var data = {
+          id: this.id,
+          isLogin: this.isLogin,
         }
+        this.post = await this.$store.dispatch('post/fetch', data)
       },
       immediate: true
     }

@@ -52,12 +52,20 @@ class PostController extends Controller
 
     /**
      * 転載記事一覧
+     * @param string $category
+     * @return Post
      */
-    public function index()
+    public function index(string $category)
     {
-        $posts = Post::with(['owner', 'likes'])
+        $posts = null;
+        if($category == 'ALL') {
+            $posts = Post::with(['owner', 'likes'])
             ->orderBy(Post::CREATED_AT, 'desc')->paginate();
-    
+        } else {
+            $posts = Post::where('category', $category)
+            ->with(['owner', 'likes'])
+            ->orderBy(Post::CREATED_AT, 'desc')->paginate();
+        }
         return $posts;
     }
 

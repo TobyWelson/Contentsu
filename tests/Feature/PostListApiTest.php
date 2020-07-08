@@ -22,8 +22,8 @@ class PostListApiTest extends TestCase
         // 5つの記事データを生成する
         factory(Post::class, 5)->create();
 
-        $response = $this->json('GET', route('post.index'));
-
+        $response = $this->json('GET', route('post.index',['category'=>'ALL']));
+        
         // 生成した写真データを作成日降順で取得
         $posts = Post::with(['owner'])->orderBy('created_at', 'desc')->get();
 

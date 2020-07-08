@@ -5,6 +5,7 @@ import auth from './auth'
 import error from './error'
 import message from './message'
 import post from './post'
+import filter from './filter'
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ const store = new Vuex.Store({
     auth,
     error,
     post,
+    filter,
     message
   }
 });
