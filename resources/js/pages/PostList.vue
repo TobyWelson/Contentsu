@@ -14,14 +14,12 @@
       <span slot="no-results">-----検索結果はありません-----</span>
     </infinite-loading>
 
-    <v-btn id="addPost" v-if="isLogin" fab color="warning" class="button hidden-md-and-up" @click="showForm = ! showForm">
+    <v-btn id="addPost" v-if="isLogin" fab color="warning" class="button hidden-md-and-up" @click="showPost">
       <v-icon>mdi-feather</v-icon>
     </v-btn>
-    <PostForm v-model="showForm" />
+    <PostForm ref="post"/>
   </div>
 </template>
-
-
 
 <script>
 import Post from '../components/Post.vue'
@@ -60,6 +58,9 @@ export default {
         this.$refs.infiniteLoading.stateChanger.complete();
       }
       this.page = this.page + 1;
+    },
+    showPost() {
+      this.$refs.post.isShowPostDialog = true
     }
   },
   computed: {

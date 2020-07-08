@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isDialogShow" max-width="600px">
+  <v-dialog v-model="isShowLoginDialog" max-width="600px">
     <v-card>
       <v-container>
         <v-layout justify-center class="display-1">LOGIN</v-layout>
@@ -10,7 +10,7 @@
         <ul v-if="loginErrors.password"><li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li></ul>
       </v-container>
       <v-form @submit.prevent="login">
-        <v-container class="login-dialog-input" py-5>
+        <v-container py-5>
           <v-container>
             <v-text-field
               id="login-email"
@@ -21,13 +21,12 @@
               placeholder="xxx@xxx.com"/>
             <v-text-field
               id="login-password"
-              :type="isPasswordShow ? 'text' : 'password'"
+              :type="isShowPassword ? 'text' : 'password'"
               label="パスワード"
               v-model="loginForm.password"
-              width="80%"
               prepend-icon="mdi-lock"
-              :append-icon="isPasswordShow ? 'mdi-eye' : 'mdi-eye-off'"
-              @click:append="isPasswordShow= !isPasswordShow"
+              :append-icon="isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="isShowPassword= !isShowPassword"
               outlined
               placeholder="英数字 8桁以上"/>
           </v-container>
@@ -52,8 +51,8 @@ import { SUCCESS } from '../util'
 export default {
   data () {
     return {
-      isDialogShow: false,
-      isPasswordShow: false,
+      isShowLoginDialog: false,
+      isShowPassword: false,
       loginForm: {
         email: '',
         password: ''
@@ -71,7 +70,7 @@ export default {
       // authストアのloginアクションを呼び出す
       var result = await this.$store.dispatch('auth/login', this.loginForm)
       if (result == SUCCESS) {
-        this.isDialogShow = false
+        this.isShowLoginDialog = false
         this.$store.commit('message/setContent', {
           content: 'ログインしました',
           timeout: 4000
@@ -79,7 +78,7 @@ export default {
       }
     },
     regist () {
-      this.isDialogShow = false
+      this.isShowLoginDialog = false
       this.$router.push('/Regist')
     },
     clearError () {
