@@ -64,9 +64,6 @@ a {
   -webkit-line-clamp: 1;
   display: -webkit-box!important;
 }
-.login-dialog-input {
-  background-color: white;
-}
 #addPost {
   position: fixed;
   bottom: 10px;

@@ -32,7 +32,6 @@
               :type="'password'"
               label="パスワード"
               v-model="registerForm.password"
-              width="80%"
               prepend-icon="mdi-lock"
               outlined
               placeholder="英数字 8桁以上"/>
@@ -41,7 +40,6 @@
               :type="'password'"
               label="パスワード (確認)"
               v-model="registerForm.password_confirmation"
-              width="80%"
               prepend-icon="mdi-lock-reset"
               outlined
               placeholder="英数字 8桁以上"/>
