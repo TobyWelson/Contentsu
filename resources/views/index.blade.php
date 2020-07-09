@@ -17,7 +17,7 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="https://hypertext-candy.s3-ap-northeast-1.amazonaws.com/posts/vue-laravel-tutorial/app.css">
-  <link rel="stylesheet" href="../css/common.css?6" rel="preload" as="style">
+  <link rel="stylesheet" href="../css/common.css?<?php echo time() ?>" rel="preload" as="style">
   
 
   <!-- Veutify Fonts -->
