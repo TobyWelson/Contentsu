@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" fixed temporary>
+    <v-navigation-drawer v-model="drawer" fixed temporary right>
       <v-container>
         <v-list-item v-if="isLogin">
           <v-list-item-content>
