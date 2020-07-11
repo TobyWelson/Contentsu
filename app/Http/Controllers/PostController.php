@@ -78,26 +78,10 @@ class PostController extends Controller
     {
         $post = Post::where('id', $id)
         ->with(['owner', 'comments.author', 'likes'])->first();
-
-        $post->view_count = (int)$post->view_count + 1;
-        $post->save();
-
-        return $post ?? abort(404);
-    }
-
-    /**
-     * 転載記事詳細
-     * @param string $id
-     * @return Post
-     */
-    public function authshow(string $id)
-    {
-        $post = Post::where('id', $id)
-        ->with(['owner', 'comments.author', 'likes'])->first();
-
-        // 呼び出されるたびに閲覧者数がカウントアップされる
-        // 正し投稿者本人の場合はカウントアップされない。
-        if ($post->user_id <> Auth::user()->id) {
+        
+        // 未ログイン又はログイン中で自分の投稿以外の場合
+        if (!Auth::check()
+            || (Auth::check() && $post->user_id <> Auth::user()->id)) {
             $post->view_count = (int)$post->view_count + 1;
             $post->save();
         }

@@ -4,17 +4,12 @@ import { OK } from '../util'
 const actions = {
    // 投稿内容取得
   async fetch (context, data) {
-    var res = null;
-    if (data.isLogin === true) {
-      res = await axios.get(`/api/posts/${data.id}/authshow`)
-    } else {
-      res = await axios.get(`/api/posts/${data.id}/show`)
-    }
+    var res = await axios.get(`/api/posts/${data.id}/show`)
     const response = res;
     if (response.status === OK) {
       return response.data
     } else {
-        context.commit('error/setCode', response.status, { root: true })
+      context.commit('error/setCode', response.status, { root: true })
     }
   },
   // 投稿内容取得
