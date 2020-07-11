@@ -1,6 +1,6 @@
 <template>
     <div class="thumb">
-      <v-img :src="getThumURL" alt="alt here..." />
+      <v-img :src="getThumURL" alt="alt here..."/>
       <div class="gard" />
     </div>
 </template>
@@ -23,9 +23,11 @@ export default {
         this.videoId = this.videoUrl.split('/')[3];
       } else if (youtubeResult != null) {
         this.videoId = this.videoUrl.split('v=')[1];
+      } else {
+        return require('../../img/tiktok.png');
       }
       return "http://img.youtube.com/vi/" + this.videoId + "/mqdefault.jpg";
-    }
+    },
   }
 }
 </script>

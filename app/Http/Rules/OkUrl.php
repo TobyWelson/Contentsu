@@ -26,7 +26,9 @@ class OkUrl implements Rule
     public function passes($attribute, $value)
     {
         $youtube = 'https://youtu\.be/.*|https://www\.youtube\.com/watch.*';
-        $pattern = $youtube;
+        $tiktok = 'https://www\.tiktok\.com/.*';
+        $pattern = $youtube.'|'.$tiktok;
+        // $pattern = $youtube;
         return mb_ereg($pattern, $value);
     }
 

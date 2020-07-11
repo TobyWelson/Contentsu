@@ -55,6 +55,7 @@ export default {
         page: this.page,
         category: this.getCategory =='' ? 'ALL': this.getCategory,
       }
+
       const response = await this.$store.dispatch('post/fetchPage', data)
       
       // レスポンス無し
@@ -67,7 +68,7 @@ export default {
       this.lastPage = response.last_page
 
       // 記事取得無し
-      if (this.posts == null || this.page == 0) {
+      if (this.posts == null) {
         this.$refs.infiniteLoading.stateChanger.complete();
         return false;
       }
@@ -78,6 +79,7 @@ export default {
       this.$refs.infiniteLoading.stateChanger.loaded();
       if (this.lastPage == this.page) {
         this.$refs.infiniteLoading.stateChanger.complete();
+        return false;
       }
       this.page = this.page + 1;
     },

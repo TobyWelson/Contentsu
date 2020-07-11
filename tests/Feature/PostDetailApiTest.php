@@ -67,7 +67,7 @@ class PostDetailApiTest extends TestCase
         $post->save();
 
         $response = $this->actingAs($this->user)
-        ->json('GET', route('post.authshow', [
+        ->json('GET', route('post.show', [
             'id' => $post->id,
         ]));
 
@@ -112,7 +112,7 @@ class PostDetailApiTest extends TestCase
         $post->save();
         
         $response = $this->actingAs($this->user)
-        ->json('GET', route('post.authshow', [
+        ->json('GET', route('post.show', [
             'id' => $post->id,
         ]));
 

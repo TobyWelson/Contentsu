@@ -25,13 +25,35 @@ class PostSubmitApiTest extends TestCase
     /**
      * @test
      */
-    public function 記事を投稿できる1()
+    public function 記事を投稿できる1_youtube()
     {
         $response = $this->actingAs($this->user)
             ->json('POST', route('post.create'), [
                 'title' => '面白いyoutuber１',
                 'category' => 'ゲーム実況',
                 'url' => 'https://www.youtube.com/watch?v=ySQIOtjSHIc&list=RDySQIOtjSHIc&start_radio=1'
+            ]);
+
+        // レスポンスが201(CREATED)であること
+        $response->assertStatus(201);
+
+        $post = Post::first();
+
+        // 転載記事のIDが12桁のランダムな文字列であること
+        $this->assertRegExp('/^[0-9a-zA-Z-_]{12}$/', $post->id);
+
+    }
+
+        /**
+     * @test
+     */
+    public function 記事を投稿できる1_tiktok()
+    {
+        $response = $this->actingAs($this->user)
+            ->json('POST', route('post.create'), [
+                'title' => '面白いyoutuber１',
+                'category' => 'ゲーム実況',
+                'url' => 'https://www.tiktok.com/@hassaku0804/video/6845086982771608833'
             ]);
 
         // レスポンスが201(CREATED)であること
