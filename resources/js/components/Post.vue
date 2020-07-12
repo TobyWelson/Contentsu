@@ -6,6 +6,7 @@
       :to="`/posts/${item.id}`">
       <Thumbnail :videoUrl="item.url"></Thumbnail>
       <v-card-title class="title-over-text font-weight-bold text-body-2 text-sm-h5 text-md-h6 text-lg-h6 text-xl-h6">{{ item.title }}</v-card-title>
+      <v-card-subtitle class="title-over-text">{{ item.category }}</v-card-subtitle>
       <div class="titlegard" />
       <v-divider></v-divider>
       <v-card-actions>
