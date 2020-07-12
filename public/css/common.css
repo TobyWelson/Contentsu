@@ -39,28 +39,10 @@ a {
   height: 100%;
   background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0) 30%, rgb(252, 105, 0) 100%) ; 
 }
-.v-card__title {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  color: white;
-  font-weight: bold;
-  text-shadow: 
-  black 2px 0px,  black -2px 0px,
-  black 0px -2px, black 0px 2px,
-  black 2px 2px , black -2px 2px,
-  black 2px -2px, black -2px -2px,
-  black 1px 2px,  black -1px 2px,
-  black 1px -2px, black -1px -2px,
-  black 2px 1px,  black -2px 1px,
-  black 2px -1px, black -2px -1px;
-  /* background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgb(255, 81, 0) 100%) ; */
-}
+
 .v-card__subtitle {
   position: absolute;
   z-index: 2;
-  transform: translateY("-1000px");
   right: 0;
   color: white !important;
   font-weight: bold;
@@ -105,9 +87,32 @@ a {
     display: -webkit-box!important;
     max-height: 5rem!important;
     font-size: 1.1rem!important;
-    margin: 10px!important;
-    padding: 0px!important;
-    line-height: normal!important;
+    padding-top: 1px!important;
+    padding-right: 16px!important;
+    padding-bottom: 1px!important;
+    padding-left: 1px!important;
+    position   : absolute;                   /* 親要素からの絶対位置 */
+    box-sizing : border-box;
+    white-space: nowrap;                     /* 折返しなし */
+    display    : block;                      /* ブロック要素にする */
+    width      : 100%;                       /* 親要素の幅に合わせる */
+    color      : rgba(255, 255, 255, 0.8);    /* 文字色（透明度） */
+    top        : 50%;                        /* 親要素からの上位置 */
+    left       : 0;                          /* 親要素からの左位置 */
+    text-align : right;                     /* 文字位置 */
+    transform  : translateY(-280%);           /* 文字BOXの位置ずらし */
+    text-shadow: 
+    black 2px 0px,  black -2px 0px,
+    black 0px -2px, black 0px 2px,
+    black 2px 2px , black -2px 2px,
+    black 2px -2px, black -2px -2px,
+    black 1px 2px,  black -1px 2px,
+    black 1px -2px, black -1px -2px,
+    black 2px 1px,  black -2px 1px,
+    black 2px -1px, black -2px -1px;
+    width      : 100%;                       /* 親要素の幅に合わせる */
+    background : rgba(255, 255, 255, 0.5);
+    /* background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgb(255, 81, 0) 100%) ; */
 }
 
 @media screen and ( max-width:379px){
@@ -118,6 +123,12 @@ a {
     justify-content: center;
     height: 78.75px;
     background-color: black;
+  }
+  .v-card__title {
+    font-size: 0.8rem!important;
+  }
+  .v-card__subtitle {
+    font-size: 0.5rem!important;
   }
 }
 
@@ -130,6 +141,12 @@ a {
     height: 105.69px;
     background-color: black;
   }
+  .v-card__title {
+    font-size: 0.8rem!important;
+  }
+  .v-card__subtitle {
+    font-size: 0.5rem!important;
+  }
 }
 
 @media screen and (min-width:415px) and ( max-width:599px){
@@ -141,6 +158,12 @@ a {
     height: 153.69px;
     background-color: black;
   }
+  .v-card__title {
+    font-size: 0.8rem!important;
+  }
+  .v-card__subtitle {
+    font-size: 0.5rem!important;
+  }
 }
 
 @media screen and (min-width:600px) and ( max-width:959px){
@@ -151,6 +174,12 @@ a {
     justify-content: center;
     height: 253.69px;
     background-color: black;
+  }
+  .v-card__title {
+    font-size: 0.8rem!important;
+  }
+  .v-card__subtitle {
+    font-size: 0.5rem!important;
   }
 }
 
