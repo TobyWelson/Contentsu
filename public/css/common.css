@@ -55,7 +55,7 @@ a {
   black 1px -2px, black -1px -2px,
   black 2px 1px,  black -2px 1px,
   black 2px -1px, black -2px -1px;
-  background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgb(255, 81, 0) 100%) ;
+  /* background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgb(255, 81, 0) 100%) ; */
 }
 .v-card__subtitle {
   position: absolute;
@@ -73,7 +73,7 @@ a {
   black 1px -1px, black -1px -1px,
   black 1px 1px,  black -1px 1px,
   black 1px -1px, black -1px -1px;
-  background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgb(255, 81, 0) 60%) ;
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgb(0, 0, 0) 60%) ;
 }
 
 .title-over-text {
