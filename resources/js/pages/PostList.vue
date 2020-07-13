@@ -41,8 +41,6 @@ export default {
     return {
       showForm: false,
       posts: [],
-      page: 1,
-      lastPage: 0
     }
   },
   methods: {
@@ -52,42 +50,34 @@ export default {
    */
     async infiniteLoad() {
       var data = {
-        page: this.page,
+        page: this.page + 1,
         category: this.getCategory =='' ? 'ALL': this.getCategory,
       }
-
       const response = await this.$store.dispatch('post/fetchPage', data)
       
-      // レスポンス無し
-      if (this.response == UNPROCESSABLE_ENTITY) {
+      if (response.data.posts != null
+        || response.last_page >= this.page + 1) {
+
+        this.posts = response.data
+        this.$store.commit('post/setPage', this.page + 1);
+        this.$store.commit('post/setLastPage', response.last_page);
+
+        for (let i=0;i<this.posts.length;i++) {
+          this.viewposts.push(this.posts[i]);
+        }
+        this.$refs.infiniteLoading.stateChanger.loaded();
+        
+      } else {
         this.$refs.infiniteLoading.stateChanger.complete();
         return false;
       }
-
-      this.posts = response.data
-      this.lastPage = response.last_page
-
-      // 記事取得無し
-      if (this.posts == null) {
-        this.$refs.infiniteLoading.stateChanger.complete();
-        return false;
-      }
-
-      for (let i=0;i<this.posts.length;i++) {
-        this.viewposts.push(this.posts[i]);
-      }
-      this.$refs.infiniteLoading.stateChanger.loaded();
-      if (this.lastPage == this.page) {
-        this.$refs.infiniteLoading.stateChanger.complete();
-        return false;
-      }
-      this.page = this.page + 1;
     },
     showPost() {
       this.$refs.post.isShowPostDialog = true;
     },
     reset() {
-      this.page = 1;
+      this.$store.commit('post/setLastPage', 0);
+      this.$store.commit('post/setPage', 0);
       this.posts = [];
       this.$store.commit('post/setPosts', []);
       this.$refs.infiniteLoading.stateChanger.reset();
@@ -102,6 +92,8 @@ export default {
     },
     ...mapState({
         viewposts: state => state.post.viewposts,
+        page: state => state.post.page,
+        lastPage: state => state.post.lastPage,
     }),
   },
 }

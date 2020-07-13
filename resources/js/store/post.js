@@ -27,12 +27,20 @@ const actions = {
 const mutations = {
   setPosts(state, viewposts) {
     state.viewposts = viewposts;
+  },
+  setPage(state, page) {
+    state.page = page;
+  },
+  setLastPage(state, lastPage) {
+    state.lastPage = lastPage;
   }
 };
 
 // 検索機能のカテゴリ状態を保持する category ステート
 const state = {
   viewposts: [],
+  page: 0,
+  lastPage: 0,
 };
 
 const getter = {

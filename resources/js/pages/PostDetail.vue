@@ -139,10 +139,10 @@ export default {
     },
   },
   computed: {
-      isLogin () {
-        return this.$store.getters['auth/check']
-      }
-    },
+    isLogin () {
+      return this.$store.getters['auth/check']
+    }
+  },
   watch: {
     $route: {
       async handler () {
