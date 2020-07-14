@@ -82,9 +82,8 @@ export default {
       formData.append('url', this.url)
       var result = await this.$store.dispatch('post/posts', formData)
       this.loading = false
-      this.reset()
-      this.$emit('input', false)
       if (result != FAILURE) {
+        this.reset()
         this.isShowPostDialog = false
         this.$router.push(`/posts/${result}`)
         this.$store.commit('message/setContent', {
