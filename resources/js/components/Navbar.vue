@@ -20,9 +20,9 @@
     </v-navigation-drawer>
     <v-toolbar class="nav-tool">
       <div id="logo">
-        <RouterLink class="navbar__brand" to="/">
-          <img src="../../img/logo_contents_1.png" alt="コン転ツ" width="60px" height="55px"/>
-        </RouterLink>
+        <router-link class="navbar__brand" @click.native="reload" to="/">
+          <img src="../../img/logo_contents_1.png" alt="コン転ツ" height="55px"/>
+        </router-link>
       </div>
       <div v-if="isLogin" class="hidden-sm-and-down">
         <v-icon>mdi-account</v-icon>{{ username }}
@@ -93,6 +93,10 @@ export default {
     },
     showPost() {
       this.$refs.post.isShowPostDialog = true
+    },
+    reload() {
+      this.$store.commit('post/setPosts', []);
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
     }
   }
 }

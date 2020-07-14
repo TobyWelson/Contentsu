@@ -40,7 +40,6 @@ export default {
   data () {
     return {
       showForm: false,
-      posts: [],
     }
   },
   methods: {
@@ -57,13 +56,11 @@ export default {
       
       if (response.data.posts != null
         || response.last_page >= this.page + 1) {
-
-        this.posts = response.data
         this.$store.commit('post/setPage', this.page + 1);
         this.$store.commit('post/setLastPage', response.last_page);
 
-        for (let i=0;i<this.posts.length;i++) {
-          this.viewposts.push(this.posts[i]);
+        for (let i=0;i<response.data.length;i++) {
+          this.viewposts.push(response.data[i]);
         }
         this.$refs.infiniteLoading.stateChanger.loaded();
         
@@ -78,7 +75,6 @@ export default {
     reset() {
       this.$store.commit('post/setLastPage', 0);
       this.$store.commit('post/setPage', 0);
-      this.posts = [];
       this.$store.commit('post/setPosts', []);
       this.$refs.infiniteLoading.stateChanger.reset();
     }

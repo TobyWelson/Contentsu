@@ -22,7 +22,8 @@ export default {
       if (youbeResult != null) {
         this.videoId = this.videoUrl.split('/')[3];
       } else if (youtubeResult != null) {
-        this.videoId = this.videoUrl.split('v=')[1];
+        var spritId = this.videoUrl.split('v=')[1];
+        this.videoId = spritId.split('&')[0];
       } else {
         return require('../../img/tiktok.png');
       }

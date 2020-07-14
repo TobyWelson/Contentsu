@@ -4,8 +4,8 @@
   left: 50%;
   position: absolute;
   top: 50%;
+  transform: translate(-50%,-50%);
 }
-#logo img{transform: translate(-50%,-50%);}
 .nav-tool{
   left: 0;
   position: fixed;
