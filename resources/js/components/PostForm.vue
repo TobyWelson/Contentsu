@@ -1,21 +1,18 @@
 <template>
   <v-dialog v-model="isShowPostDialog" max-width="600px">
     <v-card>
-      <v-container>
-        <v-layout justify-center class="display-1">URL転載</v-layout>
-      </v-container>
       <div v-show="loading" class="panel">
         <Loader>記事を投稿中...</Loader>
       </div>
-      <div class="errors" v-if="errors">
-        <ul v-if="errors.title">
-          <li v-for="msg in errors.title" :key="msg">{{ msg }}</li>
+      <div class="errors" v-if="postErrors">
+        <ul v-if="postErrors.title">
+          <li v-for="msg in postErrors.title" :key="msg">{{ msg }}</li>
         </ul>
-        <ul v-if="errors.category">
-          <li v-for="msg in errors.category" :key="msg">{{ msg }}</li>
+        <ul v-if="postErrors.category">
+          <li v-for="msg in postErrors.category" :key="msg">{{ msg }}</li>
         </ul>
-        <ul v-if="errors.url">
-          <li v-for="msg in errors.url" :key="msg">{{ msg }}</li>
+        <ul v-if="postErrors.url">
+          <li v-for="msg in postErrors.url" :key="msg">{{ msg }}</li>
         </ul>
       </div>
       <v-form @submit.prevent="submit">
@@ -38,14 +35,14 @@
             <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="submit">投稿</v-btn>
           </v-row>
         </v-container>
-        <v-card-actions>&nbsp;</v-card-actions>
       </v-form>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
+import { mapState } from 'vuex'
+import { FAILURE } from '../util'
 import Loader from './Loader.vue'
 
 export default {
@@ -59,8 +56,12 @@ export default {
       title: '',
       category: '',
       url: '',
-      errors: null
     }
+  },
+  computed: {
+    ...mapState({
+      postErrors: state => state.post.postsErrorMessages,
+    }),
   },
   methods: {
     onFileChange (event) {
@@ -79,33 +80,18 @@ export default {
       formData.append('title', this.title)
       formData.append('category', this.category)
       formData.append('url', this.url)
-      const response = await axios.post('/api/posts', formData)
+      var result = await this.$store.dispatch('post/posts', formData)
       this.loading = false
-
-      if (response.status === UNPROCESSABLE_ENTITY) {
-        this.errors = response.data.errors
-        return false
-      }
       this.reset()
       this.$emit('input', false)
-      if (response.status !== CREATED) {
-        this.$store.commit('error/setCode', response.status)
-        return false
+      if (result != FAILURE) {
+        this.isShowPostDialog = false
+        this.$router.push(`/posts/${result}`)
+        this.$store.commit('message/setContent', {
+          content: '記事が投稿されました',
+          timeout: 4000
+        })
       }
-      this.$router.push(`/posts/${response.data.id}`)
-
-      if (response.status !== CREATED) {
-        this.$store.commit('error/setCode', response.status)
-        return false
-      }
-
-      // メッセージ登録
-      this.$store.commit('message/setContent', {
-        content: '記事が投稿されました',
-        timeout: 6000
-      })
-
-      this.$router.push(`/posts/${response.data.id}`)
     }
   }
 }

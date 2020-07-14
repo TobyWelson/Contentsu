@@ -1,4 +1,4 @@
-import { OK } from '../util'
+import { OK, UNPROCESSABLE_ENTITY, CREATED, FAILURE  } from '../util'
 
 // 転載記事 API を呼び出す アクション
 const actions = {
@@ -20,6 +20,20 @@ const actions = {
     } else {
       context.commit('error/setCode', response.status, { root: true })
     }
+  },
+  // 投稿
+  async posts (context, data) {
+    const response = await axios.post('/api/posts', data)
+    if (response.status === UNPROCESSABLE_ENTITY) {
+      context.commit('setPostsErrorMessages', response.data.errors)
+      return FAILURE
+    }
+    if (response.status === CREATED) {
+      return response.data.id
+    } else {
+      this.$store.commit('error/setCode', response.status)
+      return FAILURE
+    }
   }
 };
 
@@ -33,6 +47,9 @@ const mutations = {
   },
   setLastPage(state, lastPage) {
     state.lastPage = lastPage;
+  },
+  setPostsErrorMessages (state, messages) {
+    state.postsErrorMessages = messages
   }
 };
 
@@ -41,6 +58,7 @@ const state = {
   viewposts: [],
   page: 0,
   lastPage: 0,
+  postsErrorMessages: null
 };
 
 const getter = {
