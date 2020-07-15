@@ -1,8 +1,8 @@
 <template>
   <v-dialog v-model="isShowPostDialog" max-width="600px">
     <v-card>
-      <div v-show="loading" class="panel">
-        <Loader>記事を投稿中...</Loader>
+      <div v-show="loading" class="post-load">
+        <Loader>投稿中...</Loader>
       </div>
       <div class="errors" v-if="postErrors">
         <ul v-if="postErrors.title">
