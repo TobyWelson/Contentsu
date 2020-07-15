@@ -7,27 +7,28 @@
 
 <script>
 export default {
-  props: [
-    'videoUrl'
-  ],
-  data(){
-      return {
-          videoId: ''
-      }
+  props: {
+    videoUrl: {
+      type: String,
+      required: true
+    }
   },
   computed: {
     getThumURL : function() {
-      var youbeResult = this.videoUrl.match(/youtu\.be/);
+      var youtuResult = this.videoUrl.match(/youtu\.be/);
       var youtubeResult = this.videoUrl.match(/youtube\.com/);
-      if (youbeResult != null) {
-        this.videoId = this.videoUrl.split('/')[3];
+      var tiktokResult = this.videoUrl.match(/tiktok\.com/);
+      if (youtuResult != null) {
+        var videoId = this.videoUrl.split('/')[3];
+        return "http://img.youtube.com/vi/" + videoId + "/mqdefault.jpg";
       } else if (youtubeResult != null) {
         var spritId = this.videoUrl.split('v=')[1];
-        this.videoId = spritId.split('&')[0];
-      } else {
+        var videoId = spritId.split('&')[0];
+        return "http://img.youtube.com/vi/" + videoId + "/mqdefault.jpg";
+      } else if (tiktokResult != null)  {
         return require('../../img/tiktok.png');
       }
-      return "http://img.youtube.com/vi/" + this.videoId + "/mqdefault.jpg";
+      return "";
     },
   }
 }

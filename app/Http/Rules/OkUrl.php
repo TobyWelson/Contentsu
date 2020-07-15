@@ -3,6 +3,7 @@
 namespace App\Http\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class OkUrl implements Rule
 {
@@ -25,11 +26,9 @@ class OkUrl implements Rule
      */
     public function passes($attribute, $value)
     {
-        $youtube = 'https://youtu\.be/.*|https://www\.youtube\.com/watch.*';
-        $tiktok = 'https://www\.tiktok\.com/.*';
-        $pattern = $youtube.'|'.$tiktok;
-        // $pattern = $youtube;
-        return mb_ereg($pattern, $value);
+        $rules = Storage::get('/public/RulesUrl.txt');
+        $rulesReplace = str_replace(array("\r\n", "\r", "\n"), '|', $rules);
+        return mb_ereg_match($rulesReplace, $value);
     }
 
     /**
@@ -40,6 +39,6 @@ class OkUrl implements Rule
     public function message()
     {
         // return '氏名は「姓1文字以上＋空白＋名1文字以上」の形式である必要があります。';
-        return '指定サイト以外のＵＲＬを入力することはできません。\n必要な場合は申請をお願いします。';
+        return "指定サイト以外のＵＲＬを入力することはできません。\n必要な場合は申請をお願いします。";
     }
 }

@@ -21,7 +21,7 @@
     <v-toolbar class="nav-tool">
       <div id="logo">
         <router-link class="navbar__brand" @click.native="reload" to="/">
-          <img src="../../img/logo_contents_1.png" alt="コン転ツ" height="55px"/>
+          <img src="../../img/logo.png" alt="コン転ツ" height="55px"/>
         </router-link>
       </div>
       <div v-if="isLogin" class="hidden-sm-and-down">
