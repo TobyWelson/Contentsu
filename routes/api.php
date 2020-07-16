@@ -33,6 +33,9 @@ Route::get('/user', fn() => Auth::user())->name('user');
 // 転載記事投稿
 Route::post('/posts', 'PostController@create')->name('post.create');
 
+// 転載記事削除
+Route::delete('/posts/{id}', 'PostController@postDelete')->name('post.postDelete');
+
 // 転載記事一覧
 Route::get('/posts/{category}', 'PostController@index')->name('post.index');
 

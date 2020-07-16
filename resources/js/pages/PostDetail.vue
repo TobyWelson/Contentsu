@@ -25,6 +25,15 @@
         <i class="icon ion-md-chatboxes"></i>コメント
       </h2>
       <p>閲覧者数: {{ post.view_count }}</p>
+      <div v-if="isPostFromCurrentUser" class="delete_btn my-2">
+        <v-btn
+          color="error"
+          class="delete_btn"
+          @click="onDeleteClick"
+        >
+        記事を削除する
+        </v-btn>
+      </div>
       <ul v-if="post.comments.length > 0" class="post-detail__comments">
         <li
           v-for="comment in post.comments"
@@ -58,6 +67,7 @@
 <script>
 import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../util'
 import Youtube from '../components/Youtube.vue'
+import { FAILURE } from '../util'
 
 export default {
   components: {
@@ -137,10 +147,39 @@ export default {
         this.like()
       }
     },
+    async onDeleteClick () {
+      if(confirm('本当に記事を削除しますか？')){
+        var result = await this.$store.dispatch('post/delete', this.post.id);
+        if (result != FAILURE) {
+          this.$store.commit('post/setLastPage', 0);
+          this.$store.commit('post/setPage', 0);
+          this.$store.commit('post/setPosts', []);
+          this.$router.push('/')
+          this.$store.commit('message/setContent', {
+            content: '記事が削除されました'.result,
+            timeout: 4000
+            })
+        } else {
+          this.$store.commit('message/setContent', {
+            content: '記事の削除に失敗しました',
+            timeout: 4000
+          })
+        }
+      }
+    }
   },
   computed: {
     isLogin () {
       return this.$store.getters['auth/check']
+    },
+    username () {
+      return this.$store.getters['auth/username']
+    },
+    isPostFromCurrentUser() {
+      if(this.username == this.post.owner.name) {
+        return true
+      }
+      return false
     }
   },
   watch: {
@@ -151,6 +190,7 @@ export default {
           isLogin: this.isLogin,
         }
         this.post = await this.$store.dispatch('post/fetch', data)
+        this.$store.commit('screen/setCurrent', 'PostDetail');
       },
       immediate: true
     }

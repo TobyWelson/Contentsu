@@ -51,6 +51,30 @@ class PostController extends Controller
     }
 
     /**
+     * 転載記事削除
+     * @param string $id
+     * @return array
+     */
+    public function postDelete(string $id)
+    {
+        $post = Post::where('id', $id)->with(['owner', 'comments.author', 'likes'])->first();
+
+        // データベースエラー時にロールバックする為
+        // トランザクションを利用する
+        DB::beginTransaction();
+
+        try {
+            $post->delete();
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
+
+        return ["post_id" => $id];
+    }
+
+    /**
      * 転載記事一覧
      * @param string $category
      * @return Post

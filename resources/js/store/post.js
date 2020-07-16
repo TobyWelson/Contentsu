@@ -34,6 +34,15 @@ const actions = {
       context.commit('error/setCode', response.status)
       return FAILURE
     }
+  },
+  // 削除
+  async delete (context, data) {
+    const response = await axios.delete(`/api/posts/${data}`)
+    if (response.status !== OK) {
+      // context.commit('error/setCode', response.status)
+      return FAILURE
+    }
+    return response.data.id
   }
 };
 
@@ -61,7 +70,7 @@ const state = {
   postsErrorMessages: null
 };
 
-const getter = {
+const getters = {
   viewposts: state => state.viewposts,
 }
 
@@ -70,5 +79,5 @@ export default {
   actions,
   mutations,
   state,
-  getter
+  getters
 };
