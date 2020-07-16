@@ -31,7 +31,7 @@ const actions = {
     if (response.status === CREATED) {
       return response.data.id
     } else {
-      this.$store.commit('error/setCode', response.status)
+      context.commit('error/setCode', response.status)
       return FAILURE
     }
   }
