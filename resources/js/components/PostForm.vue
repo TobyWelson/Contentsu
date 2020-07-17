@@ -22,10 +22,11 @@
               label="タイトル"
               v-model="title"
               outlined/>
-            <v-text-field
+            <v-select
               label="カテゴリ"
               v-model="category"
-              outlined/>
+              :items="categories"
+              outlined></v-select>
             <v-text-field
               label="URL"
               v-model="url"
@@ -61,6 +62,7 @@ export default {
   computed: {
     ...mapState({
       postErrors: state => state.post.postsErrorMessages,
+      categories: state => state.filter.categories,
     }),
   },
   methods: {

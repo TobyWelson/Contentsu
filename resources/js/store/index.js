@@ -6,6 +6,7 @@ import error from './error'
 import message from './message'
 import post from './post'
 import filter from './filter'
+import screen from './screen'
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ const store = new Vuex.Store({
     error,
     post,
     filter,
+    screen,
     message
   }
 });
