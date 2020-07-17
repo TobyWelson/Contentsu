@@ -1,45 +1,48 @@
 <template>
-  <div
-    v-if="post"
-    class="post-detail">
-    <figure
-      class="post-detail__pane post-detail__image">
-      <p>タイトル：{{ post.title }}</p>
-      <p>カテゴリ：{{ post.category }}</p>
-      <p>URL：{{ post.url }}</p>
-
+  <div v-if="post" class="post_detail">
+  <v-card flat>
       <Youtube :videoUrl="post.url"/>
-      
-      <figcaption>Posted by {{ post.owner.name }}</figcaption>
-    </figure>
+      <v-card-title class="font-weight-bold text-body-1 text-sm-h5 text-md-h6 text-lg-h6 text-xl-h6">{{ post.title }}</v-card-title>
+      <v-card-actions>
+       <span class="title_over_text text-subtitle-2 text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.url }}</span>
+        <v-spacer></v-spacer>
+        <div class="menu_icons">
+          <v-btn icon @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
+          <v-btn icon v-if="isPostFromCurrentUser" color="error" @click="onDeleteClick"><v-icon>mdi-delete</v-icon></v-btn>
+        </div>
+      </v-card-actions>
+      <v-divider></v-divider>
+      <v-card-actions>
+        <v-icon small>mdi-account</v-icon><span class="name-over-text text-caption text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.owner.name }}</span>
+        <v-spacer></v-spacer>
+        <div>
+          <v-icon small>mdi-folder</v-icon><span class="mr-1 text-subtitle-2 text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.category }}</span>
+          <v-icon small>mdi-eye</v-icon><span class="mr-1 text-subtitle-2 text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.view_count }}</span>
+          <v-icon small>mdi-heart</v-icon><span class="mr-1 text-subtitle-2 text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.likes_count }}</span>
+        </div>
+      </v-card-actions>
+  </v-card>
+
     <div class="post-detail__pane">
-      <button
-        class="button button--like"
-        :class="{ 'button--liked': post.liked_by_user }"
-        title="Like post"
-        @click="onLikeClick"
-      >
-        <i class="icon ion-md-heart"></i>{{ post.likes_count }}
-      </button>
       <h2 class="post-detail__title">
         <i class="icon ion-md-chatboxes"></i>コメント
       </h2>
-      <p>閲覧者数: {{ post.view_count }}</p>
-      <div v-if="isPostFromCurrentUser" class="delete_btn my-2">
-        <v-btn
-          color="error"
-          class="delete_btn"
-          @click="onDeleteClick"
-        >
-        記事を削除する
-        </v-btn>
-      </div>
+      <form v-if="isLogin" @submit.prevent="addComment" class="form">
+        <div v-if="commentErrors" class="errors">
+          <ul v-if="commentErrors.content">
+            <li v-for="msg in commentErrors.content" :key="msg">{{ msg }}</li>
+          </ul>
+        </div>
+        <textarea class="form__item" v-model="commentContent"></textarea>
+        <div class="form__button">
+          <v-btn depressed rounded type="submit" color="warning"><v-icon small>mdi-lead-pencil</v-icon>書込み</v-btn>
+        </div>
+      </form>
       <ul v-if="post.comments.length > 0" class="post-detail__comments">
         <li
           v-for="comment in post.comments"
           :key="comment.content"
-          class="post-detail__commentItem"
-        >
+          class="post-detail__commentItem">
           <p class="post-detail__commentBody">
             {{ comment.content }}
           </p>
@@ -49,17 +52,6 @@
         </li>
       </ul>
       <p v-else>まだコメントはありません。</p>
-      <form v-if="isLogin" @submit.prevent="addComment" class="form">
-        <div v-if="commentErrors" class="errors">
-          <ul v-if="commentErrors.content">
-            <li v-for="msg in commentErrors.content" :key="msg">{{ msg }}</li>
-          </ul>
-        </div>
-        <textarea class="form__item" v-model="commentContent"></textarea>
-        <div class="form__button">
-          <button type="submit" class="button button--inverse">書込み</button>
-        </div>
-      </form>
     </div>
   </div>
 </template>
@@ -154,7 +146,7 @@ export default {
           this.$store.commit('post/setLastPage', 0);
           this.$store.commit('post/setPage', 0);
           this.$store.commit('post/setPosts', []);
-          this.$router.push('/')
+          this.$router.push('/').catch(err => {})
           this.$store.commit('message/setContent', {
             content: '記事が削除されました'.result,
             timeout: 4000

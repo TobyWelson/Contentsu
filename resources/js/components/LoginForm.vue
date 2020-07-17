@@ -70,7 +70,7 @@ export default {
       // authストアのloginアクションを呼び出す
       var result = await this.$store.dispatch('auth/login', this.loginForm)
       if (result == SUCCESS) {
-        this.$router.push('/')
+        this.$router.push('/').catch(err => {})
         this.isShowLoginDialog = false
         this.$store.commit('message/setContent', {
           content: 'ログインしました',

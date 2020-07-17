@@ -18,7 +18,7 @@
       </v-list>
       </v-container>
     </v-navigation-drawer>
-    <v-toolbar class="nav-tool">
+    <v-toolbar class="nav_tool">
       <div id="logo">
         <router-link class="navbar__brand" @click.native="reload" to="/">
           <img src="../../img/logo.png" alt="コン転ツ" height="55px"/>
@@ -95,8 +95,10 @@ export default {
       this.$refs.post.isShowPostDialog = true
     },
     reload() {
+      this.$store.commit('post/setLastPage', 0);
+      this.$store.commit('post/setPage', 0);
       this.$store.commit('post/setPosts', []);
-      this.$router.go({path: this.$router.currentRoute.path, force: true})
+      this.$router.push('/').catch(err => {})
     }
   }
 }

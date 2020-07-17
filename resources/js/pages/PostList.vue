@@ -15,7 +15,7 @@
       // 結果が存在しない場合下記が表示される
       <span slot="no-results">-----検索結果はありません-----</span>
     </infinite-loading>
-    <v-btn id="addPost" v-if="isLogin" fab color="warning" class="button hidden-md-and-up" @click="showPost">
+    <v-btn v-if="isLogin" fab color="warning" class="button hidden-md-and-up add_post" @click="showPost">
       <v-icon>mdi-feather</v-icon>
     </v-btn>
     <PostForm ref="post"/>
