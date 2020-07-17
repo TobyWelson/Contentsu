@@ -1,11 +1,9 @@
 <template>
-  <v-toolbar
-            dark
-            color="#fb8c00 darken-1"
-            class="mb-1"
-          >
-    <template v-if="$vuetify.breakpoint.mdAndUp">
+
       <v-select
+        light
+        color="orange light-4"
+        class="mb-1"
         @input="setCategory"
         :items="categories"
         :value="category"
@@ -16,8 +14,6 @@
         solo-inverted
         hide-details
       ></v-select>
-    </template>
-  </v-toolbar>
 </template>
 
 <script>
