@@ -1,9 +1,7 @@
 <template>
   <v-dialog v-model="isShowPostDialog" max-width="600px">
-    <v-card>
-      <div v-show="loading" class="post_regist_load">
-        <Loader>投稿中...</Loader>
-      </div>
+    <v-card class="post_regist">
+      <Loader v-show="loading">投稿中...</Loader>
       <div class="errors" v-if="postErrors">
         <ul v-if="postErrors.title">
           <li v-for="msg in postErrors.title" :key="msg">{{ msg }}</li>

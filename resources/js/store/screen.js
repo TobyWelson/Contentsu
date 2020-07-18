@@ -1,22 +1,22 @@
-// screen ステートの値を更新する setUser ミューテーション
-const mutations = {
-  setCurrent(state, current) {
-    state.current = current;
-  },
-  setPrev(state, prev) {
-    state.prev = prev;
+const actions = {
+  showLoading (context) {
+    context.commit('setShowLoading', true)
   }
 };
 
-// 画面状態を保持する screen ステート
+// screen ステートの値を更新する setUser ミューテーション
+const mutations = {
+  setShowLoading(state, isLoading) {
+    state.isLoading = isLoading;
+  }
+};
+
 const state = {
-  current: '',
-  prev: '',
+  isLoading: false,
 };
 
 const getters = {
-  current: state => state.current,
-  prev: state => state.prev,
+  loading: state => state.isLoading
 };
 
 export default {
@@ -24,4 +24,5 @@ export default {
   state,
   getters,
   mutations,
+  actions
 };

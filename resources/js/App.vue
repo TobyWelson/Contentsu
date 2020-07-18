@@ -1,5 +1,8 @@
 <template>
     <v-app>
+      <div v-if="isLoading" class="top_loading">
+        <div class="loader"></div>
+      </div>
       <header>
         <Navbar />
       </header>
@@ -28,6 +31,9 @@ export default {
   computed: {
     errorCode () {
       return this.$store.state.error.code
+    },
+    isLoading () {
+      return this.$store.getters['screen/loading']
     }
   },
   watch: {

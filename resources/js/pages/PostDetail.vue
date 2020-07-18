@@ -7,7 +7,7 @@
        <span class="title_over_text text-subtitle-2 text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.url }}</span>
         <v-spacer></v-spacer>
         <div class="menu_icons">
-          <v-btn icon @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
+          <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
           <v-btn icon v-if="isPostFromCurrentUser" color="error" @click="onDeleteClick"><v-icon>mdi-delete</v-icon></v-btn>
         </div>
       </v-card-actions>
@@ -128,11 +128,6 @@ export default {
       this.post.liked_by_user = false
     },
     onLikeClick () {
-      if (! this.isLogin) {
-        alert('いいね機能を使うにはログインしてください。')
-        return false
-      }
-
       if (this.post.liked_by_user) {
         this.unlike()
       } else {
@@ -182,7 +177,6 @@ export default {
           isLogin: this.isLogin,
         }
         this.post = await this.$store.dispatch('post/fetch', data)
-        this.$store.commit('screen/setCurrent', 'PostDetail');
       },
       immediate: true
     }

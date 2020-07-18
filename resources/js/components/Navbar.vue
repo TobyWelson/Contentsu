@@ -94,11 +94,9 @@ export default {
     showPost() {
       this.$refs.post.isShowPostDialog = true
     },
-    reload() {
-      this.$store.commit('post/setLastPage', 0);
-      this.$store.commit('post/setPage', 0);
-      this.$store.commit('post/setPosts', []);
-      this.$router.push('/').catch(err => {})
+    async reload() {
+      await this.$store.dispatch('screen/showLoading')
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
     }
   }
 }
