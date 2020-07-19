@@ -1,7 +1,7 @@
 <template>
   <div v-if="post" class="post_detail">
   <v-card flat>
-      <Youtube :videoUrl="post.url"/>
+      <Video :videoUrl="post.url"/>
       <v-card-title class="font-weight-bold text-body-1 text-sm-h5 text-md-h6 text-lg-h6 text-xl-h6">{{ post.title }}</v-card-title>
       <v-card-actions>
        <span class="title_over_text text-subtitle-2 text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.url }}</span>
@@ -58,12 +58,12 @@
 
 <script>
 import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../util'
-import Youtube from '../components/Youtube.vue'
+import Video from '../components/Video.vue'
 import { FAILURE } from '../util'
 
 export default {
   components: {
-    Youtube
+    Video
   },
   props: {
     id: {
