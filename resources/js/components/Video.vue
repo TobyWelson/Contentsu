@@ -1,5 +1,4 @@
 <template>
-  <!-- <youtube :video-id="getId" /> -->
   <iframe
     class="youtube_view"
     :src="`http://www.youtube.com/embed/${getId}`"
@@ -8,9 +7,6 @@
 </template>
 
 <script>
-// import Vue from 'vue'
-// import VueYoutube from 'vue-youtube'
-// Vue.use(VueYoutube)
 export default {
   props: {
     videoUrl: {
