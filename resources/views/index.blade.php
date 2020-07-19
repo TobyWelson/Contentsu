@@ -6,13 +6,13 @@
   <title>{{ config('app.name') }}</title>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('./img/favicon_mult.ico') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('../images/favicon_mult.ico') }}">
 
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}" defer></script>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+1p:wght@500&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="https://hypertext-candy.s3-ap-northeast-1.amazonaws.com/posts/vue-laravel-tutorial/app.css">
