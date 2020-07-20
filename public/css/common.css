@@ -162,6 +162,10 @@ a {
   background: white!important;
   border-color: white!important;
 }
+.tiktok_view{
+  width: 340px!important;
+  height: 700px!important;
+}
 
 
 @media screen and ( max-width:379px){

@@ -12,6 +12,17 @@ export const NOT_FOUND = 404
 export const SUCCESS = true
 export const FAILURE = false
 
+/** URLマッチ条件 */
+export const MATCH_URL_YOUTU = /youtu\.be/
+export const MATCH_URL_YOUTUBE = /youtube\.com/
+export const MATCH_URL_TIKTOK = /tiktok\.com/
+/** 動画URL */
+export const VIDEO_URL_YOUTUBE = 'http://www.youtube.com/embed/'
+export const VIDEO_URL_TIKTOK = 'https://www.tiktok.com/embed/'
+/** サムネイルURL */
+export const THUMBNAIL_URL_YOUTUBE = 'http://img.youtube.com/vi/'
+export const THUMBNAIL_URL_YOUTUBE_IMAGE = '/mqdefault.jpg'
+
 /**
  * クッキーの値を取得する
  * @param {String} searchKey 検索するキー
