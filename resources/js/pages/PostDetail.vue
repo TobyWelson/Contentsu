@@ -8,7 +8,7 @@
         <v-spacer></v-spacer>
         <div class="menu_icons">
           <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
-          <v-btn icon v-if="isPostFromCurrentUser" color="error" @click="onDeleteClick"><v-icon>mdi-delete</v-icon></v-btn>
+          <v-btn icon v-if="isPostFromCurrentUser" color="error" @click="showDelete"><v-icon>mdi-delete</v-icon></v-btn>
         </div>
       </v-card-actions>
       <v-divider></v-divider>
@@ -53,17 +53,20 @@
       </ul>
       <p v-else>まだコメントはありません。</p>
     </div>
+  <Delete ref="delete" :post_id="post.id" :post_title="post.title"/>
   </div>
 </template>
 
 <script>
 import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../util'
 import Video from '../components/Video.vue'
+import Delete from '../components/Delete.vue'
 import { FAILURE } from '../util'
 
 export default {
   components: {
-    Video
+    Video,
+    Delete
   },
   props: {
     id: {
@@ -134,26 +137,9 @@ export default {
         this.like()
       }
     },
-    async onDeleteClick () {
-      if(confirm('本当に記事を削除しますか？')){
-        var result = await this.$store.dispatch('post/delete', this.post.id);
-        if (result != FAILURE) {
-          this.$store.commit('post/setLastPage', 0);
-          this.$store.commit('post/setPage', 0);
-          this.$store.commit('post/setPosts', []);
-          this.$router.push('/').catch(err => {})
-          this.$store.commit('message/setContent', {
-            content: '記事が削除されました'.result,
-            timeout: 4000
-            })
-        } else {
-          this.$store.commit('message/setContent', {
-            content: '記事の削除に失敗しました',
-            timeout: 4000
-          })
-        }
-      }
-    }
+    showDelete() {
+      this.$refs.delete.isShowDeleteDialog = true
+    },
   },
   computed: {
     isLogin () {

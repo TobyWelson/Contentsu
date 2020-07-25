@@ -39,7 +39,7 @@ const actions = {
   async delete (context, data) {
     const response = await axios.delete(`/api/posts/${data}`)
     if (response.status !== OK) {
-      // context.commit('error/setCode', response.status)
+      context.commit('error/setCode', response.status)
       return FAILURE
     }
     return response.data.id
