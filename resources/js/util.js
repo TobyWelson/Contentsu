@@ -16,12 +16,18 @@ export const FAILURE = false
 export const MATCH_URL_YOUTU = /youtu\.be/
 export const MATCH_URL_YOUTUBE = /youtube\.com/
 export const MATCH_URL_TIKTOK = /tiktok\.com/
+export const MATCH_URL_NICOVIDEO = /nicovideo\.jp/
+export const MATCH_URL_NICO = /nico\.ms/
+export const MATCH_URL_NICOSP = /sp\.nicovideo\.jp/
 /** 動画URL */
 export const VIDEO_URL_YOUTUBE = 'http://www.youtube.com/embed/'
 export const VIDEO_URL_TIKTOK = 'https://www.tiktok.com/embed/'
+export const VIDEO_URL_NICONICO = 'https://embed.nicovideo.jp/watch/'
 /** サムネイルURL */
 export const THUMBNAIL_URL_YOUTUBE = 'http://img.youtube.com/vi/'
 export const THUMBNAIL_URL_YOUTUBE_IMAGE = '/mqdefault.jpg'
+export const THUMBNAIL_URL_NICONICO = 'https://nicovideo.cdn.nimg.jp/thumbnails/'
+
 
 /**
  * クッキーの値を取得する
