@@ -2,6 +2,7 @@
     <div class="thumb">
       <v-img :src="getThumURL"
              :class="{ 'niconico_thum': getVideoTypeNiconico,
+                       'youtube_thum': getVideoTypeYoutube,
                       }"
               alt="alt here..."
               ref="thum_img"
@@ -66,6 +67,12 @@ export default {
     },
     getVideoTypeNiconico : function() {
       if (this.videoUrl.match(MATCH_URL_NICOVIDEO) || this.videoUrl.match(MATCH_URL_NICO)) {
+        return true;
+      }
+      return false;
+    },
+    getVideoTypeYoutube : function() {
+      if (this.videoUrl.match(MATCH_URL_YOUTU) || this.videoUrl.match(MATCH_URL_YOUTUBE)) {
         return true;
       }
       return false;
