@@ -1,39 +1,37 @@
 <template>
   <div v-if="post" class="post_detail">
-  <v-card flat>
-      <Video :videoUrl="post.url"/>
-      <v-card-title class="font-weight-bold text-body-1 text-sm-h5 text-md-h6 text-lg-h6 text-xl-h6">{{ post.title }}</v-card-title>
-      <v-card-actions>
-       <span class="title_over_text text-subtitle-2 text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.url }}</span>
-        <v-spacer></v-spacer>
-        <div class="menu_icons">
-          <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
-          <v-btn icon v-if="isPostFromCurrentUser" color="error" @click="showDelete"><v-icon>mdi-delete</v-icon></v-btn>
-        </div>
-      </v-card-actions>
-      <v-divider></v-divider>
-      <v-card-actions>
-        <v-icon small>mdi-account</v-icon><span class="name-over-text text-caption text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.owner.name }}</span>
-        <v-spacer></v-spacer>
-        <div>
-          <v-icon small>mdi-folder</v-icon><span class="mr-1 text-subtitle-2 text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.category }}</span>
-          <v-icon small>mdi-eye</v-icon><span class="mr-1 text-subtitle-2 text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.view_count }}</span>
-          <v-icon small>mdi-heart</v-icon><span class="mr-1 text-subtitle-2 text-sm-subtitle-1 text-md-subtitle-1 text-lg-subtitle-1 text-xl-subtitle-1">{{ post.likes_count }}</span>
-        </div>
-      </v-card-actions>
-  </v-card>
-
-    <div class="post-detail__pane">
-      <h2 class="post-detail__title">
-        <i class="icon ion-md-chatboxes"></i>コメント
-      </h2>
+    <v-card flat>
+        <Video :videoUrl="post.url"/>
+        <v-card-title class="pa-2 detail_title font-weight-bold">{{ post.title }}</v-card-title>
+        <v-card-actions class="pr-1 py-1">
+          <span class="url"><a :href="`${ post.url }`" target="_brank">{{ post.url }}</a></span>
+          <v-spacer></v-spacer>
+          <div class="menu_icons">
+            <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
+            <v-btn icon v-if="isPostFromCurrentUser" color="error" @click="showDelete"><v-icon>mdi-delete</v-icon></v-btn>
+          </div>
+        </v-card-actions>
+        <v-divider></v-divider>
+        <v-divider></v-divider>
+        <v-card-actions class="detail">
+          <v-icon small>mdi-account</v-icon>{{ post.owner.name }}
+          <v-spacer></v-spacer>
+          <div class="detail_right">
+            <div class="bl pa-2"><v-icon small>mdi-folder</v-icon>{{ post.category }}</div>
+            <div class="bl pa-2"><v-icon small>mdi-eye</v-icon>{{ post.view_count }}</div>
+            <div class="bl pa-2"><v-icon small>mdi-heart</v-icon>{{ post.likes_count }}</div>
+          </div>
+        </v-card-actions>
+    </v-card>
+    <div class="pt-5">
+      <div class="comments_title px-1 py-1">コメント</div>
       <form v-if="isLogin" @submit.prevent="addComment" class="form">
         <div v-if="commentErrors" class="errors">
           <ul v-if="commentErrors.content">
             <li v-for="msg in commentErrors.content" :key="msg">{{ msg }}</li>
           </ul>
         </div>
-        <textarea class="form__item" v-model="commentContent"></textarea>
+        <input type="text" class="form__item my-2" v-model="commentContent" placeholder="コメント入力..."/>
         <div class="form__button">
           <v-btn depressed rounded type="submit" color="warning"><v-icon small>mdi-lead-pencil</v-icon>書込み</v-btn>
         </div>
@@ -53,7 +51,7 @@
       </ul>
       <p v-else>まだコメントはありません。</p>
     </div>
-  <Delete ref="delete" :post_id="post.id" :post_title="post.title"/>
+    <Delete ref="delete" :post_id="post.id" :post_title="post.title"/>
   </div>
 </template>
 

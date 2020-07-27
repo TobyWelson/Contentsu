@@ -1,70 +1,18 @@
 /* 共通 */
-.v-application{ font-family: 'M PLUS 1p', sans-serif!important; }
-#logo{
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%,-50%);
-}
-.nav_tool{
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 3;
-}
-.nav_tool>div{
-  display: flex;
-  margin: 0 auto;
-  flex-wrap: wrap;
-}
-a {
-  text-decoration: none;
-  color: #222!important;
-}
-.add_post {
-  position: fixed!important;
-  bottom: 10px;
-  right: 10px;
-  z-index: 3;
-}
-.post_regist .post_loader {
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  z-index: 110;
-}
-.post_regist .post_loader .loader {
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%,-100%);
-}
-.top_loading{
-  left: 50%;
-  position: fixed!important;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  z-index: 999;
-}
-.top_loading .loader {
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%,-100%);
-}
+.v-application{font-family: 'M PLUS 1p', sans-serif!important;}
+.v-toolbar{position: fixed!important;}
+#logo{left: 50%;position: absolute;top: 50%;transform: translate(-50%,-50%);}
+a {text-decoration: none;color: #222!important;}
+.add_post {position: fixed!important;bottom: 10px;right: 10px;z-index: 3;}
+.nav_tool{left: 0;position: fixed;right: 0;top: 0;z-index: 3;}
+.nav_tool>div{display: flex;margin: 0 auto;flex-wrap: wrap;}
+.post_regist .post_loader {left: 50%;position: absolute;top: 50%;transform: translate(-50%,-50%);background-color: white;width: 100%;height: 100%;z-index: 110;}
+.post_regist .post_loader .loader {left: 50%;position: absolute;top: 50%;transform: translate(-50%,-100%);}
+.top_loading{left: 50%;position: fixed!important;top: 50%;transform: translate(-50%,-50%);background-color: white;width: 100%;height: 100%;z-index: 999;}
+.top_loading .loader {left: 50%;position: absolute;top: 50%;transform: translate(-50%,-100%);}
 
 /* regist */
-#regist {
-  max-width: 600px;
-}
+#regist {max-width: 600px;}
 
 /* post list */
 .post_hover a:hover .thumb{
@@ -148,27 +96,22 @@ a {
 }
 
 /* post detail */
-.youtube_view, .niconico_view{
-  max-width: 1160px;
-}
-.post_detail .v-sheet {
-  border-radius: 0px!important;
-}
-.post_detail .menu_icons {
-  display: flex;
-}
-.post_detail .menu_icons .button--liked .v-btn__content {
-  color: #e4406f;
-}
+.post_detail .detail_title{font-size: 1.25rem;}
+.post_detail .url{font-size: 0.9rem;word-break: break-all;text-decoration: underline;}
+.post_detail .comments_title{background: rgb(224, 224, 224);font-size: 1.25rem;}
+.post_detail .v-card__actions{padding: 0!important;}
+.post_detail .v-sheet {border-radius: 0px!important;}
+.post_detail .tiktok_back_view{background: url("../images/tiktok.png") no-repeat center;background-color: black!important;background-size: contain;position: relative;z-index: 0;overflow: hidden;}
+.post_detail .tiktok_back_view:before{content: '';background: inherit;-webkit-filter: blur(10px);-moz-filter: blur(10px);-o-filter: blur(10px);-ms-filter: blur(10px);filter: blur(10px);position: absolute;top: -5px;left: -5px;right: -5px;bottom: -5px;z-index: -1;}
+.post_detail .back_view{background-color: rgb(224, 224, 224);}
+.post_detail .back_view .youtube_view, .post_detail .back_view .niconico_view{max-width: 1160px;}
+.post_detail .back_view .tiktok_view{display: block;width: 341px!important;height: 700px!important;margin: 0 auto;}
+.post_detail .menu_icons {display: flex;}
+.post_detail .menu_icons .button--like {background: white!important; border-color: white!important;}
 .post_detail .menu_icons .button--liked,
-.post_detail .menu_icons .button--like {
-  background: white!important;
-  border-color: white!important;
-}
-.tiktok_view{
-  width: 340px!important;
-  height: 700px!important;
-}
+.post_detail .menu_icons .button--liked .v-btn__content {color: #e4406f;}
+.post_detail .detail .detail_right{display: flex;}
+.post_detail .detail .detail_right .bl{border-left: solid 2px rgba(0,0,0,.12);}
 
 
 @media screen and ( max-width:379px){

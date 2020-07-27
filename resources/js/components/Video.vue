@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="back_view" :class="{ 'tiktok_back_view': getVideoTypeTiktok,}">
     <iframe
       class="youtube_view"
       :class="{ 'tiktok_view': getVideoTypeTiktok,
