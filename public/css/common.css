@@ -96,9 +96,9 @@ a {text-decoration: none;color: #222!important;}
 }
 
 /* post detail */
-.post_detail .detail_title{font-size: 1.25rem;}
+.post_detail .detail_title{font-size: 1.3rem;}
 .post_detail .url{font-size: 0.9rem;word-break: break-all;text-decoration: underline;}
-.post_detail .comments_title{background: rgb(224, 224, 224);font-size: 1.25rem;}
+.post_detail .comments_title{background: linear-gradient(transparent 60%, rgb(224, 224, 224) 60%);font-size: 1.2rem;}
 .post_detail .v-card__actions{padding: 0!important;}
 .post_detail .v-sheet {border-radius: 0px!important;}
 .post_detail .tiktok_back_view{height: 700px!important;background: url("../images/tiktok.png") no-repeat center;background-color: black!important;background-size: contain;position: relative;z-index: 0;overflow: hidden;}
@@ -111,13 +111,12 @@ a {text-decoration: none;color: #222!important;}
 .post_detail .menu_icons .button--liked,
 .post_detail .menu_icons .button--liked .v-btn__content {color: #e4406f;}
 .post_detail .detail .detail_right{display: flex;}
+.post_detail .detail .detail_right div{display: grid; text-align: center;width: 55px;}
 .post_detail .detail .detail_right .bl{border-left: solid 2px rgba(0,0,0,.12);}
 .post_detail .comments {list-style: none;}
-.post_detail .comments .comment {position: relative;margin-bottom: 1.3em;padding: 0.5rem 1rem;border-radius: 10px;background: #eee;}
+.post_detail .comments .comment {position: relative;padding: .5em .75em;background-color: #f0f0f0;border-radius: 6px;}
 .post_detail .comments .comment:before,
-.post_detail .comments .comment:after {position: absolute;content: '';border-radius: 50%;background: #eee;}
-.post_detail .comments .comment:before {bottom: -10px;left: 20px;width: 20px;height: 20px;}
-.post_detail .comments .comment:after {bottom: -20px;left: 30px;width: 10px;height: 10px;}
+.post_detail .comments .comment:after {position: absolute;top: 100%;left: 6px;content: '';width: 0;height: 0;border: 10px solid transparent;border-top: 10px solid #f0f0f0;}
 
 @media screen and ( max-width:379px){
   .v-btn:not(.v-btn--round).v-size--default {padding: 0 10px!important;}

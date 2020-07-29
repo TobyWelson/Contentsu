@@ -13,16 +13,16 @@
         </v-card-actions>
         <v-divider></v-divider>
         <v-card-actions class="detail">
-          <v-icon small>mdi-account</v-icon>{{ post.owner.name }}
+          <v-icon>mdi-account</v-icon>{{ post.owner.name }}
           <v-spacer></v-spacer>
           <div class="detail_right">
-            <div class="pa-1"><v-icon small color="orange">mdi-folder</v-icon>{{ post.category }}</div>
-            <div class="pa-1"><v-icon small color="blue">mdi-eye</v-icon>{{ post.view_count }}</div>
-            <div class="pa-1"><v-icon small color="#e4406f">mdi-heart</v-icon>{{ post.likes_count }}</div>
+            <div><v-icon color="orange">mdi-folder</v-icon>{{ post.category }}</div>
+            <div><v-icon color="blue">mdi-eye</v-icon>{{ post.view_count }}</div>
+            <div><v-icon color="#e4406f">mdi-heart</v-icon>{{ post.likes_count }}</div>
           </div>
         </v-card-actions>
     </v-card>
-    <div class="pt-5">
+    <div class="pt-6">
       <div class="comments_title px-1 py-1">コメント</div>
       <form v-if="isLogin" @submit.prevent="addComment" class="form mb-5">
         <div v-if="commentErrors" class="errors">
@@ -36,10 +36,9 @@
         </div>
       </form>
       <ul v-if="post.comments.length > 0" class="comments pa-0 my-2">
-        <li
-          v-for="comment in post.comments" :key="comment.content">
-          <p class="comment">{{ comment.content }}</p>
-          <p class="px-3"><v-icon small>mdi-account</v-icon>{{ comment.author.name }}</p>
+        <li v-for="comment in post.comments" :key="comment.content" class="pb-1">
+          <div class="comment">{{ comment.content }}</div>
+          <div class="px-2 pt-2"><v-icon small>mdi-account</v-icon>{{ comment.author.name }}</div>
         </li>
       </ul>
       <p v-else>まだコメントはありません。</p>
