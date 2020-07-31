@@ -1,7 +1,9 @@
 <template>
   <v-dialog v-model="isShowPostDialog" max-width="600px">
     <v-card class="post_regist">
-      <Loader v-show="loading">投稿中...</Loader>
+      <v-overlay :value="loading">
+        <v-progress-circular indeterminate :size="80" :width="7" color="deep-orange lighten-2"></v-progress-circular>
+      </v-overlay>
       <div class="errors" v-if="postErrors">
         <ul v-if="postErrors.title">
           <li v-for="msg in postErrors.title" :key="msg">{{ msg }}</li>
@@ -42,12 +44,8 @@
 <script>
 import { mapState } from 'vuex'
 import { FAILURE } from '../util'
-import Loader from './Loader.vue'
 
 export default {
-  components: {
-    Loader
-  },
   data () {
     return {
       isShowPostDialog: false,

@@ -1,8 +1,8 @@
 <template>
     <v-app>
-      <div v-if="isLoading" class="top_loading">
-        <div class="loader"></div>
-      </div>
+      <v-overlay :value="isLoading" color="white" opacity="1">
+        <v-progress-circular indeterminate :size="80" :width="7" color="deep-orange lighten-2"></v-progress-circular>
+      </v-overlay>
       <header>
         <Navbar />
       </header>

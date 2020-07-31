@@ -1,10 +1,7 @@
 <template>
   <v-dialog v-model="isShowDeleteDialog" max-width="600px">
     <v-card class="post_delete">
-      <!-- "v-overlay"を有効にすると、ローディング描画が前面に表示されて、ローディング中に"削除ボタン"を連打などされなくなる。 
-      　　　よかったらPostFormとかにも使いたい-->
       <v-overlay :value="loading">
-        <!-- Loaderを使わなくても"v-progress-circular"で簡単にローディング描画できるのでどうでしょうか。 -->
         <v-progress-circular indeterminate :size="80" :width="7" color="deep-orange lighten-2"></v-progress-circular>
       </v-overlay>
       <v-container py-5>
@@ -26,12 +23,8 @@
 
 <script>
 import { FAILURE } from '../util'
-import Loader from './Loader.vue'
 
 export default {
-  components: {
-    Loader
-  },
   props: {
     post_id: {
       type: String,
