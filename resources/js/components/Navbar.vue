@@ -31,7 +31,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"/>
       <div class="hidden-sm-and-down">
         <v-btn v-if="isLogin" depressed rounded color="warning" class="font-weight-bold mx-1" @click="showPost">
-          <v-icon small>ion-md-add</v-icon>転載
+          <v-icon small>mdi-feather</v-icon>投稿
         </v-btn>
         <v-btn v-if="isLogin" outlined rounded color="warning" class="font-weight-bold" @click="logout">ログアウト</v-btn>
         <v-btn v-if="!isLogin" outlined rounded color="warning" class="font-weight-bold" @click="showLogin">ログイン</v-btn>  

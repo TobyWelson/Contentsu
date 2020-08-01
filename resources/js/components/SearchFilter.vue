@@ -1,19 +1,14 @@
 <template>
-
-      <v-select
-        light
-        color="orange light-4"
-        class="mb-1"
-        @input="setCategory"
-        :items="categories"
-        :value="category"
-        @change="reset"
-        label="カテゴリー検索"
-        outlined
-        flat
-        solo-inverted
-        hide-details
-      ></v-select>
+  <v-select
+    color="orange light-4"
+    @input="setCategory"
+    :items="categories"
+    :value="category"
+    @change="reset"
+    label="カテゴリー検索"
+    flat
+    solo>
+  </v-select>
 </template>
 
 <script>
@@ -30,6 +25,10 @@ export default {
       this.$store.commit('filter/setCategory', val);
     },
     reset() {
+      window.scrollTo({
+        top: 0,
+        behavior: "instant"
+      });
       this.$emit('reset');
     }
   }

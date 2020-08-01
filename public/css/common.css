@@ -1,49 +1,25 @@
 /* 共通 */
+main {margin-bottom: 5rem;margin-top: 5rem;}
 .v-application{font-family: 'M PLUS 1p', sans-serif!important;}
 .v-toolbar{position: fixed!important;}
 #logo{left: 50%;position: absolute;top: 50%;transform: translate(-50%,-50%);}
 a {text-decoration: none;color: #222!important;}
 .add_post {position: fixed!important;bottom: 10px;right: 10px;z-index: 3;}
-.nav_tool{left: 0;position: fixed;right: 0;top: 0;z-index: 3;}
-.nav_tool>div{display: flex;margin: 0 auto;flex-wrap: wrap;}
-.post_regist .post_loader {left: 50%;position: absolute;top: 50%;transform: translate(-50%,-50%);background-color: white;width: 100%;height: 100%;z-index: 110;}
-.post_regist .post_loader .loader {left: 50%;position: absolute;top: 50%;transform: translate(-50%,-100%);}
-
+.nav_tool{left: 0;right: 0;top: 0;z-index: 3;}
+.nav_tool>div{margin: 0 auto;}
+.v-sheet.v-toolbar:not(.v-sheet--outlined) {border-bottom: 1px solid #e4e4e4;box-shadow: none!important;}
 /* regist */
 #regist {max-width: 600px;}
-
-/* post list */
-.post_hover a:hover .thumb{
-  transition: filter 0.8s ease;
-  filter: blur(2px) brightness(1.2);
-  animation-name: blur;
-  animation-duration: 5s;
-}
-.post_hover a:hover .gard {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0) 30%, rgb(252, 105, 0) 100%) ; 
-}
-.title_over_text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-.name_over_text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  display: -webkit-box!important;
-}
-
 /* post */
-#post .v-card__title {
+.post_list .menu{position: sticky;margin-bottom: 0;top: 80px;position: -webkit-sticky;z-index: 1;align-self: flex-start;overflow-x: hidden;overflow-y: auto;flex-grow: 1;}
+.post_list .menu .menu_layout{border-radius: 4px;background-color: #f0f0f0;}
+.post_list .menu .search_title{font-size: 1.15rem;}
+.post_list .menu .v-text-field__details{display: none;}
+.post_list .post .thumb{text-align: center;align-items: center;display: flex;justify-content: center;background-color: black;}
+.post_list .post .thumb .back_thumbnail{max-height: 100%;}
+.post_list .post .title_over_text {overflow: hidden;text-overflow: ellipsis;-webkit-box-orient: vertical;-webkit-line-clamp: 2;}
+.post_list .post .name_over_text {overflow: hidden;text-overflow: ellipsis;-webkit-box-orient: vertical;-webkit-line-clamp: 1;display: -webkit-box!important;}
+.post_list .post .v-card__title {
   display: -webkit-box!important;
   max-height: 5rem!important;
   font-size: 1.1rem!important;
@@ -70,11 +46,10 @@ a {text-decoration: none;color: #222!important;}
   black 2px -1px, black -2px -1px;
   width      : 100%;                       /* 親要素の幅に合わせる */
   background : rgba(255, 255, 255, 0.5);
-  /* background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgb(255, 81, 0) 100%) ; */
 }
-#post .v-card__subtitle {
+.post_list .post .v-card__subtitle {
   position: absolute;
-  z-index: 2;
+  /* z-index: 2; */
   right: 0;
   color: white !important;
   font-weight: bold;
@@ -89,9 +64,8 @@ a {text-decoration: none;color: #222!important;}
   black 1px -1px, black -1px -1px;
   background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgb(0, 0, 0) 60%) ;
 }
-.niconico_thum, .youtube_thum{
-  max-height: 100%;
-}
+.post_list .post .post_hover a:hover .gard {position: absolute;top: 0;left: 0;z-index: 1;width: 100%;height: 100%;background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0) 30%, rgb(252, 105, 0) 100%) ; }
+.post_list .post .post_hover a:hover .thumb{transition: filter 0.8s ease;filter: blur(2px) brightness(1.2);animation-name: blur;animation-duration: 5s;}
 
 /* post detail */
 .post_detail .detail_title{font-size: 1.3rem;}
@@ -118,35 +92,25 @@ a {text-decoration: none;color: #222!important;}
 
 @media screen and ( max-width:379px){
   .v-btn:not(.v-btn--round).v-size--default {padding: 0 10px!important;}
-  #post .thumb{
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    height: 94.22px;
-    background-color: black;
-  }
-  #post .v-card__title {font-size: 0.8rem!important;}
-  #post .v-card__subtitle {font-size: 0.5rem!important;}
+  /* post */
+  .post_list .menu .menu_layout{opacity: 1;position: fixed;top: 55px;width: 100%;left: 0px;}
+  .post_list .menu .menu_layout .search_title{display: none;}
+  .post .thumb{height: 179px;}
+  .post .v-card__title {font-size: 0.95rem!important;}
+  .post .v-card__subtitle {font-size: 0.7rem!important;}
   /* post detail */
   .post_detail .tiktok_back_view{width: 342px!important;}
   .post_detail .back_view{height: 200px;background-color: rgb(224, 224, 224);}
   .post_detail .back_view .youtube_view{width: 100%;height: 200px;}
- 
 }
 
 @media screen and (min-width:380px) and ( max-width:414px){
   .v-btn:not(.v-btn--round).v-size--default {padding: 0 10px!important;}
-  #post .thumb{
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    height: 105.69px;
-    background-color: black;
-  }
-  #post .v-card__title {font-size: 0.8rem!important;}
-  #post .v-card__subtitle {font-size: 0.5rem!important;}
+  /* post */
+  .post_list .menu .menu_layout{opacity: 1;position: fixed;top: 55px;width: 100%;left: 0px;}
+  .post_list .menu .menu_layout .search_title{display: none;}
+  .post .thumb{height: 199px;}
+  .post .v-card__subtitle {font-size: 0.8rem!important;}
   /* post detail */
   .post_detail .tiktok_back_view{width: 342px!important;}
   .post_detail .back_view{height: 250px;}
@@ -155,16 +119,11 @@ a {text-decoration: none;color: #222!important;}
 
 @media screen and (min-width:415px) and ( max-width:599px){
   .v-btn:not(.v-btn--round).v-size--default {padding: 0 10px!important;}
-  #post .thumb{
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    height: 153.69px;
-    background-color: black;
-  }
-  #post .v-card__title {font-size: 0.8rem!important;}
-  #post .v-card__subtitle {font-size: 0.5rem!important;}
+  /* post */
+  .post_list .menu .menu_layout{opacity: 1;position: fixed;top: 55px;width: 100%;left: 0px;}
+  .post_list .menu .menu_layout .search_title{display: none;}
+  .post .thumb{height: 220px;}
+  .post .v-card__subtitle {font-size: 0.9rem!important;}
   /* post detail */
   .post_detail .back_view{height: 280px;}
   .post_detail .back_view .youtube_view{height: 280px;
@@ -173,20 +132,11 @@ a {text-decoration: none;color: #222!important;}
 
 @media screen and (min-width:600px) and ( max-width:959px){
   .v-btn:not(.v-btn--round).v-size--default {padding: 0 10px!important;}
-  .thumb{
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    height: 253.69px;
-    background-color: black;
-  }
-  #post .v-card__title {
-    font-size: 0.8rem!important;
-  }
-  #post .v-card__subtitle {
-    font-size: 0.5rem!important;
-  }
+  /* post */
+  .post_list .menu .menu_layout{opacity: 1;position: fixed;top: 55px;width: 100%;left: 0px;}
+  .post_list .menu .menu_layout .search_title{display: none;}
+  .post .thumb{height: 196px;}
+  .post .v-card__title {font-size: 1.1rem!important;}
   /* post detail */
   .post_detail .back_view{height: 390px;}
   .post_detail .back_view .youtube_view{height: 390px;}
@@ -194,14 +144,9 @@ a {text-decoration: none;color: #222!important;}
 
 @media screen and  (min-width: 960px) and (max-width:1263px){
   .nav_tool>div{max-width: 900px}
-  .thumb{
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    height: 158.77px;
-    background-color: black;
-  }
+  /* post */
+  .post .thumb{height: 114px;}
+  .post .v-card__subtitle {font-size: 0.9rem!important;}
   /* post detail */
   .post_detail .back_view{height: 480px;}
   .post_detail .back_view .youtube_view{height: 480px;}
@@ -209,14 +154,9 @@ a {text-decoration: none;color: #222!important;}
 
 @media screen and  (min-width: 1264px) {
   .nav_tool>div{max-width: 1185px}
-  .thumb{
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    height: 158.77px;
-    background-color: black;
-  }
+  /* post */
+  .post .thumb{height: 154px;}
+  .post .v-card__subtitle {font-size: 0.8rem!important;}
   /* post detail */
   .post_detail .back_view{height: 655px;}
   .post_detail .back_view .youtube_view{height: 655px;}
