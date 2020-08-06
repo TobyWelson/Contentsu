@@ -1,33 +1,31 @@
 <template>
-  <v-container class="post_list">
+  <v-container class="post_list pa-0">
     <v-row>
+      <!-- メニュー -->
       <v-col xl="2" lg="3" md="3" sm="0" cols="0" class="menu">
         <div class="menu_layout px-5 py-1" v-if="isMenu">
           <p class="font-weight-bold search_title">検索</p>
           <SearchFilter @reset="reset" class="pt-1"/>
         </div>
       </v-col>
+      <!-- 投稿リスト -->
       <v-col xl="10" lg="9" md="9" sm="12" cols="12">
         <v-layout wrap class="post_layout">
-          <Post
-            v-for="post in viewposts"
-            :key="post.id"
-            :item="post"
-          />
+          <Post v-for="post in viewposts" :key="post.id" :item="post" />
         </v-layout>
         <infinite-loading ref="infiniteLoading" @infinite="infiniteLoad">
           <div slot="circle">Loading...</div>
-          // ステータスがcompleteに更新されると下記が表示される
+          <!-- ステータスがcompleteに更新されると下記が表示される -->
           <span slot="no-more">-----検索結果は以上です-----</span>
-          // 結果が存在しない場合下記が表示される
+          <!-- 結果が存在しない場合下記が表示される -->
           <span slot="no-results">-----検索結果はありません-----</span>
         </infinite-loading>
         <v-btn v-if="isLogin" fab color="warning" class="button hidden-md-and-up add_post" @click="showPost">
           <v-icon>mdi-feather</v-icon>
         </v-btn>
-        <PostForm ref="post"/>
       </v-col>
     </v-row>
+    <PostForm ref="post"/>
   </v-container>
 </template>
 

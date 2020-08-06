@@ -1,5 +1,6 @@
 <template>
   <v-select
+    class="mb-1"
     color="orange light-4"
     @input="setCategory"
     :items="categories"
@@ -7,7 +8,8 @@
     @change="reset"
     label="カテゴリー検索"
     flat
-    solo>
+    solo
+    hide-details>
   </v-select>
 </template>
 

@@ -1,48 +1,63 @@
 <template>
   <div v-if="post" class="post_detail">
-    <v-card flat>
-        <Video :videoUrl="post.url"/>
-        <v-card-title class="pa-2 detail_title font-weight-bold">{{ post.title }}</v-card-title>
-        <v-card-actions class="pr-1 py-1">
-          <span class="url"><a :href="`${ post.url }`" target="_brank">{{ post.url }}</a></span>
+    <v-row>
+      <!-- 動画 -->
+      <v-col xl="9" lg="9" md="9" sm="0" cols="0" class="video_layout pa-2">
+        <v-card flat>
+            <Video :videoUrl="post.url"/>
+            <v-card-title class="pa-2 detail_title font-weight-bold">{{ post.title }}</v-card-title>
+            <v-card-actions class="pr-1 py-1">
+              <span class="url"><a :href="`${ post.url }`" target="_brank">{{ post.url }}</a></span>
+            </v-card-actions>
+            <v-divider></v-divider>
+            <v-card-actions class="pa-1">
+              <v-icon>mdi-account</v-icon>{{ post.owner.name }}
+              <v-spacer></v-spacer>
+              <div class="menu_icons">
+                <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
+                <v-btn icon v-if="isPostFromCurrentUser" color="error" @click="showDelete"><v-icon>mdi-delete</v-icon></v-btn>
+              </div>
+            </v-card-actions>
+        </v-card>
+      </v-col>
+      <!-- 詳細・コメント -->
+      <v-col xl="3" lg="3" md="3" sm="12" cols="12" class="detail_layout px-0 py-2">
+        <v-divider></v-divider>
+        <v-card-actions class="detail py-2 px-0">
           <v-spacer></v-spacer>
-          <div class="menu_icons">
-            <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
-            <v-btn icon v-if="isPostFromCurrentUser" color="error" @click="showDelete"><v-icon>mdi-delete</v-icon></v-btn>
-          </div>
+          <div><v-icon color="orange">mdi-folder</v-icon>{{ post.category }}</div>
+          <v-spacer></v-spacer>
+          <div><v-icon color="blue">mdi-eye</v-icon>{{ post.view_count }}</div>
+          <v-spacer></v-spacer>
+          <div><v-icon color="#e4406f">mdi-heart</v-icon>{{ post.likes_count }}</div>
+          <v-spacer></v-spacer>
         </v-card-actions>
         <v-divider></v-divider>
-        <v-card-actions class="detail">
-          <v-icon>mdi-account</v-icon>{{ post.owner.name }}
-          <v-spacer></v-spacer>
-          <div class="detail_right">
-            <div><v-icon color="orange">mdi-folder</v-icon>{{ post.category }}</div>
-            <div><v-icon color="blue">mdi-eye</v-icon>{{ post.view_count }}</div>
-            <div><v-icon color="#e4406f">mdi-heart</v-icon>{{ post.likes_count }}</div>
-          </div>
-        </v-card-actions>
-    </v-card>
-    <div class="pt-6">
-      <div class="comments_title px-1 py-1">コメント</div>
-      <form v-if="isLogin" @submit.prevent="addComment" class="form mb-5">
-        <div v-if="commentErrors" class="errors">
-          <ul v-if="commentErrors.content">
-            <li v-for="msg in commentErrors.content" :key="msg">{{ msg }}</li>
+        <div class="comments_layout pt-5">
+          <form v-if="isLogin" @submit.prevent="addComment" class="py-1">
+            <div v-if="commentErrors" class="errors">
+              <ul v-if="commentErrors.content">
+                <li v-for="msg in commentErrors.content" :key="msg">{{ msg }}</li>
+              </ul>
+            </div>
+            <div class="comment_submit">
+              <input type="text" class="form__item ma-0" v-model="commentContent" placeholder="コメント入力..."/>
+              <div class="submit">
+                <v-btn icon type="submit" color="warning"><v-icon small>mdi-lead-pencil</v-icon></v-btn>
+              </div>
+            </div>
+          </form>
+          <ul v-if="post.comments.length > 0" class="comments pa-0">
+            <li v-for="comment in post.comments" :key="comment.id" class="pb-2">
+              <v-divider></v-divider>
+              <div class="pt-2 comment_user"><v-icon small>mdi-account</v-icon>{{ comment.author.name }}</div>
+              <div class="comment">{{ comment.content }}</div>
+            </li>
           </ul>
+          <p v-else class="pt-2">コメントはありません。</p>
         </div>
-        <input type="text" class="form__item my-2" v-model="commentContent" placeholder="コメント入力..."/>
-        <div class="form__button">
-          <v-btn depressed rounded type="submit" color="warning"><v-icon small>mdi-lead-pencil</v-icon>書込み</v-btn>
-        </div>
-      </form>
-      <ul v-if="post.comments.length > 0" class="comments pa-0 my-2">
-        <li v-for="comment in post.comments" :key="comment.content" class="pb-1">
-          <div class="comment">{{ comment.content }}</div>
-          <div class="px-2 pt-2"><v-icon small>mdi-account</v-icon>{{ comment.author.name }}</div>
-        </li>
-      </ul>
-      <p v-else>まだコメントはありません。</p>
-    </div>
+      </v-col>
+    </v-row>
     <Delete ref="delete" :post_id="post.id" :post_title="post.title"/>
   </div>
 </template>
@@ -135,11 +150,11 @@ export default {
     isLogin () {
       return this.$store.getters['auth/check']
     },
-    username () {
-      return this.$store.getters['auth/username']
+    userId () {
+      return this.$store.getters['auth/userId']
     },
     isPostFromCurrentUser() {
-      if(this.username == this.post.owner.name) {
+      if(this.userId == this.post.owner.userId) {
         return true
       }
       return false

@@ -6,7 +6,7 @@
       </v-overlay>
       <v-container py-5>
         <div class="title text-center pb-3">
-          本当に記事を削除しますか？
+          記事を削除しますか？
         </div>
         <v-row justify="center" align-content="center">
           <v-col class="d-flax" cols="12" sm="6">

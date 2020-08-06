@@ -1,9 +1,7 @@
 <template>
 <v-flex xs12 sm6 md4 lg4 xl4 class="post">
   <v-card class="mx-1 my-1 post_hover" outlined>
-    <RouterLink
-      class="post__overlay"
-      :to="`/posts/${item.id}`">
+    <RouterLink class="post__overlay" :to="`/posts/${item.id}`">
       <Thumbnail :videoUrl="item.url"></Thumbnail>
       <v-card-title class="title_over_text font-weight-bold">{{ item.title }}</v-card-title>
       <v-card-subtitle class="title_over_text">{{ item.category }}</v-card-subtitle>
