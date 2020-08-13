@@ -2,7 +2,7 @@
   <div v-if="post" class="post_detail">
     <v-row>
       <!-- 動画 -->
-      <v-col xl="9" lg="9" md="9" sm="0" cols="0" class="video_layout pa-2">
+      <v-col xl="9" lg="9" md="9" sm="0" cols="0" class="video_layout px-2  py-0">
         <v-card flat>
             <Video :videoUrl="post.url"/>
             <v-card-title class="pa-2 detail_title font-weight-bold">{{ post.title }}</v-card-title>
@@ -11,7 +11,7 @@
             </v-card-actions>
             <v-divider></v-divider>
             <v-card-actions class="pa-1">
-              <v-icon>mdi-account</v-icon>{{ post.owner.name }}
+              <v-icon>mdi-account</v-icon><span class="user">{{ post.owner.name }}</span>
               <v-spacer></v-spacer>
               <div class="menu_icons">
                 <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
@@ -21,7 +21,7 @@
         </v-card>
       </v-col>
       <!-- 詳細・コメント -->
-      <v-col xl="3" lg="3" md="3" sm="12" cols="12" class="detail_layout px-0 py-2">
+      <v-col xl="3" lg="3" md="3" sm="12" cols="12" class="detail_layout px-0 py-0">
         <v-divider></v-divider>
         <v-card-actions class="detail py-2 px-0">
           <v-spacer></v-spacer>
@@ -35,26 +35,26 @@
         <v-divider></v-divider>
         <div class="comments_layout pt-5">
           <form v-if="isLogin" @submit.prevent="addComment" class="py-1">
-            <div v-if="commentErrors" class="errors">
-              <ul v-if="commentErrors.content">
-                <li v-for="msg in commentErrors.content" :key="msg">{{ msg }}</li>
+            <div v-if="commentsErrors" class="errors">
+              <ul v-if="commentsErrors.content">
+                <li v-for="msg in commentsErrors.content" :key="msg">{{ msg }}</li>
               </ul>
             </div>
             <div class="comment_submit">
-              <input type="text" class="form__item ma-0" v-model="commentContent" placeholder="コメント入力..."/>
+              <input type="text" class="input form__item ma-0" v-model="commentContent" placeholder="コメント入力..."/>
               <div class="submit">
                 <v-btn icon type="submit" color="warning"><v-icon small>mdi-lead-pencil</v-icon></v-btn>
               </div>
             </div>
           </form>
-          <ul v-if="post.comments.length > 0" class="comments pa-0">
-            <li v-for="comment in post.comments" :key="comment.id" class="pb-2">
+          <ul v-if="post.comments.length > 0" class="comments pa-0" :class="{ 'tiktok_comments': getVideoTypeTiktok}">
+            <li v-for="comment in post.comments" :key="comment.id" class="pb-4 pl-2 pr-2">
               <v-divider></v-divider>
-              <div class="pt-2 comment_user"><v-icon small>mdi-account</v-icon>{{ comment.author.name }}</div>
+              <div class="pt-2 user">{{ comment.author.name }}&nbsp;{{ dateFormat(comment.created_at) }}</div>
               <div class="comment">{{ comment.content }}</div>
             </li>
           </ul>
-          <p v-else class="pt-2">コメントはありません。</p>
+          <p v-else class="pa-2">コメントはありません。</p>
         </div>
       </v-col>
     </v-row>
@@ -63,10 +63,11 @@
 </template>
 
 <script>
-import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../util'
+import { MATCH_URL_TIKTOK } from '../util'
+import { OK, FAILURE } from '../util'
 import Video from '../components/Video.vue'
 import Delete from '../components/Delete.vue'
-import { FAILURE } from '../util'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -87,32 +88,22 @@ export default {
     }
   },
   methods: {
+    // コメント投稿
     async addComment () {
-
-      const response = await axios.post(`/api/posts/${this.id}/comments`, {
-        content: this.commentContent
-      })
-
-      // バリデーションエラー
-      if (response.status === UNPROCESSABLE_ENTITY) {
-        this.commentErrors = response.data.errors
-        return false
+      var data = {
+        id: this.id,
+        comment: this.commentContent,
       }
-
-      this.commentContent = ''
-      // エラーメッセージをクリア
-      this.commentErrors = null
-
-      // その他のエラー
-      if (response.status !== CREATED) {
-        this.$store.commit('error/setCode', response.status)
-        return false
+      var response = await this.$store.dispatch('comments/add', data)
+      if (response != FAILURE) {
+        this.commentContent = ''
+        this.post.comments = [
+          response,
+          ...this.post.comments
+        ]
       }
-      this.post.comments = [
-        response.data,
-        ...this.post.comments
-      ]
     },
+    // いいね追加
     async like () {
       const response = await axios.put(`/api/posts/${this.id}/like`)
 
@@ -124,6 +115,7 @@ export default {
       this.post.likes_count = this.post.likes_count + 1
       this.post.liked_by_user = true
     },
+    // いいね削除
     async unlike () {
       const response = await axios.delete(`/api/posts/${this.id}/like`)
 
@@ -135,6 +127,7 @@ export default {
       this.post.likes_count = this.post.likes_count - 1
       this.post.liked_by_user = false
     },
+    // いいね押下
     onLikeClick () {
       if (this.post.liked_by_user) {
         this.unlike()
@@ -142,9 +135,17 @@ export default {
         this.like()
       }
     },
+    // 削除ポップアップ表示
     showDelete() {
       this.$refs.delete.isShowDeleteDialog = true
     },
+    // 日付成形
+    dateFormat(date) {
+      var yyyymmdd = date.split('T')[0];
+      var hh = date.split('T')[1].split(':')[0];
+      var mm = date.split('T')[1].split(':')[1];
+      return yyyymmdd+' '+hh+':'+mm;
+    }
   },
   computed: {
     isLogin () {
@@ -158,14 +159,23 @@ export default {
         return true
       }
       return false
-    }
+    },
+    getVideoTypeTiktok() {
+      if (this.post.url.match(MATCH_URL_TIKTOK)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    ...mapState({
+      commentsErrors: state => state.comments.commentsErrorMessages,
+    }),
   },
   watch: {
     $route: {
       async handler () {
         var data = {
-          id: this.id,
-          isLogin: this.isLogin,
+          id: this.id
         }
         this.post = await this.$store.dispatch('post/fetch', data)
       },

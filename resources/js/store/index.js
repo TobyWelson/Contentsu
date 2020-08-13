@@ -7,6 +7,7 @@ import message from './message'
 import post from './post'
 import filter from './filter'
 import screen from './screen'
+import comments from './comments'
 
 Vue.use(Vuex);
 
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
     post,
     filter,
     screen,
-    message
+    message,
+    comments
   }
 });
 

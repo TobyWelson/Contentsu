@@ -4,8 +4,7 @@ import { OK, UNPROCESSABLE_ENTITY, CREATED, FAILURE  } from '../util'
 const actions = {
    // 投稿内容取得
   async fetch (context, data) {
-    var res = await axios.get(`/api/posts/${data.id}/show`)
-    const response = res;
+    var response = await axios.get(`/api/posts/${data.id}/show`)
     if (response.status === OK) {
       return response.data
     } else {
@@ -14,7 +13,7 @@ const actions = {
   },
   // 投稿内容取得
   async fetchPage (context, data) {
-    const response = await axios.get(`/api/posts/${data.category}/?page=${data.page}`)
+    var response = await axios.get(`/api/posts/${data.category}/?page=${data.page}`)
     if (response.status === OK) {
       return response.data
     } else {
@@ -23,7 +22,7 @@ const actions = {
   },
   // 投稿
   async posts (context, data) {
-    const response = await axios.post('/api/posts', data)
+    var response = await axios.post('/api/posts', data)
     if (response.status === UNPROCESSABLE_ENTITY) {
       context.commit('setPostsErrorMessages', response.data.errors)
       return FAILURE
@@ -37,7 +36,7 @@ const actions = {
   },
   // 削除
   async delete (context, data) {
-    const response = await axios.delete(`/api/posts/${data}`)
+    var response = await axios.delete(`/api/posts/${data}`)
     if (response.status !== OK) {
       context.commit('error/setCode', response.status)
       return FAILURE
