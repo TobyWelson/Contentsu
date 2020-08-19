@@ -1,10 +1,8 @@
 <template>
-  <div class="back_view" :class="{ 'tiktok_back_view': getVideoTypeTiktok,}">
+  <div class="back_view" :class="{ 'tiktok_back_view': isVideoTypeTiktok,}">
     <iframe
-      class="youtube_view"
-      :class="{ 'tiktok_view': getVideoTypeTiktok,
-                'niconico_view': getVideoTypeNiconico,
-              }"
+      class="video_view"
+      :class="{ 'tiktok_view': isVideoTypeTiktok}"
       :src="`${getUrl}`"
       frameborder="0"
       allowfullscreen=""/>
@@ -45,14 +43,8 @@ export default {
       }
       return "";
     },
-    getVideoTypeTiktok : function() {
+    isVideoTypeTiktok : function() {
       if (this.videoUrl.match(MATCH_URL_TIKTOK)) {
-        return true;
-      }
-      return false;
-    },
-    getVideoTypeNiconico : function() {
-      if (this.videoUrl.match(MATCH_URL_NICOVIDEO) || this.videoUrl.match(MATCH_URL_NICO)) {
         return true;
       }
       return false;

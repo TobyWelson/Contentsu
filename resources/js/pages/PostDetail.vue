@@ -7,7 +7,7 @@
             <Video :videoUrl="post.url"/>
             <v-card-title class="pa-2 detail_title font-weight-bold">{{ post.title }}</v-card-title>
             <v-card-actions class="pr-1 py-1">
-              <span class="url"><a :href="`${ post.url }`" target="_brank">{{ post.url }}</a></span>
+              <span class="url"><a :href="`${ getUrl(post.url) }`" target="_brank">{{ post.url }}</a></span>
             </v-card-actions>
             <v-divider></v-divider>
             <v-card-actions class="pa-1">
@@ -144,7 +144,11 @@ export default {
       var yyyymmdd = date.split('T')[0];
       var hh = date.split('T')[1].split(':')[0];
       var mm = date.split('T')[1].split(':')[1];
-      return yyyymmdd+' '+hh+':'+mm;
+      return yyyymmdd + ' ' + hh + ':' + mm;
+    },
+    // URL取得
+    getUrl(date) {
+      return date.replace('sp.', '');
     }
   },
   computed: {

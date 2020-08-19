@@ -15,8 +15,10 @@ a {text-decoration: none;color: #222!important;}
 .post_list .menu{position: sticky;margin-bottom: 0;top: 80px;position: -webkit-sticky;z-index: 1;align-self: flex-start;overflow-x: hidden;overflow-y: auto;flex-grow: 1;}
 .post_list .menu .menu_layout{border-radius: 4px;background-color: #f0f0f0;}
 .post_list .menu .search_title{font-size: 1.15rem;}
-.post_list .post .thumb{text-align: center;align-items: center;display: flex;justify-content: center;background-color: black;}
-.post_list .post .thumb .back_thumbnail{max-height: 100%;}
+.post_list .post .thumbnail{text-align: center;align-items: center;display: flex;justify-content: center;background-color: black;}
+.post_list .post .thumbnail .back_image{max-height: 100%;}
+.post_list .post .niconico_thumbnail{text-align: center;align-items: center;display: flex;justify-content: center;background-color: white;}
+.post_list .post .niconico_thumbnail .back_image{height: 100%;}
 .post_list .post .title_over_text {overflow: hidden;text-overflow: ellipsis;-webkit-box-orient: vertical;-webkit-line-clamp: 2;}
 .post_list .post .name_over_text {overflow: hidden;text-overflow: ellipsis;-webkit-box-orient: vertical;-webkit-line-clamp: 1;display: -webkit-box!important;}
 .post_list .post .v-card__title {display: -webkit-box!important;font-size: 1.1rem!important;padding-top: 1px!important;padding-right: 16px!important;padding-bottom: 1px!important;padding-left: 1px!important;position: absolute;display: block;color: rgba(255, 255, 255, 0.8);top: 10%;left: 0;text-align: right;text-shadow:black 2px 0px,  black -2px 0px,black 0px -2px, black 0px 2px,black 2px 2px , black -2px 2px,black 2px -2px, black -2px -2px,black 1px 2px,  black -1px 2px,black 1px -2px, black -1px -2px,black 2px 1px,  black -2px 1px,black 2px -1px, black -2px -1px;width: 100%;background : rgba(255, 255, 255, 0.5);}
@@ -37,7 +39,7 @@ a {text-decoration: none;color: #222!important;}
   background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 20%, rgb(0, 0, 0) 60%) ;
 }
 .post_list .post .post_hover a:hover .gard {position: absolute;top: 0;left: 0;z-index: 1;width: 100%;height: 100%;background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0) 30%, rgb(252, 105, 0) 100%) ; }
-.post_list .post .post_hover a:hover .thumb{transition: filter 0.8s ease;filter: blur(2px) brightness(1.2);animation-name: blur;animation-duration: 5s;}
+.post_list .post .post_hover a:hover .thumbnail{transition: filter 0.8s ease;filter: blur(2px) brightness(1.2);animation-name: blur;animation-duration: 5s;}
 
 /* post detail */
 .post_detail .video_layout .detail_title{font-size: 1.3rem;}
@@ -48,7 +50,7 @@ a {text-decoration: none;color: #222!important;}
 .post_detail .video_layout .tiktok_back_view{height: 700px!important;background: url("../images/tiktok.png") no-repeat center;background-color: black!important;background-size: contain;position: relative;z-index: 0;overflow: hidden;}
 .post_detail .video_layout .tiktok_back_view:before{content: '';background: inherit;-webkit-filter: blur(10px);-moz-filter: blur(10px);-o-filter: blur(10px);-ms-filter: blur(10px);filter: blur(10px);position: absolute;top: -5px;left: -5px;right: -5px;bottom: -5px;z-index: -1;}
 .post_detail .video_layout .back_view{background-color: rgb(224, 224, 224);margin: 0 auto;}
-.post_detail .video_layout .back_view .youtube_view, .post_detail .back_view .niconico_view{width: 100%;max-width: 1160px;}
+.post_detail .video_layout .back_view .video_view, .post_detail .back_view{width: 100%;max-width: 1160px;}
 .post_detail .video_layout .back_view .tiktok_view{display: block;width: 341px!important;height: 100%!important;margin: 0 auto;}
 .post_detail .video_layout .menu_icons {display: flex;}
 .post_detail .video_layout .menu_icons .button--like {background: white!important; border-color: white!important;}
@@ -71,13 +73,13 @@ a {text-decoration: none;color: #222!important;}
   /* post */
   .post_list .menu .menu_layout{opacity: 1;position: fixed;top: 55px;width: 100%;left: 0px;}
   .post_list .menu .menu_layout .search_title{display: none;}
-  .post .thumb{height: 179px;}
+  .post .thumbnail{height: 179px;}
   .post .v-card__title {font-size: 0.95rem!important;}
   .post .v-card__subtitle {font-size: 0.8rem!important;}
   /* post detail */
   .post_detail .video_layout .tiktok_back_view{width: 342px!important;}
   .post_detail .video_layout .back_view{height: 200px;background-color: rgb(224, 224, 224);}
-  .post_detail .video_layout .back_view .youtube_view{width: 100%;height: 200px;}
+  .post_detail .video_layout .back_view .video_view{width: 100%;height: 200px;}
   .post_detail .detail_layout{padding-top: 0px!important;}
   .post_detail .detail_layout .comments_layout {padding: 0 8px 0 8px;}
   .post_detail .detail_layout .comments_layout .comments {overflow:none;height:100%;}
@@ -90,12 +92,12 @@ a {text-decoration: none;color: #222!important;}
   /* post */
   .post_list .menu .menu_layout{opacity: 1;position: fixed;top: 55px;width: 100%;left: 0px;}
   .post_list .menu .menu_layout .search_title{display: none;}
-  .post .thumb{height: 199px;}
+  .post .thumbnail{height: 199px;}
   .post .v-card__subtitle {font-size: 0.8rem!important;}
   /* post detail */
   .post_detail .video_layout .tiktok_back_view{width: 342px!important;}
   .post_detail .video_layout .back_view{height: 250px;}
-  .post_detail .video_layout .back_view .youtube_view{height: 250px;}
+  .post_detail .video_layout .back_view .video_view{height: 250px;}
   .post_detail .detail_layout{padding-top: 0px!important;}
   .post_detail .detail_layout .comments_layout {padding: 0 8px 0 8px;}
   .post_detail .detail_layout .comments_layout .comments {overflow:none;height:100%;}
@@ -108,11 +110,11 @@ a {text-decoration: none;color: #222!important;}
   /* post */
   .post_list .menu .menu_layout{opacity: 1;position: fixed;top: 55px;width: 100%;left: 0px;}
   .post_list .menu .menu_layout .search_title{display: none;}
-  .post .thumb{height: 220px;}
+  .post .thumbnail{height: 220px;}
   .post .v-card__subtitle {font-size: 0.9rem!important;}
   /* post detail */
   .post_detail .video_layout .back_view{height: 280px;}
-  .post_detail .video_layout .back_view .youtube_view{height: 280px;}
+  .post_detail .video_layout .back_view .video_view{height: 280px;}
   .post_detail .detail_layout{padding-top: 0px!important;}
   .post_detail .detail_layout .comments_layout {padding: 0 8px 0 8px;}
   .post_detail .detail_layout .comments_layout .comments {overflow:none;height:100%;}
@@ -125,11 +127,11 @@ a {text-decoration: none;color: #222!important;}
   /* post */
   .post_list .menu .menu_layout{opacity: 1;position: fixed;top: 55px;width: 100%;left: 0px;}
   .post_list .menu .menu_layout .search_title{display: none;}
-  .post .thumb{height: 196px;}
+  .post .thumbnail{height: 196px;}
   .post .v-card__title {font-size: 1.1rem!important;}
   /* post detail */
   .post_detail .video_layout .back_view,
-  .post_detail .video_layout .back_view .youtube_view{height: 390px;}
+  .post_detail .video_layout .back_view .video_view{height: 390px;}
   .post_detail .detail_layout{padding-top: 0px!important;}
   .post_detail .detail_layout .comments_layout {padding: 0 8px 0 8px;}
   .post_detail .detail_layout .comments_layout .comments {overflow:none;height:100%;}
@@ -138,11 +140,11 @@ a {text-decoration: none;color: #222!important;}
 @media screen and  (min-width: 960px) and (max-width:1263px){
   .nav_tool>div{max-width: 900px}
   /* post */
-  .post .thumb{height: 114px;}
+  .post .thumbnail{height: 114px;}
   .post .v-card__subtitle {font-size: 0.75rem!important;}
   /* post detail */
   .post_detail .video_layout .back_view,
-  .post_detail .video_layout .back_view .youtube_view{height: 370px;}
+  .post_detail .video_layout .back_view .video_view{height: 370px;}
   .post_detail .detail_layout .comments_layout .comments {height:390px;}
   .post_detail .detail_layout .comments_layout .tiktok_comments {height:690px!important;}
 }
@@ -150,11 +152,11 @@ a {text-decoration: none;color: #222!important;}
 @media screen and  (min-width: 1264px) {
   .nav_tool>div{max-width: 1185px}
   /* post */
-  .post .thumb{height: 154px;}
+  .post .thumbnail{height: 154px;}
   .post .v-card__subtitle {font-size: 0.8rem!important;}
   /* post detail */
   .post_detail .video_layout .back_view,
-  .post_detail .video_layout .back_view .youtube_view{height: 487px;}
+  .post_detail .video_layout .back_view .video_view{height: 487px;}
   .post_detail .detail_layout .comments_layout .comments {height:505px;}
   .post_detail .detail_layout .comments_layout .tiktok_comments {height:690px!important;}
 }
