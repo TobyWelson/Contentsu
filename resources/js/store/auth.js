@@ -74,7 +74,24 @@ const actions = {
 
     context.commit('setApiStatus', false)
     context.commit('error/setCode', response.status, { root: true })
-  }
+  },
+
+  // 退会
+  async withdrawaler (context) {
+    context.commit('setApiStatus', null)
+    const response = await axios.delete('/api/withdrawaler')
+
+    if (response.status === OK) {
+      context.commit('setApiStatus', true)
+      context.commit('setUser', null)
+      return SUCCESS
+    }
+
+    context.commit('setApiStatus', false)
+    context.commit('error/setCode', response.status, { root: true })
+    return FAILURE
+  },
+
 };
 
 // user ステートの値を更新する setUser ミューテーション

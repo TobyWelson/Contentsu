@@ -34,6 +34,7 @@
           <v-icon small>mdi-feather</v-icon>投稿
         </v-btn>
         <v-btn v-if="isLogin" outlined rounded color="warning" class="font-weight-bold" @click="logout">ログアウト</v-btn>
+        <v-btn v-if="isLogin" outlined rounded color="warning" class="font-weight-bold" @click="withdrawal">退会</v-btn>
         <v-btn v-if="!isLogin" outlined rounded color="warning" class="font-weight-bold" @click="showLogin">ログイン</v-btn>  
         <v-btn v-if="!isLogin" depressed rounded color="warning" class="font-weight-bold" @click="regist">新規登録</v-btn>
       </div>
@@ -63,6 +64,7 @@ export default {
         { title: "特定商取引法に基づく表記", to: "/Regist"},
         { title: "プライバシーポリシー", to: "/Regist"},
         { title: "お問い合わせ", to: "/Regist"},
+        { title: "退会", to: "/Withdrawal"},
       ]
     }
   },
@@ -87,6 +89,9 @@ export default {
     },
     regist () {
       this.$router.push('/Regist')
+    },
+    withdrawal () {
+      this.$router.push('/Withdrawal')
     },
     showLogin() {
       this.$refs.login.isShowLoginDialog = true

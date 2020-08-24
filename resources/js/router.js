@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 // ページコンポーネントをインポートする
 import PostList from './pages/PostList.vue';
 import Regist from './pages/Regist.vue';
+import Withdrawal from './pages/Withdrawal.vue';
 import SystemError from './pages/errors/System.vue'
 import PostDetail from './pages/PostDetail.vue'
 import Vuetify from '../../node_modules/vuetify/'
@@ -37,6 +38,17 @@ const routes = [
     component: Regist,
     beforeEnter (to, from, next) {
       if (store.getters['auth/check']) {
+        next('/')
+      } else {
+        next()
+      }
+    }
+  },
+  {
+    path: '/withdrawal',
+    component: Withdrawal,
+    beforeEnter (to, from, next) {
+      if (!store.getters['auth/check']) {
         next('/')
       } else {
         next()
