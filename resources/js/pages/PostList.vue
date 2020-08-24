@@ -4,7 +4,7 @@
       <!-- メニュー -->
       <v-col xl="2" lg="3" md="3" sm="0" cols="0" class="menu">
         <div class="menu_layout px-5 py-1" v-if="isMenu">
-          <p class="font-weight-bold search_title">検索</p>
+          <SearchTextFilter @reset="reset" class="pt-1"/>
           <SearchFilter @reset="reset" class="pt-1"/>
         </div>
       </v-col>
@@ -32,6 +32,7 @@
 <script>
 import Post from '../components/Post.vue'
 import SearchFilter from '../components/SearchFilter.vue'
+import SearchTextFilter from '../components/SearchTextFilter.vue'
 import InfiniteLoading from 'vue-infinite-loading';
 import PostForm from '../components/PostForm.vue'
 import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../util'
@@ -42,6 +43,7 @@ export default {
     PostForm,
     Post,
     SearchFilter,
+    SearchTextFilter,
     InfiniteLoading
   },
   data () {
@@ -63,14 +65,20 @@ export default {
    * 自動実行されるmethod  
    */
     async infiniteLoad() {
+      const formData = new FormData()
+      formData.append('category', this.getCategory =='' ? 'ALL': this.getCategory)
+      formData.append('title', this.getText)
       var data = {
-        page: this.page + 1,
-        category: this.getCategory =='' ? 'ALL': this.getCategory,
+        page : this.page + 1,
+        formData : formData,
       }
       const response = await this.$store.dispatch('post/fetchPage', data)
       
-      if (response.data.posts != null
-        || response.last_page >= this.page + 1) {
+      if (response == null) {
+          return false;
+      }
+
+      if (response.last_page >= this.page + 1) {
         this.$store.commit('post/setPage', this.page + 1);
         this.$store.commit('post/setLastPage', response.last_page);
 
@@ -113,6 +121,9 @@ export default {
     },
     getCategory () {
       return this.$store.getters['filter/category']
+    },
+    getText () {
+      return this.$store.getters['filter/text']
     },
     ...mapState({
         viewposts: state => state.post.viewposts,

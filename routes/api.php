@@ -40,7 +40,7 @@ Route::post('/posts', 'PostController@create')->name('post.create');
 Route::delete('/posts/{id}', 'PostController@postDelete')->name('post.postDelete');
 
 // 転載記事一覧
-Route::get('/posts/{category}', 'PostController@index')->name('post.index');
+Route::post('/index', 'PostController@index')->name('post.index');
 
 // 転載記事詳細
 Route::get('/posts/{id}/show', 'PostController@show')->name('post.show');

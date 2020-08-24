@@ -13,7 +13,7 @@ const actions = {
   },
   // 投稿内容取得
   async fetchPage (context, data) {
-    var response = await axios.get(`/api/posts/${data.category}/?page=${data.page}`)
+    var response = await axios.post(`/api/index/?page=${data.page}`, data.formData)
     if (response.status === OK) {
       return response.data
     } else {
