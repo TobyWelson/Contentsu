@@ -58,7 +58,7 @@ export default {
   computed: {
     ...mapState({
       postErrors: state => state.post.postsErrorMessages,
-      categories: state => state.filter.categories,
+      categories: state => state.filter.registCategories,
     }),
   },
   methods: {

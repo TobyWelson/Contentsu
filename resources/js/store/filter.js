@@ -8,14 +8,23 @@ const actions = {
 const mutations = {
   setCategory(state, category) {
     state.category = category;
-  }
+  },
+  setText(state, text) {
+    state.text = text;
+  },
 };
 
 // 検索機能のカテゴリ状態を保持する category ステート
 const state = {
   category: '',
+  text: '',
   categories: [
     'ALL',      // 0
+    'アニメ',    // 1
+    'ゲーム',    // 2
+    'ドラマ',    // 3
+  ],
+  registCategories: [
     'アニメ',    // 1
     'ゲーム',    // 2
     'ドラマ',    // 3
@@ -24,6 +33,7 @@ const state = {
 
 const getters = {
   category: state => state.category,
+  text: state => state.text,
   categories: state => state.categories,
 };
 
