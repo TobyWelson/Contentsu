@@ -89,6 +89,10 @@ class PostController extends Controller
             $posts = Post::where('title','like','%'.$title.'%')
             ->with(['owner', 'likes'])
             ->orderBy(Post::CREATED_AT, 'desc')->paginate();
+        } else if($category == 'ランダム順') {
+            $posts = Post::where('title','like','%'.$title.'%')
+            ->with(['owner', 'likes'])
+            ->orderBy(Post::raw('RANDOM()'))->paginate();
         } else {
             $posts = Post::where('category', $category)
             ->where('title','like','%'.$title.'%')
