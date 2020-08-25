@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- SPメニュー -->
     <v-navigation-drawer v-model="drawer" fixed temporary right>
       <v-container>
         <v-list-item v-if="isLogin">
@@ -11,11 +12,11 @@
         <v-btn v-if="!isLogin" outlined rounded @click="showLogin" class="font-weight-bold mb-2 mt-1" width="100%" color="warning">ログイン</v-btn>
         <v-btn v-if="!isLogin" depressed rounded @click="regist" class="font-weight-bold mb-3" width="100%" color="warning">新規登録</v-btn>
         <v-divider></v-divider>
-      <v-list nav dense>
-        <v-list-item v-for="item in items" :key="item.title" :to="item.to">
-          <v-list-item-content><v-list-item-title v-text="item.title"/></v-list-item-content>
-        </v-list-item>
-      </v-list>
+        <v-list nav dense>
+          <v-list-item v-for="item in items" :key="item.title" :to="item.to">
+            <v-list-item-content><v-list-item-title v-text="item.title"/></v-list-item-content>
+          </v-list-item>
+        </v-list>
       </v-container>
     </v-navigation-drawer>
     <v-toolbar class="nav_tool">
@@ -102,7 +103,7 @@ export default {
     async reload() {
       await this.$store.dispatch('screen/showLoading')
       this.$router.go({path: this.$router.currentRoute.path, force: true})
-    }
+    },
   }
 }
 </script>

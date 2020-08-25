@@ -15,7 +15,7 @@
               <v-spacer></v-spacer>
               <div class="menu_icons">
                 <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
-                <v-btn icon v-if="isPostFromCurrentUser" color="error" @click="showDelete"><v-icon>mdi-delete</v-icon></v-btn>
+                <v-btn icon v-if="isPostCreateUser" color="error" @click="showDelete"><v-icon>mdi-delete</v-icon></v-btn>
               </div>
             </v-card-actions>
         </v-card>
@@ -47,7 +47,7 @@
               </div>
             </div>
           </form>
-          <ul v-if="post.comments.length > 0" class="comments pa-0" :class="{ 'tiktok_comments': getVideoTypeTiktok}">
+          <ul v-if="post.comments.length > 0" class="comments pa-0" :class="{ 'tiktok_comments': isVideoTypeTiktok}">
             <li v-for="comment in post.comments" :key="comment.id" class="pb-4 pl-2 pr-2">
               <v-divider></v-divider>
               <div class="pt-2 user">{{ comment.author.name }}&nbsp;{{ dateFormat(comment.created_at) }}</div>
@@ -72,7 +72,7 @@ import { mapState } from 'vuex'
 export default {
   components: {
     Video,
-    Delete
+    Delete,
   },
   props: {
     id: {
@@ -84,7 +84,7 @@ export default {
     return {
       post: null,
       commentContent: '',
-      commentErrors: null
+      commentErrors: null,
     }
   },
   methods: {
@@ -155,16 +155,15 @@ export default {
     isLogin () {
       return this.$store.getters['auth/check']
     },
-    userId () {
-      return this.$store.getters['auth/userId']
-    },
-    isPostFromCurrentUser() {
-      if(this.userId == this.post.owner.userId) {
+    isPostCreateUser() {
+      var userId = this.$store.getters['auth/userid']
+      if(userId == this.post.owner.id) {
         return true
+      } else {
+        return false
       }
-      return false
     },
-    getVideoTypeTiktok() {
+    isVideoTypeTiktok() {
       if (this.post.url.match(MATCH_URL_TIKTOK)) {
         return true;
       } else {

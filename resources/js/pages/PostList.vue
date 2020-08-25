@@ -1,11 +1,13 @@
 <template>
-  <v-container class="post_list pa-0">
+  <v-container class="post_list pa-0 mb-10">
     <v-row>
       <!-- メニュー -->
-      <v-col xl="2" lg="3" md="3" sm="0" cols="0" class="menu">
-        <div class="menu_layout px-5 py-1" v-if="isMenu">
-          <SearchTextFilter @reset="reset" class="pt-1"/>
-          <SearchFilter @reset="reset" class="pt-1"/>
+      <v-col xl="2" lg="3" md="3" sm="0" cols="0" class="pc_menu hidden-sm-and-down">
+        <div class="menu_layout px-5 py-1">
+          <div class="px-2 pt-3">キーワード検索</div>
+          <SearchTextFilter @reset="reset"/>
+          <div class="px-2 pt-3">カテゴリー検索</div>
+          <SearchFilter @reset="reset"/>
         </div>
       </v-col>
       <!-- 投稿リスト -->
@@ -20,12 +22,20 @@
           <!-- 結果が存在しない場合下記が表示される -->
           <span slot="no-results">-----検索結果はありません-----</span>
         </infinite-loading>
-        <v-btn v-if="isLogin" fab color="warning" class="button hidden-md-and-up add_post" @click="showPost">
-          <v-icon>mdi-feather</v-icon>
-        </v-btn>
       </v-col>
     </v-row>
-    <PostForm ref="post"/>
+    <!-- SPメニュー -->
+    <div v-if="isShowMenu" class="sp_menu hidden-md-and-up">
+      <div class="upper" @click="onMenuClick">
+      </div>
+      <div class="menu">
+        <div class="px-2 pt-3">キーワード検索</div>
+        <SearchTextFilter :keyword="this.getText" @reset="reset"/>
+        <div class="px-2 pt-3">カテゴリー検索</div>
+        <SearchFilter @reset="reset" class="pb-3"/>
+      </div>
+    </div>
+    <FooterToolbar/>
   </v-container>
 </template>
 
@@ -34,30 +44,17 @@ import Post from '../components/Post.vue'
 import SearchFilter from '../components/SearchFilter.vue'
 import SearchTextFilter from '../components/SearchTextFilter.vue'
 import InfiniteLoading from 'vue-infinite-loading';
-import PostForm from '../components/PostForm.vue'
+import FooterToolbar from '../components/FooterToolbar'
 import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../util'
 import { mapState } from 'vuex'
 
 export default {
   components: {
-    PostForm,
     Post,
     SearchFilter,
     SearchTextFilter,
-    InfiniteLoading
-  },
-  data () {
-    return {
-      showForm: false,
-      scrollY: 0,
-      isMenu:true,
-    }
-  },
-  mounted() {
-    window.addEventListener('scroll', this.calculateScrollY);
-  },
-  beforeDestroy() {
-   window.removeEventListener('scroll', this.calculateScrollY);
+    InfiniteLoading,
+    FooterToolbar
   },
   methods: {
   /*
@@ -66,7 +63,7 @@ export default {
    */
     async infiniteLoad() {
       const formData = new FormData()
-      formData.append('category', this.getCategory =='' ? '新着順': this.getCategory)
+      formData.append('category', this.getCategory)
       formData.append('title', this.getText)
       var data = {
         page : this.page + 1,
@@ -100,24 +97,14 @@ export default {
       this.$store.commit('post/setPage', 0);
       this.$store.commit('post/setPosts', []);
       this.$refs.infiniteLoading.stateChanger.reset();
-      this.scrollY = 0;
     },
-    calculateScrollY() {
-      if (window.innerWidth < 960) {
-        if(55 > this.scrollY) {
-          this.isMenu = true;
-        } else if (window.scrollY < this.scrollY) {
-          this.isMenu = false;
-        } else {
-          this.isMenu = true;
-        }
-        this.scrollY = window.scrollY
-      }
+    onMenuClick() {
+      this.$store.dispatch('screen/onMenuClick')
     }
   },
   computed: {
-    isLogin () {
-      return this.$store.getters['auth/check']
+    isShowMenu () {
+      return this.$store.getters['screen/menu']
     },
     getCategory () {
       return this.$store.getters['filter/category']

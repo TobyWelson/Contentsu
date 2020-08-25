@@ -1,12 +1,11 @@
 <template>
   <v-select
-    class="mb-1"
+    class="pa-2"
     color="orange light-4"
     @input="setCategory"
     :items="categories"
     :value="category"
     @change="reset"
-    label="カテゴリー検索"
     flat
     solo
     hide-details>

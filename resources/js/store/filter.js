@@ -16,7 +16,7 @@ const mutations = {
 
 // 検索機能のカテゴリ状態を保持する category ステート
 const state = {
-  category: '',
+  category: '新着順',
   text: '',
   categories: [
     '新着順',
