@@ -19,10 +19,11 @@ const state = {
   category: '',
   text: '',
   categories: [
-    'ALL',      // 0
-    'アニメ',    // 1
-    'ゲーム',    // 2
-    'ドラマ',    // 3
+    '新着順',
+    'ランダム表示',
+    'アニメ',
+    'ゲーム',
+    'ドラマ',
   ],
   registCategories: [
     'アニメ',    // 1

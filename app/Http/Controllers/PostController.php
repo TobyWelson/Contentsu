@@ -85,7 +85,7 @@ class PostController extends Controller
         $title = $request->title;
         $category = $request->category;
 
-        if($category == 'ALL') {
+        if($category == '新着順') {
             $posts = Post::where('title','like','%'.$title.'%')
             ->with(['owner', 'likes'])
             ->orderBy(Post::CREATED_AT, 'desc')->paginate();

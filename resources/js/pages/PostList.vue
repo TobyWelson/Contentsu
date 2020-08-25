@@ -66,7 +66,7 @@ export default {
    */
     async infiniteLoad() {
       const formData = new FormData()
-      formData.append('category', this.getCategory =='' ? 'ALL': this.getCategory)
+      formData.append('category', this.getCategory =='' ? '新着順': this.getCategory)
       formData.append('title', this.getText)
       var data = {
         page : this.page + 1,
