@@ -7,7 +7,7 @@
         <Navbar />
       </header>
       <main>
-        <v-container>
+        <v-container class="pb-0">
           <Message />
           <RouterView />
         </v-container>

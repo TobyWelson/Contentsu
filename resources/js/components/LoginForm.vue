@@ -28,7 +28,8 @@
               :append-icon="isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="isShowPassword= !isShowPassword"
               outlined
-              placeholder="英数字 8桁以上"/>
+              placeholder="英数字 8桁以上"
+              autocomplete="password"/>
           </v-container>
           <v-row justify="center" align-content="center">
             <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="login">ログイン</v-btn>
@@ -37,7 +38,6 @@
             <v-btn text v-on:click="regist">パスワードを忘れた方はこちら</v-btn>
           </v-row>
         </v-container>
-        <v-card-actions>&nbsp;</v-card-actions>
       </v-form>
     </v-card>
   </v-dialog>

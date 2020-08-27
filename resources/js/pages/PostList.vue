@@ -3,7 +3,7 @@
     <v-row>
       <!-- メニュー -->
       <v-col xl="2" lg="3" md="3" sm="0" cols="0" class="pc_menu hidden-sm-and-down">
-        <div class="menu_layout px-5 py-1">
+        <div class="menu_layout px-5 py-2">
           <div class="px-2 pt-3">キーワード検索</div>
           <SearchTextFilter @reset="reset"/>
           <div class="px-2 pt-3">カテゴリー検索</div>
@@ -97,6 +97,7 @@ export default {
       this.$store.commit('post/setPage', 0);
       this.$store.commit('post/setPosts', []);
       this.$refs.infiniteLoading.stateChanger.reset();
+      this.$store.dispatch('screen/closeMenu')
     },
     onMenuClick() {
       this.$store.dispatch('screen/onMenuClick')

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="post" class="post_detail">
+  <div v-if="post" class="post_detail mt-2">
     <v-row>
       <!-- 動画 -->
       <v-col xl="9" lg="9" md="9" sm="0" cols="0" class="video_layout px-2  py-0">

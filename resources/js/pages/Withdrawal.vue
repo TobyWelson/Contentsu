@@ -31,7 +31,7 @@
       <br/>
       <v-row justify="center" align-content="center">
         <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="withdrawaler">退会する</v-btn>
-        <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" @click.native="reload" to="/">キャンセル</v-btn>
+        <v-btn outlined rounded width="90%" height="45" class="font-weight-bold title" @click.native="reload" to="/">キャンセル</v-btn>
       </v-row>
     </v-card>
   </v-container>

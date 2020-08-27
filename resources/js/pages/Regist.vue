@@ -34,7 +34,8 @@
               v-model="registerForm.password"
               prepend-icon="mdi-lock"
               outlined
-              placeholder="英数字 8桁以上"/>
+              placeholder="英数字 8桁以上"
+              autocomplete="password"/>
             <v-text-field
               id="password-confirmation"
               :type="'password'"
@@ -42,7 +43,8 @@
               v-model="registerForm.password_confirmation"
               prepend-icon="mdi-lock-reset"
               outlined
-              placeholder="英数字 8桁以上"/>
+              placeholder="英数字 8桁以上"
+              autocomplete="password"/>
           </v-container>
           <v-row justify="center" align-content="center">
             <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="register">登録</v-btn>
