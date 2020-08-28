@@ -26,6 +26,8 @@
               label="カテゴリ"
               v-model="category"
               :items="categories"
+              item-text="categoryName"
+              item-value="id"
               outlined></v-select>
             <v-text-field
               label="URL"

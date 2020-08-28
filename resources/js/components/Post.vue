@@ -4,7 +4,7 @@
     <RouterLink class="post__overlay" :to="`/posts/${item.id}`">
       <Thumbnail :videoUrl="item.url"></Thumbnail>
       <v-card-title class="title_over_text font-weight-bold">{{ item.title }}</v-card-title>
-      <v-card-subtitle class="title_over_text">{{ item.category }}</v-card-subtitle>
+      <v-card-subtitle class="title_over_text">{{ categories.filter(e => e.id == item.category)[0]['categoryName'] }}</v-card-subtitle>
       <div class="titlegard" />
       <v-divider></v-divider>
       <v-card-actions>
@@ -14,13 +14,13 @@
         <v-icon small color="blue">mdi-eye</v-icon><span class="">{{ item.view_count }}</span>
       </v-card-actions>
     </RouterLink>
-  </v-card>
+  </v-card> 
 </v-flex>
 </template>
 
 <script>
 import Thumbnail from './Thumbnail.vue'
-
+import { mapState } from 'vuex'
 export default {
   components: {
     Thumbnail
@@ -30,6 +30,11 @@ export default {
       type: Object,
       required: true
     }
+  },
+  computed: {
+    ...mapState({
+        categories: state => state.filter.categories
+    }),
   },
   methods : {
     like () {

@@ -2,9 +2,10 @@
   <v-select
     class="pa-2"
     color="orange light-4"
-    @input="setCategory"
+    v-model="category"
     :items="categories"
-    :value="category"
+    item-text="categoryName"
+    item-value="id"
     @change="reset"
     flat
     solo
@@ -17,14 +18,14 @@ import { mapState } from 'vuex'
 export default {
   computed: {
     ...mapState({
-        category: state => state.filter.category,
-        categories: state => state.filter.categories
+      categories: state => state.filter.categories
     }),
+    category: {
+      get: function () { return this.$store.getters['filter/category']; },
+      set: function (val) { this.$store.commit('filter/setCategory', val); },
+    }
   },
   methods: {
-    setCategory(val) {
-      this.$store.commit('filter/setCategory', val);
-    },
     reset() {
       window.scrollTo({
         top: 0,

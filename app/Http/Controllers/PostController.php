@@ -85,11 +85,11 @@ class PostController extends Controller
         $title = $request->title;
         $category = $request->category;
 
-        if($category == '新着順') {
+        if($category == '1') {
             $posts = Post::where('title','like','%'.$title.'%')
             ->with(['owner', 'likes'])
             ->orderBy(Post::CREATED_AT, 'desc')->paginate();
-        } else if($category == 'ランダム順') {
+        } else if($category == '2') {
             $posts = Post::where('title','like','%'.$title.'%')
             ->with(['owner', 'likes'])
             ->orderBy(Post::raw('RANDOM()'))->paginate();
