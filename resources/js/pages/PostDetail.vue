@@ -25,7 +25,7 @@
         <v-divider></v-divider>
         <v-card-actions class="detail py-2 px-0">
           <v-spacer></v-spacer>
-          <div><v-icon color="orange">mdi-folder</v-icon>{{ post.category }}</div>
+          <div><v-icon color="orange">mdi-folder</v-icon>{{ categories.filter(e => e.id == post.category)[0]['categoryName'] }}</div>
           <v-spacer></v-spacer>
           <div><v-icon color="blue">mdi-eye</v-icon>{{ post.view_count }}</div>
           <v-spacer></v-spacer>
@@ -172,6 +172,7 @@ export default {
     },
     ...mapState({
       commentsErrors: state => state.comments.commentsErrorMessages,
+      categories: state => state.filter.categories
     }),
   },
   watch: {
