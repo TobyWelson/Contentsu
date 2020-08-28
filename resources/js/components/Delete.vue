@@ -9,11 +9,11 @@
           記事を削除しますか？
         </div>
         <v-row justify="center" align-content="center">
-          <v-col class="d-flax" cols="12" sm="6">
-            <v-btn color="warning" width="100%" height="45" class="font-weight-bold title" @click="onDeleteClick">削除</v-btn>
+          <v-col class="d-flax py-0" cols="12" sm="6">
+            <v-btn depressed rounded color="warning" width="100%" height="45" class="font-weight-bold title" @click="onDeleteClick">削除</v-btn>
           </v-col>
-          <v-col class="d-flax" cols="12" sm="6">
-            <v-btn color="warning" width="100%" height="45" class="font-weight-bold title" @click="isShowDeleteDialog = false">キャンセル</v-btn>
+          <v-col class="d-flax py-0" cols="12" sm="6">
+            <v-btn outlined rounded width="100%" height="45" class="font-weight-bold title" @click="isShowDeleteDialog = false">キャンセル</v-btn>
           </v-col>
         </v-row>
       </v-container>

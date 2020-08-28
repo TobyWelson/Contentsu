@@ -4,13 +4,16 @@ const actions = {
   },
   onMenuClick (context) {
     context.commit('onMenuClick')
+  },
+  closeMenu (context) {
+    context.commit('changeMenuState', false)
   }
 };
 
 // screen ステートの値を更新する setUser ミューテーション
 const mutations = {
-  setShowLoading(state, isLoading) {
-    state.isLoading = isLoading;
+  setShowLoading(state, isState) {
+    state.isLoading = isState;
   },
   onMenuClick(state) {
     if (state.isMenu == false) {
@@ -18,6 +21,9 @@ const mutations = {
     } else {
       state.isMenu = false;
     }
+  },
+  changeMenuState(state, isState) {
+    state.isMenu = isState;
   }
 };
 
