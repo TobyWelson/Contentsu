@@ -11,6 +11,14 @@ class Post extends Model
     /** プライマリキーの型 */
     protected $keyType = 'string';
 
+     /**
+     * モデルと関連しているテーブル
+     *
+     * @var string
+     */
+    protected $table = 'contentsposts';
+
+
     /** JSONに含めるアクセサ */
     protected $appends = [
         'likes_count', 'liked_by_user',
