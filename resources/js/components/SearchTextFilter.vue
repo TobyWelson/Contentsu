@@ -8,7 +8,8 @@
       label="例)タイトル名"
       flat
       solo
-      hide-details>
+      hide-details
+      v-on:keyup.enter="reset">
     </v-text-field>
     <div class="submit">
       <v-btn icon @click="reset" color="warning"><v-icon>mdi-magnify</v-icon></v-btn>
@@ -20,7 +21,8 @@
 export default {
   props: {
     keyword: {
-      type: String
+      type: String,
+      required: false,
     }
   },
   data() {

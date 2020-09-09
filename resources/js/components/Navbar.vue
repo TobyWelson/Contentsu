@@ -10,7 +10,7 @@
         </v-list-item>
         <v-btn v-if="isLogin" outlined rounded @click="logout" class="font-weight-bold mb-3" width="100%" color="warning">ログアウト</v-btn>
         <v-btn v-if="!isLogin" outlined rounded @click="showLogin" class="font-weight-bold mb-2 mt-1" width="100%" color="warning">ログイン</v-btn>
-        <v-btn v-if="!isLogin" depressed rounded @click="regist" class="font-weight-bold mb-3" width="100%" color="warning">新規登録</v-btn>
+        <v-btn v-if="!isLogin" depressed rounded @click="preRegist" class="font-weight-bold mb-3" width="100%" color="warning">新規登録</v-btn>
         <v-divider></v-divider>
         <v-list nav dense>
           <v-list-item v-for="item in items" :key="item.title" :to="item.to">
@@ -37,7 +37,7 @@
         <v-btn v-if="isLogin" outlined rounded color="warning" class="font-weight-bold" @click="logout">ログアウト</v-btn>
         <v-btn v-if="isLogin" outlined rounded color="warning" class="font-weight-bold" @click="withdrawal">退会</v-btn>
         <v-btn v-if="!isLogin" outlined rounded color="warning" class="font-weight-bold" @click="showLogin">ログイン</v-btn>  
-        <v-btn v-if="!isLogin" depressed rounded color="warning" class="font-weight-bold" @click="regist">新規登録</v-btn>
+        <v-btn v-if="!isLogin" depressed rounded color="warning" class="font-weight-bold" @click="preRegist">新規登録</v-btn>
       </div>
     </v-toolbar>
     <PostForm ref="post"/>
@@ -60,11 +60,11 @@ export default {
       drawer: null,
       items: [
         { title: "TOP", to: "/"},
-        { title: "FAQ", to: "/Regist"},
-        { title: "利用規約", to: "/Regist"},
-        { title: "特定商取引法に基づく表記", to: "/Regist"},
-        { title: "プライバシーポリシー", to: "/Regist"},
-        { title: "お問い合わせ", to: "/Regist"},
+        { title: "FAQ", to: "/preRegist"},
+        { title: "利用規約", to: "/preRegist"},
+        { title: "特定商取引法に基づく表記", to: "/preRegist"},
+        { title: "プライバシーポリシー", to: "/preRegist"},
+        { title: "お問い合わせ", to: "/preRegist"},
         { title: "退会", to: "/Withdrawal"},
       ]
     }
@@ -88,11 +88,11 @@ export default {
         })
       }
     },
-    regist () {
-      this.$router.push('/Regist')
+    preRegist () {
+      this.$router.push('/preRegist')
     },
     withdrawal () {
-      this.$router.push('/Withdrawal')
+      this.$router.push('/withdrawal')
     },
     showLogin() {
       this.$refs.login.isShowLoginDialog = true

@@ -16,10 +16,10 @@ class CreateContentsPostsTable extends Migration
         Schema::create('contentsposts', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->unsignedInteger('user_id');
-            $table->string('title');
-            $table->string('category');
+            $table->string('title', 255);
+            $table->string('category', 2);
             $table->unsignedInteger('view_count');
-            $table->string('url');
+            $table->string('url', 300);
             $table->timestamps();
     
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -3,7 +3,7 @@
     <v-card flat>
       <div>
         <v-layout justify-center class="display-1">SIGN UP</v-layout>
-        <v-layout justify-center>新規登録</v-layout>
+        <v-layout justify-center>本登録</v-layout>
       </div>
       <div v-if="registerErrors" class="errors mt-2">
         <ul v-if="registerErrors.name"><li v-for="msg in registerErrors.name" :key="msg">{{ msg }}</li></ul>
@@ -20,13 +20,6 @@
               v-model="registerForm.name"
               outlined
               placeholder="xxx"/>
-            <v-text-field
-              id="email"
-              label="ID（メールアドレス）"
-              prepend-icon="mdi-email"
-              v-model="registerForm.email"
-              outlined
-              placeholder="xxx@xxx.com"/>
             <v-text-field
               id="password"
               :type="'password'"
@@ -62,8 +55,8 @@ export default {
   data () {
     return {
       registerForm: {
+        id: '',
         name: '',
-        email: '',
         password: '',
         password_confirmation: ''
       }
@@ -81,19 +74,17 @@ export default {
 
   methods: {
     async register () {
+      this.registerForm.id = this.$route.params.id;
       // authストアのresigterアクションを呼び出す
       await this.$store.dispatch('auth/register', this.registerForm)
 
       if (this.apiStatus) {
+        this.$store.commit('message/setContent', {
+          content: '登録処理が完了しました。',
+          timeout: 4000
+        });
         // トップページに移動する
         this.$router.push('/')
-      }
-    },
-    async logout () {
-      await this.$store.dispatch('auth/logout')
-
-      if (this.apiStatus) {
-        this.$router.push('/login')
       }
     },
     clearError () {

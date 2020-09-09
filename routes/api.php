@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 */
+// 仮会員登録
+Route::post('/pre-register', 'Auth\RegisterController@preRegister');
+
 // 会員登録
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
 

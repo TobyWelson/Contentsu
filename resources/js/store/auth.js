@@ -6,15 +6,14 @@ import { OK, CREATED, UNPROCESSABLE_ENTITY, SUCCESS, FAILURE } from '../util'
  */
  // 会員登録 API を呼び出す register アクション
 const actions = {
-   // 会員登録
-  async register (context, data) {
+  // 仮会員登録
+  async preRegister (context, data) {
     context.commit('setApiStatus', null)
-    const response = await axios.post('/api/register', data)
-
+    const response = await axios.post('/api/pre-register', data)
+    
     if (response.status === CREATED) {
       context.commit('setApiStatus', true)
-      context.commit('setUser', response.data)
-      return false
+      return SUCCESS
     }
 
     context.commit('setApiStatus', false)
@@ -23,6 +22,27 @@ const actions = {
     } else {
       context.commit('error/setCode', response.status, { root: true })
     }
+    return FAILURE
+  },
+
+   // 会員登録
+  async register (context, data) {
+    context.commit('setApiStatus', null)
+    const response = await axios.post('/api/register', data)
+
+    if (response.status === CREATED) {
+      context.commit('setApiStatus', true)
+      context.commit('setUser', response.data)
+      return SUCCESS
+    }
+
+    context.commit('setApiStatus', false)
+    if (response.status === UNPROCESSABLE_ENTITY) {
+      context.commit('setRegisterErrorMessages', response.data.errors)
+    } else {
+      context.commit('error/setCode', response.status, { root: true })
+    }
+    return FAILURE
   },
 
   // ログイン
