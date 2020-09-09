@@ -5,7 +5,7 @@
         <v-progress-circular indeterminate :size="80" :width="7" color="deep-orange lighten-2"></v-progress-circular>
       </v-overlay>
       <div>
-        <v-layout justify-center class="display-1">WITHDRAWAL</v-layout>
+        <v-layout justify-center class="headline">WITHDRAWAL</v-layout>
         <v-layout justify-center>退会</v-layout>
       </div>
       <br/>
@@ -31,7 +31,7 @@
       <br/>
       <v-row justify="center" align-content="center">
         <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="withdrawaler">退会する</v-btn>
-        <v-btn outlined rounded width="90%" height="45" class="font-weight-bold title" @click.native="reload" to="/">キャンセル</v-btn>
+        <v-btn outlined rounded width="90%" height="45" class="font-weight-bold title" v-on:click="reload">キャンセル</v-btn>
       </v-row>
     </v-card>
   </v-container>
@@ -72,10 +72,11 @@ export default {
         });
       }
     },
-  },
-  async reload() {
-    await this.$store.dispatch('screen/showLoading')
-    this.$router.go({path: this.$router.currentRoute.path, force: true})
+    async reload() {
+      await this.$store.dispatch('screen/showLoading')
+      this.$router.push('/')
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
+    }
   }
 }
 </script>

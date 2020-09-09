@@ -12,7 +12,7 @@ class MailController extends Controller
   public static function preRegistSend(string $to, string $id)
   {
     $subject = 'コン転ツ：仮登録';
-    $text = 'http://localhost:3000/regist/'.$id;
+    $text = "コン転ツへのご登録ありがとうございます。\r\n下のリンクより、本登録を完了してください。\r\n\r\nhttp://localhost:3000/regist/".$id;
     Mail::to($to)->send(new MailAction($subject, $text));
   }
 }

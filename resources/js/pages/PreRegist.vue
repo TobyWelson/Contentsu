@@ -5,14 +5,14 @@
         <v-progress-circular indeterminate :size="80" :width="7" color="deep-orange lighten-2"></v-progress-circular>
       </v-overlay>
       <div>
-        <v-layout justify-center class="display-1">PROVISIONAL SIGN UP</v-layout>
+        <v-layout justify-center class="headline">PROVISIONAL SIGN UP</v-layout>
         <v-layout justify-center>仮登録</v-layout>
       </div>
-      <div v-if="registerErrors" class="errors mt-2">
+      <div v-if="registerErrors" class="errors mt-3">
         <ul v-if="registerErrors.email"><li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li></ul>
       </div>
       <v-form @submit.prevent="register">
-        <div class="login-dialog-input mt-2">
+        <div class="login-dialog-input mt-4">
           <v-container>
             <v-text-field
               id="email"

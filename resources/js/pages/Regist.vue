@@ -2,7 +2,7 @@
   <v-container id="regist">
     <v-card flat>
       <div>
-        <v-layout justify-center class="display-1">SIGN UP</v-layout>
+        <v-layout justify-center class="headline">SIGN UP</v-layout>
         <v-layout justify-center>本登録</v-layout>
       </div>
       <div v-if="registerErrors" class="errors mt-2">

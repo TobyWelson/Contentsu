@@ -2,7 +2,7 @@
   <v-dialog v-model="isShowLoginDialog" max-width="600px">
     <v-card>
       <v-container>
-        <v-layout justify-center class="display-1">LOGIN</v-layout>
+        <v-layout justify-center class="headline">LOGIN</v-layout>
         <v-layout justify-center class="mb-1">ログイン</v-layout>
       </v-container>
       <v-container v-if="loginErrors" class="errors">
