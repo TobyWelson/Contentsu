@@ -134,9 +134,16 @@ class RegisterController extends Controller
         }
         // ユーザ作成
         event(new Registered($user = $this->update($request->all())));
-        $this->guard()->login( $user );
 
-        return response($user, 201);
+        if (empty($user)) {
+            // エラー返却
+            return response(["errors" => ["email" => ['登録に失敗しました。理由が不明な場合、お問い合わ画面よりお問い合わせください。']]], 422);
+        } else {
+            // ログインし成功
+            $this->guard()->login( $user );
+            return response($user, 201);
+        }
+
     }
 
     /**
@@ -162,19 +169,29 @@ class RegisterController extends Controller
     protected function update(array $data)
     {
         $user = User::where('id', $data['id'])->first();
-        $user->name = $data['name'];
-        $user->password = Hash::make($data['password']);
-        $user->states = 1;
 
-        DB::beginTransaction();
-        try {
-            $user->save();
-            DB::commit();
-        } catch (\Exception $exception) {
-            DB::rollBack();
-            throw $exception;
+        // 仮登録の場合、本登録を行う
+        if ($user['states'] == 0) {
+            $user->name = $data['name'];
+            $user->password = Hash::make($data['password']);
+            $user->states = 1;
+    
+            DB::beginTransaction();
+            try {
+                $user->save();
+                DB::commit();
+            } catch (\Exception $exception) {
+                DB::rollBack();
+                throw $exception;
+            }
+    
+            return $user;
+
+        // 仮登録以外の場合
+        } else {
+            return null;
         }
 
-        return $user;
+
     }
 }
