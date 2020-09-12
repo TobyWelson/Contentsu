@@ -16,7 +16,7 @@ class Post extends Model
      *
      * @var string
      */
-    protected $table = 'contentsposts';
+    protected $table = 'contents_posts';
 
 
     /** JSONに含めるアクセサ */
