@@ -165,7 +165,9 @@ return [
         /*
          * Package Service Providers...
          */
-
+        TCG\Voyager\VoyagerServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,   
         /*
          * Application Service Providers...
          */
