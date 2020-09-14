@@ -43,25 +43,26 @@ export default {
   },
   methods: {
     async onDeleteClick () {
-        this.loading = true;
-        var result = await this.$store.dispatch('post/delete', this.post_id);
-        this.loading = false;
-        this.isShowDeleteDialog = false;
-        if (result != FAILURE) {
-          this.$store.commit('post/setLastPage', 0);
-          this.$store.commit('post/setPage', 0);
-          this.$store.commit('post/setPosts', []);
-          this.$router.push('/').catch(err => {})
-          this.$store.commit('message/setContent', {
-            content: `記事(${this.post_title})が削除されました`,
-            timeout: 4000
-            })
-        } else {
-          this.$store.commit('message/setContent', {
-            content: `記事(${this.post_title})の削除に失敗しました`,
-            timeout: 4000
+      if (this.loading) return;
+      this.loading = true;
+      var result = await this.$store.dispatch('post/delete', this.post_id);
+      this.loading = false;
+      this.isShowDeleteDialog = false;
+      if (result != FAILURE) {
+        this.$store.commit('post/setLastPage', 0);
+        this.$store.commit('post/setPage', 0);
+        this.$store.commit('post/setPosts', []);
+        this.$router.push('/').catch(err => {})
+        this.$store.commit('message/setContent', {
+          content: `記事(${this.post_title})が削除されました`,
+          timeout: 4000
           })
-        }
+      } else {
+        this.$store.commit('message/setContent', {
+          content: `記事(${this.post_title})の削除に失敗しました`,
+          timeout: 4000
+        })
+      }
     }
   }
 }

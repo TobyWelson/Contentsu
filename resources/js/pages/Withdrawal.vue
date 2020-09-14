@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     async withdrawaler () {
+      if (this.loading) return;
       this.loading = true;
       await this.$store.dispatch('auth/withdrawaler');
       this.loading = false;

@@ -5,7 +5,7 @@
       color="orange light-4"
       v-model="inputKeyword"
       @input="setText"
-      label="例)タイトル名"
+      label="例)ハロウィン"
       flat
       solo
       hide-details

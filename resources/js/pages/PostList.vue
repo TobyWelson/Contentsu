@@ -1,10 +1,10 @@
 <template>
   <v-container class="post_list pa-0 mb-10">
     <v-row>
-      <!-- メニュー -->
+      <!-- PCメニュー -->
       <v-col xl="2" lg="3" md="3" sm="0" cols="0" class="pc_menu hidden-sm-and-down">
         <div class="menu_layout px-5 py-2">
-          <div class="px-2 pt-3">キーワード検索</div>
+          <div class="px-2 pt-3">タイトル検索</div>
           <SearchTextFilter @reset="reset"/>
           <div class="px-2 pt-3">カテゴリー検索</div>
           <SearchFilter @reset="reset"/>
@@ -29,7 +29,7 @@
       <div class="upper" @click="onMenuClick">
       </div>
       <div class="menu">
-        <div class="px-2 pt-3">キーワード検索</div>
+        <div class="px-2 pt-3">タイトル検索</div>
         <SearchTextFilter :keyword="this.getText" @reset="reset"/>
         <div class="px-2 pt-3">カテゴリー検索</div>
         <SearchFilter @reset="reset" class="pb-3"/>

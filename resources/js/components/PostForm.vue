@@ -75,6 +75,7 @@ export default {
       this.url = ''
     },
     async submit () {
+      if (this.loading) return;
       this.loading = true
       const formData = new FormData()
       formData.append('title', this.title)

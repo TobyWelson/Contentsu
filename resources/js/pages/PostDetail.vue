@@ -1,5 +1,8 @@
 <template>
   <div v-if="post" class="post_detail mt-2">
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate :size="80" :width="7" color="deep-orange lighten-2"></v-progress-circular>
+    </v-overlay>
     <v-row>
       <!-- 動画 -->
       <v-col xl="9" lg="9" md="9" sm="0" cols="0" class="video_layout px-2  py-0">
@@ -85,16 +88,20 @@ export default {
       post: null,
       commentContent: '',
       commentErrors: null,
+      loading: false,
     }
   },
   methods: {
     // コメント投稿
     async addComment () {
+      if (this.loading) return;
+      this.loading = true;
       var data = {
         id: this.id,
         comment: this.commentContent,
       }
       var response = await this.$store.dispatch('comments/add', data)
+      this.loading = false;
       if (response != FAILURE) {
         this.commentContent = ''
         this.post.comments = [
