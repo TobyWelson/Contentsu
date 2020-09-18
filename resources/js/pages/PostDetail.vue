@@ -6,44 +6,40 @@
     <v-row>
       <!-- 動画 -->
       <v-col xl="9" lg="9" md="9" sm="0" cols="0" class="video_layout px-2  py-0">
-        <v-card flat>
-            <Video :videoUrl="post.url"/>
-            <v-card-title class="pa-2 detail_title font-weight-bold">{{ post.title }}</v-card-title>
-            <v-card-actions class="pr-1 py-1">
-              <span class="url"><a :href="`${ getUrl(post.url) }`" target="_brank">{{ post.url }}</a></span>
-            </v-card-actions>
-            <v-divider></v-divider>
-            <v-card-actions class="pa-1">
-              <v-icon>mdi-account</v-icon><span class="user">{{ post.owner.name }}</span>
-              <v-spacer></v-spacer>
-              <div class="menu_icons">
-                <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
-                <v-btn icon v-if="isPostCreateUser" color="error" @click="showDelete"><v-icon>mdi-delete</v-icon></v-btn>
-              </div>
-            </v-card-actions>
-        </v-card>
-      </v-col>
-      <!-- 詳細・コメント -->
-      <v-col xl="3" lg="3" md="3" sm="12" cols="12" class="detail_layout px-0 py-0">
-        <v-divider></v-divider>
-        <v-card-actions class="detail py-2 px-0">
+        <Video :videoUrl="post.url"/>
+        <v-card-title class="pa-2 detail_title font-weight-bold">{{ post.title }}</v-card-title>
+        <v-card-actions class="pr-1 py-1">
+          <span class="url"><a :href="`${ getUrl(post.url) }`" target="_brank">{{ post.url }}</a></span>
           <v-spacer></v-spacer>
-          <div><v-icon color="orange">mdi-folder</v-icon>{{ categories.filter(e => e.id == post.category)[0]['categoryName'] }}</div>
-          <v-spacer></v-spacer>
-          <div><v-icon color="blue">mdi-eye</v-icon>{{ post.view_count }}</div>
-          <v-spacer></v-spacer>
-          <div><v-icon color="#e4406f">mdi-heart</v-icon>{{ post.likes_count }}</div>
-          <v-spacer></v-spacer>
+          <div class="menu_icons">
+            <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
+            <v-btn icon v-if="isPostCreateUser" color="error" @click="showDelete"><v-icon>mdi-delete</v-icon></v-btn>
+          </div>
         </v-card-actions>
         <v-divider></v-divider>
-        <div class="comments_layout pt-5">
+        <v-card-actions class="px-1 pt-2 pb-0 detail">
+          <v-icon small>mdi-account</v-icon><span class="user">{{ post.owner.name }}</span>
+          <v-spacer></v-spacer>
+          <div class="hidden-sm-and-down"><v-icon small color="orange">mdi-folder</v-icon>{{ categories.filter(e => e.id == post.category)[0]['categoryName'] }}</div>
+          <v-icon small color="blue" class="pl-2">mdi-eye</v-icon>{{ post.view_count }}
+          <v-icon small color="#e4406f" class="pl-2">mdi-heart</v-icon>{{ post.likes_count }}
+        </v-card-actions>
+        <v-card-actions class="px-1 pt-0 pb-2 detail hidden-md-and-up">
+          <v-spacer></v-spacer>
+          <v-icon small color="orange">mdi-folder</v-icon>{{ categories.filter(e => e.id == post.category)[0]['categoryName'] }}
+        </v-card-actions>
+      </v-col>
+      <!-- コメント -->
+      <v-col xl="3" lg="3" md="3" sm="12" cols="12" class="detail_layout px-0 py-0">
+        <v-divider></v-divider>
+        <div class="comments_layout pt-2">
           <form v-if="isLogin" @submit.prevent="addComment" class="py-1">
             <div v-if="commentsErrors" class="errors">
               <ul v-if="commentsErrors.content">
                 <li v-for="msg in commentsErrors.content" :key="msg">{{ msg }}</li>
               </ul>
             </div>
-            <div class="comment_submit">
+            <div class="comment_submit px-1">
               <input type="text" class="input form__item ma-0" v-model="commentContent" placeholder="コメント入力..."/>
               <div class="submit">
                 <v-btn icon type="submit" color="warning"><v-icon small>mdi-lead-pencil</v-icon></v-btn>
@@ -51,13 +47,21 @@
             </div>
           </form>
           <ul v-if="post.comments.length > 0" class="comments pa-0" :class="{ 'tiktok_comments': isVideoTypeTiktok}">
-            <li v-for="comment in post.comments" :key="comment.id" class="pb-4 pl-2 pr-2">
+            <li v-for="(comment, index) in post.comments" :key="comment.id" class="pb-4 pl-2 pr-2">
               <v-divider></v-divider>
               <div class="pt-2 user">{{ comment.author.name }}&nbsp;{{ dateFormat(comment.created_at) }}</div>
-              <div class="comment">{{ comment.content }}</div>
+              <div class="comment">
+                <v-btn icon color="error" v-if="isShowCommentDelete(comment.author.id)" @click="deleteComment(comment.id, index)" class="comment_delete"><v-icon small>mdi-delete</v-icon></v-btn>
+                {{ comment.content }}
+              </div>
             </li>
           </ul>
-          <p v-else class="pa-2">コメントはありません。</p>
+          <ul v-else class="comments pa-0" :class="{ 'tiktok_comments': isVideoTypeTiktok}">
+            <li class="pb-4 pl-2 pr-2">
+              <v-divider></v-divider>
+              <div class="comment">コメントはありません。</div>
+            </li>
+          </ul>
         </div>
       </v-col>
     </v-row>
@@ -110,6 +114,20 @@ export default {
         ]
       }
     },
+    // コメント削除
+    async deleteComment (commentId, index) {
+      if (this.loading) return;
+      this.loading = true;
+      var data = {
+        id: this.id,
+        commentId: commentId,
+      }
+      var response = await this.$store.dispatch('comments/delete', data)
+      this.loading = false;
+      if (response != FAILURE) {
+        this.post.comments.splice(index, 1);
+      }
+    },
     // いいね追加
     async like () {
       const response = await axios.put(`/api/posts/${this.id}/like`)
@@ -156,6 +174,14 @@ export default {
     // URL取得
     getUrl(date) {
       return date.replace('sp.', '');
+    },
+    isShowCommentDelete(commentUserId) {
+      var userId = this.$store.getters['auth/userid']
+      if(userId == commentUserId) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   computed: {

@@ -1,4 +1,4 @@
-import { UNPROCESSABLE_ENTITY, CREATED, FAILURE, SUCCESS  } from '../util'
+import { UNPROCESSABLE_ENTITY, CREATED, FAILURE, NO_CONTENT, SUCCESS } from '../util'
 
 // コメントAPI を呼び出す アクション
 const actions = {
@@ -18,6 +18,17 @@ const actions = {
       return FAILURE
     }
     return response.data
+  },
+  // 削除
+  async delete (context, data) {
+    var response = await axios.delete(`/api/posts/${data.id}/comments/${data.commentId}/`)
+    // その他のエラー
+    if (response.status === NO_CONTENT) {
+      return SUCCESS
+    } else {
+      this.$store.commit('error/setCode', response.status)
+      return FAILURE
+    }
   }
 };
 

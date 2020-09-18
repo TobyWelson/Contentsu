@@ -33,6 +33,6 @@ class WithdrawalerController extends Controller
         $user = Auth::user();
         Auth::logout();
         $user->delete();
-        return response()->json();
+        return abort(204);
     }
 }

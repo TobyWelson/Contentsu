@@ -1,4 +1,4 @@
-import { OK, CREATED, UNPROCESSABLE_ENTITY, SUCCESS, FAILURE } from '../util'
+import { OK, CREATED, NO_CONTENT, UNPROCESSABLE_ENTITY, SUCCESS, FAILURE } from '../util'
 
 
 /**
@@ -101,7 +101,7 @@ const actions = {
     context.commit('setApiStatus', null)
     const response = await axios.delete('/api/withdrawaler')
 
-    if (response.status === OK) {
+    if (response.status === NO_CONTENT) {
       context.commit('setApiStatus', true)
       context.commit('setUser', null)
       return SUCCESS

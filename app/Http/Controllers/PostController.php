@@ -142,6 +142,19 @@ class PostController extends Controller
     }
 
     /**
+     * コメント削除
+     * @param Post $post
+     * @param StoreComment $request
+     * @return HTTPステータス
+     */
+    public function deleteComment(Post $post, string $commentId)
+    {
+        $userId = Auth::user()->id;
+        Comment::where('id', $commentId)->where('user_id', $userId)->first()->delete();
+        return abort(204);
+    }
+
+    /**
      * いいね
      * @param string $id
      * @return array

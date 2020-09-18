@@ -25,7 +25,7 @@ Route::post('/pre-register', 'Auth\RegisterController@preRegister');
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
 
 // 退会
-Route::delete('/withdrawaler', 'Auth\WithdrawalerController@withdrawaler')->name('withdrawaler');
+Route::delete('/withdrawaler', 'Auth\WithdrawalerController@withdrawaler');
 
 // ログイン
 Route::post('/login', 'Auth\LoginController@login')->name('login');
@@ -50,6 +50,9 @@ Route::get('/posts/{id}/show', 'PostController@show')->name('post.show');
 
 // コメント
 Route::post('/posts/{post}/comments', 'PostController@addComment')->name('post.comment');
+
+// コメント削除
+Route::delete('/posts/{post}/comments/{id}', 'PostController@deleteComment');
 
 // いいね
 Route::put('/posts/{id}/like', 'PostController@like')->name('post.like');
