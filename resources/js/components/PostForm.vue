@@ -89,6 +89,7 @@ export default {
         this.reset()
         this.isShowPostDialog = false
         this.$router.push(`/posts/${result}`)
+        this.$router.go({path: this.$router.currentRoute.path, force: true})
         this.$store.commit('message/setContent', {
           content: '記事が投稿されました',
           timeout: 4000
