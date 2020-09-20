@@ -32,7 +32,8 @@
             <v-text-field
               label="URL"
               v-model="url"
-              hint="YouTube, niconico, tiktokのURLが転載対象です。"
+              hint="YouTube, ニコニコ動画, TiktokのURLが転載対象です。"
+              persistent-hint
               outlined/>
           </v-container>
           <v-row justify="center" align-content="center">
