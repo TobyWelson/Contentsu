@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { MATCH_URL_YOUTU, MATCH_URL_YOUTUBE, MATCH_URL_TIKTOK, MATCH_URL_NICOVIDEO, MATCH_URL_NICO, MATCH_URL_NICOSP } from '../util'
+import { MATCH_URL_YOUTU, MATCH_URL_YOUTUBE, MATCH_URL_TIKTOK, MATCH_URL_NICOVIDEO, MATCH_URL_NICO, MATCH_URL_NICO_SP } from '../util'
 import { THUMBNAIL_URL_YOUTUBE, THUMBNAIL_URL_YOUTUBE_IMAGE, THUMBNAIL_URL_NICONICO } from '../util'
 
 export default {
@@ -40,7 +40,7 @@ export default {
 
       // NicoNico
       }
-      else if (this.videoUrl.match(MATCH_URL_NICOSP)
+      else if (this.videoUrl.match(MATCH_URL_NICO_SP)
         || this.videoUrl.match(MATCH_URL_NICOVIDEO)) {
         var spritId = this.videoUrl.split('watch/')[1].replace(/\?.*/g, '');
         var videoId = spritId.replace(/[^0-9]/g, '');
@@ -54,7 +54,7 @@ export default {
       return "";
     },
     isVideoTypeNiconico : function() {
-      if (this.videoUrl.match(MATCH_URL_NICOSP)
+      if (this.videoUrl.match(MATCH_URL_NICO_SP)
         || this.videoUrl.match(MATCH_URL_NICOVIDEO)
         || this.videoUrl.match(MATCH_URL_NICO)) {
         return true;

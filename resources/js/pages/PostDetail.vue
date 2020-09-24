@@ -9,7 +9,7 @@
         <Video :videoUrl="post.url"/>
         <v-card-title class="pa-2 detail_title font-weight-bold">{{ post.title }}</v-card-title>
         <v-card-actions class="pr-1 py-1">
-          <span class="url"><a :href="`${ getUrl(post.url) }`" target="_brank">{{ post.url }}</a></span>
+          <span class="url"><a :href="`${ getUrl(post.url) }`" target="_brank">{{ getUrl(post.url) }}</a></span>
           <v-spacer></v-spacer>
           <div class="menu_icons">
             <v-btn icon v-if="isLogin" @click="onLikeClick" class="button button--like" :class="{ 'button--liked': post.liked_by_user }"><v-icon>mdi-heart</v-icon></v-btn>
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { MATCH_URL_TIKTOK } from '../util'
+import { MATCH_URL_TIKTOK, MATCH_URL_NICO_SP } from '../util'
 import { OK, FAILURE } from '../util'
 import Video from '../components/Video.vue'
 import Delete from '../components/Delete.vue'
@@ -173,7 +173,13 @@ export default {
     },
     // URL取得
     getUrl(date) {
-      return date.replace('sp.', '');
+      if (this.post.url.match(MATCH_URL_TIKTOK)) {
+        return date.split('?')[0];
+      } else if (this.post.url.match(MATCH_URL_NICO_SP)) {
+        return date.replace('sp.', '');
+      } else {
+        return date;
+      }
     },
     isShowCommentDelete(commentUserId) {
       var userId = this.$store.getters['auth/userid']
