@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { MATCH_URL_YOUTU, MATCH_URL_YOUTUBE, MATCH_URL_TIKTOK, MATCH_URL_NICOVIDEO, MATCH_URL_NICO, MATCH_URL_NICO_SP } from '../util'
+import { MATCH_URL_YOUTU, MATCH_URL_YOUTUBE, MATCH_URL_TIKTOK, MATCH_URL_TIKTOK_2, MATCH_URL_NICOVIDEO, MATCH_URL_NICO, MATCH_URL_NICO_SP } from '../util'
 import { THUMBNAIL_URL_YOUTUBE, THUMBNAIL_URL_YOUTUBE_IMAGE, THUMBNAIL_URL_NICONICO } from '../util'
 
 export default {
@@ -35,12 +35,12 @@ export default {
         return THUMBNAIL_URL_YOUTUBE + videoId + THUMBNAIL_URL_YOUTUBE_IMAGE;
 
       // TikTok
-      } else if (this.videoUrl.match(MATCH_URL_TIKTOK)) {
+      } else if (this.videoUrl.match(MATCH_URL_TIKTOK)
+        || this.videoUrl.match(MATCH_URL_TIKTOK_2)) {
         return require('../../img/tiktok.png');
 
       // NicoNico
-      }
-      else if (this.videoUrl.match(MATCH_URL_NICO_SP)
+      } else if (this.videoUrl.match(MATCH_URL_NICO_SP)
         || this.videoUrl.match(MATCH_URL_NICOVIDEO)) {
         var spritId = this.videoUrl.split('watch/')[1].replace(/\?.*/g, '');
         var videoId = spritId.replace(/[^0-9]/g, '');

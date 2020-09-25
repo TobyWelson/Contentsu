@@ -17,6 +17,7 @@ export const FAILURE = false
 export const MATCH_URL_YOUTU = /youtu\.be/
 export const MATCH_URL_YOUTUBE = /youtube\.com/
 export const MATCH_URL_TIKTOK = /www\.tiktok\.com/
+export const MATCH_URL_TIKTOK_2 = /t\.tiktok\.com/
 export const MATCH_URL_NICOVIDEO = /nicovideo\.jp/
 export const MATCH_URL_NICO = /nico\.ms/
 export const MATCH_URL_NICO_SP = /sp\.nicovideo\.jp/

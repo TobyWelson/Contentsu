@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { MATCH_URL_TIKTOK, MATCH_URL_NICO_SP } from '../util'
+import { MATCH_URL_TIKTOK, MATCH_URL_TIKTOK_2, MATCH_URL_NICO_SP } from '../util'
 import { OK, FAILURE } from '../util'
 import Video from '../components/Video.vue'
 import Delete from '../components/Delete.vue'
@@ -173,7 +173,8 @@ export default {
     },
     // URL取得
     getUrl(date) {
-      if (this.post.url.match(MATCH_URL_TIKTOK)) {
+      if (this.post.url.match(MATCH_URL_TIKTOK)
+        || this.post.url.match(MATCH_URL_TIKTOK_2)) {
         return date.split('?')[0];
       } else if (this.post.url.match(MATCH_URL_NICO_SP)) {
         return date.replace('sp.', '');
@@ -203,7 +204,8 @@ export default {
       }
     },
     isVideoTypeTiktok() {
-      if (this.post.url.match(MATCH_URL_TIKTOK)) {
+      if (this.post.url.match(MATCH_URL_TIKTOK)
+        || this.post.url.match(MATCH_URL_TIKTOK_2)) {
         return true;
       } else {
         return false;
