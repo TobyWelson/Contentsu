@@ -34,6 +34,8 @@ a {text-decoration: none;color: #222!important;}
 .post_list .post .post_hover a:hover .thumbnail{transition: filter 0.8s ease;filter: blur(2px) brightness(1.2);animation-name: blur;animation-duration: 5s;}
 .post_list .comment_submit{position: relative;}
 .post_list .comment_submit .submit{position: absolute;top: 1rem;right: 0.7rem;}
+.post_random_list{overflow-x: auto;white-space: nowrap;-webkit-overflow-scrolling: touch;padding: 0;}
+.post_random_list .post_random{display: inline-block;}
 /* post detail */
 .post_detail .video_layout .detail_title{font-size: 1.3rem;}
 .post_detail .video_layout .user{color: #706e6e;}

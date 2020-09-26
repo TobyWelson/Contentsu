@@ -89,16 +89,27 @@ class PostController extends Controller
             $posts = Post::where('title','like','%'.$title.'%')
             ->with(['owner', 'likes'])
             ->orderBy(Post::CREATED_AT, 'desc')->paginate();
-        } else if($category == '2') {
-            $posts = Post::where('title','like','%'.$title.'%')
-            ->with(['owner', 'likes'])
-            ->orderBy(Post::raw('RANDOM()'))->paginate();
         } else {
             $posts = Post::where('category', $category)
             ->where('title','like','%'.$title.'%')
             ->with(['owner', 'likes'])
             ->orderBy(Post::CREATED_AT, 'desc')->paginate();
         }
+        return $posts;
+    }
+
+    /**
+     * ランダム表示
+     * @param Request $request
+     * @return posts
+     */
+    public function randomShowCase()
+    {
+
+        $posts = Post::with(['owner', 'likes'])
+        ->orderBy(Post::raw('RANDOM()'))
+        ->limit(5)
+        ->get();
         return $posts;
     }
 

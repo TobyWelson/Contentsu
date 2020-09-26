@@ -12,13 +12,16 @@
       </v-col>
       <!-- 投稿リスト -->
       <v-col xl="10" lg="9" md="9" sm="12" cols="12">
+        <div class="post_random_list">
+          <Video class="post_random" v-for="randomPost in randomViewposts" :key="randomPost.id" :item="randomPost" :videoUrl="randomPost.url" :isAuto="true"/>
+        </div>
         <v-layout wrap class="post_layout">
           <Post v-for="post in viewposts" :key="post.id" :item="post" />
         </v-layout>
         <infinite-loading ref="infiniteLoading" @infinite="infiniteLoad">
           <div slot="circle">Loading...</div>
           <!-- ステータスがcompleteに更新されると下記が表示される -->
-          <span slot="no-more">-----検索結果は以上です-----</span>
+          <span slot="no-more"></span>
           <!-- 結果が存在しない場合下記が表示される -->
           <span slot="no-results">-----検索結果はありません-----</span>
         </infinite-loading>
@@ -47,6 +50,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 import FooterToolbar from '../components/FooterToolbar'
 import { OK, CREATED, UNPROCESSABLE_ENTITY } from '../util'
 import { mapState } from 'vuex'
+import Video from '../components/Video.vue'
 
 export default {
   components: {
@@ -54,7 +58,8 @@ export default {
     SearchFilter,
     SearchTextFilter,
     InfiniteLoading,
-    FooterToolbar
+    FooterToolbar,
+    Video,
   },
   methods: {
   /*
@@ -96,11 +101,22 @@ export default {
       this.$store.commit('post/setLastPage', 0);
       this.$store.commit('post/setPage', 0);
       this.$store.commit('post/setPosts', []);
+      this.$store.commit('post/setRandomPosts', []);
       this.$refs.infiniteLoading.stateChanger.reset();
       this.$store.dispatch('screen/closeMenu')
     },
     onMenuClick() {
       this.$store.dispatch('screen/onMenuClick')
+    },
+    async randomPost() {
+      this.$store.commit('post/setRandomPosts', []);
+      const response = await this.$store.dispatch('post/randomPost');
+      if (response == null) {
+          return false;
+      }
+      for (let i=0;i<response.length;i++) {
+        this.randomViewposts.push(response[i]);
+      }
     }
   },
   computed: {
@@ -115,9 +131,18 @@ export default {
     },
     ...mapState({
         viewposts: state => state.post.viewposts,
+        randomViewposts: state => state.post.randomViewposts,
         page: state => state.post.page,
         lastPage: state => state.post.lastPage,
     })
   },
+  watch: {
+    $route: {
+      async handler () {
+        await this.randomPost()
+      },
+      immediate: true
+    }
+  }
 }
 </script>

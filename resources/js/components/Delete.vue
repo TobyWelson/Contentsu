@@ -52,6 +52,7 @@ export default {
         this.$store.commit('post/setLastPage', 0);
         this.$store.commit('post/setPage', 0);
         this.$store.commit('post/setPosts', []);
+        this.$store.commit('post/setRandomPosts', []);
         this.$router.push('/').catch(err => {})
         this.$store.commit('message/setContent', {
           content: `記事(${this.post_title})が削除されました`,

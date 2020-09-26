@@ -20,6 +20,15 @@ const actions = {
       context.commit('error/setCode', response.status, { root: true })
     }
   },
+  // ランダム投稿取得
+  async randomPost (context, data) {
+    var response = await axios.post('/api/randomShowCase')
+    if (response.status === OK) {
+      return response.data
+    } else {
+      context.commit('error/setCode', response.status, { root: true })
+    }
+  },
   // 投稿
   async posts (context, data) {
     var response = await axios.post('/api/posts', data)
@@ -50,6 +59,9 @@ const mutations = {
   setPosts(state, viewposts) {
     state.viewposts = viewposts;
   },
+  setRandomPosts(state, randomViewposts) {
+    state.randomViewposts = randomViewposts;
+  },
   setPage(state, page) {
     state.page = page;
   },
@@ -64,6 +76,7 @@ const mutations = {
 // 検索機能のカテゴリ状態を保持する category ステート
 const state = {
   viewposts: [],
+  randomViewposts: [],
   page: 0,
   lastPage: 0,
   postsErrorMessages: null
@@ -71,6 +84,7 @@ const state = {
 
 const getters = {
   viewposts: state => state.viewposts,
+  randomViewposts: state => state.randomViewposts,
 }
 
 export default {
