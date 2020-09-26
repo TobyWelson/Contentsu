@@ -21,6 +21,7 @@
             <v-text-field
               label="タイトル"
               v-model="title"
+              v-on:keyup.enter="submit"
               outlined/>
             <v-select
               label="カテゴリ"
@@ -28,12 +29,14 @@
               :items="categories"
               item-text="categoryName"
               item-value="id"
+              v-on:keyup.enter="submit"
               outlined></v-select>
             <v-text-field
               label="URL"
               v-model="url"
               hint="YouTube, ニコニコ動画, TiktokのURLが転載対象です。"
               persistent-hint
+              v-on:keyup.enter="submit"
               outlined/>
           </v-container>
           <v-row justify="center" align-content="center">

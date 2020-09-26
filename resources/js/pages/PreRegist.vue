@@ -20,7 +20,8 @@
               prepend-icon="mdi-email"
               v-model="registerForm.email"
               outlined
-              placeholder="xxx@xxx.com"/>
+              placeholder="xxx@xxx.com"
+              v-on:keyup.enter="preRegister"/>
           </v-container>
           <v-row justify="center" align-content="center">
             <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="preRegister">メール送信</v-btn>

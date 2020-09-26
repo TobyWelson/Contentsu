@@ -18,7 +18,8 @@
               prepend-icon="mdi-email"
               v-model="loginForm.email"
               outlined
-              placeholder="xxx@xxx.com"/>
+              placeholder="xxx@xxx.com"
+              v-on:keyup.enter="login"/>
             <v-text-field
               id="login-password"
               :type="isShowPassword ? 'text' : 'password'"
@@ -29,7 +30,8 @@
               @click:append="isShowPassword= !isShowPassword"
               outlined
               placeholder="英数字 8桁以上"
-              autocomplete="password"/>
+              autocomplete="password"
+              v-on:keyup.enter="login"/>
           </v-container>
           <v-row justify="center" align-content="center">
             <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="login">ログイン</v-btn>

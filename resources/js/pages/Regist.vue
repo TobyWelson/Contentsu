@@ -19,7 +19,8 @@
               prepend-icon="mdi-account"
               v-model="registerForm.name"
               outlined
-              placeholder="xxx"/>
+              placeholder="xxx"
+              v-on:keyup.enter="register"/>
             <v-text-field
               id="password"
               :type="'password'"
@@ -28,7 +29,8 @@
               prepend-icon="mdi-lock"
               outlined
               placeholder="英数字 8桁以上"
-              autocomplete="password"/>
+              autocomplete="password"
+              v-on:keyup.enter="register"/>
             <v-text-field
               id="password-confirmation"
               :type="'password'"
@@ -37,7 +39,8 @@
               prepend-icon="mdi-lock-reset"
               outlined
               placeholder="英数字 8桁以上"
-              autocomplete="password"/>
+              autocomplete="password"
+              v-on:keyup.enter="register"/>
           </v-container>
           <v-row justify="center" align-content="center">
             <v-btn depressed rounded width="90%" height="45" color="warning" class="font-weight-bold title" v-on:click="register">登録</v-btn>
