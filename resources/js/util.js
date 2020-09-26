@@ -16,10 +16,11 @@ export const FAILURE = false
 /** URLマッチ条件 */
 export const MATCH_URL_YOUTU = /youtu\.be/
 export const MATCH_URL_YOUTUBE = /youtube\.com/
-export const MATCH_URL_TIKTOK = /tiktok\.com/
+export const MATCH_URL_TIKTOK = /www\.tiktok\.com/
+export const MATCH_URL_TIKTOK_2 = /t\.tiktok\.com/
 export const MATCH_URL_NICOVIDEO = /nicovideo\.jp/
 export const MATCH_URL_NICO = /nico\.ms/
-export const MATCH_URL_NICOSP = /sp\.nicovideo\.jp/
+export const MATCH_URL_NICO_SP = /sp\.nicovideo\.jp/
 /** 動画URL */
 export const VIDEO_URL_YOUTUBE = 'http://www.youtube.com/embed/'
 export const VIDEO_URL_TIKTOK = 'https://www.tiktok.com/embed/'

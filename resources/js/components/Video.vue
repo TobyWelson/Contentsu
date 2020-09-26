@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { MATCH_URL_YOUTU, MATCH_URL_YOUTUBE, MATCH_URL_TIKTOK, MATCH_URL_NICOVIDEO, MATCH_URL_NICO, MATCH_URL_NICOSP } from '../util'
+import { MATCH_URL_YOUTU, MATCH_URL_YOUTUBE, MATCH_URL_TIKTOK, MATCH_URL_TIKTOK_2, MATCH_URL_NICOVIDEO, MATCH_URL_NICO, MATCH_URL_NICO_SP } from '../util'
 import { VIDEO_URL_YOUTUBE, VIDEO_URL_TIKTOK, VIDEO_URL_NICONICO } from '../util'
 
 export default {
@@ -30,12 +30,13 @@ export default {
         return VIDEO_URL_YOUTUBE + spritId.split('&')[0];
 
       // TikTok
-      } else if (this.videoUrl.match(MATCH_URL_TIKTOK)) {
+      } else if (this.videoUrl.match(MATCH_URL_TIKTOK)
+        || this.videoUrl.match(MATCH_URL_TIKTOK_2)) {
         var spritId = this.videoUrl.split('video/')[1];
         return VIDEO_URL_TIKTOK + spritId.split('?')[0];
       
       // NicoNico
-      } else if (this.videoUrl.match(MATCH_URL_NICOVIDEO) || this.videoUrl.match(MATCH_URL_NICOSP)) {
+      } else if (this.videoUrl.match(MATCH_URL_NICOVIDEO) || this.videoUrl.match(MATCH_URL_NICO_SP)) {
         var spritId = this.videoUrl.split('watch/')[1].replace(/\?.*/g, '');
         return VIDEO_URL_NICONICO + spritId.split('?')[0];
       } else if (this.videoUrl.match(MATCH_URL_NICO)) {
@@ -44,10 +45,12 @@ export default {
       return "";
     },
     isVideoTypeTiktok : function() {
-      if (this.videoUrl.match(MATCH_URL_TIKTOK)) {
+      if (this.videoUrl.match(MATCH_URL_TIKTOK)
+        || this.videoUrl.match(MATCH_URL_TIKTOK_2)) {
         return true;
+      } else {
+        return false;
       }
-      return false;
     }
   }
 }

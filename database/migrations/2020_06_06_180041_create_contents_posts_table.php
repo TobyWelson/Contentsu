@@ -19,7 +19,7 @@ class CreateContentsPostsTable extends Migration
             $table->string('title', 255);
             $table->string('category', 2);
             $table->unsignedInteger('view_count');
-            $table->string('url', 300);
+            $table->string('url', 900);
             $table->timestamps();
     
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
