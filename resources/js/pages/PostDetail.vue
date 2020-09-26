@@ -31,6 +31,7 @@
       </v-col>
       <!-- コメント -->
       <v-col xl="3" lg="3" md="3" sm="12" cols="12" class="detail_layout px-0 py-0">
+        広告表示
         <v-divider></v-divider>
         <div class="comments_layout pt-2">
           <form v-if="isLogin" @submit.prevent="addComment" class="py-1">

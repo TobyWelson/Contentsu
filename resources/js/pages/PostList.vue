@@ -9,6 +9,7 @@
           <div class="px-2 pt-3">カテゴリー検索</div>
           <SearchFilter @reset="reset"/>
         </div>
+        広告表示
       </v-col>
       <!-- 投稿リスト -->
       <v-col xl="10" lg="9" md="9" sm="12" cols="12">
