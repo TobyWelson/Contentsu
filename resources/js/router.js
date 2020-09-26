@@ -7,9 +7,10 @@ import PreRegist from './pages/PreRegist.vue';
 import PreRegistComplete from './pages/PreRegistComplete.vue';
 import Regist from './pages/Regist.vue';
 import Withdrawal from './pages/Withdrawal.vue';
-import SystemError from './pages/errors/System.vue'
-import PostDetail from './pages/PostDetail.vue'
-import Vuetify from '../../node_modules/vuetify/'
+import SystemError from './pages/errors/System.vue';
+import PostDetail from './pages/PostDetail.vue';
+import Vuetify from '../../node_modules/vuetify/';
+import MyPage from './pages/MyPage.vue';
 
 // ナビゲーションガード
 import store from './store'
@@ -71,6 +72,17 @@ const routes = [
   {
     path: '/withdrawal',
     component: Withdrawal,
+    beforeEnter (to, from, next) {
+      if (!store.getters['auth/check']) {
+        next('/')
+      } else {
+        next()
+      }
+    }
+  },
+  {
+    path: '/myPage',
+    component: MyPage,
     beforeEnter (to, from, next) {
       if (!store.getters['auth/check']) {
         next('/')

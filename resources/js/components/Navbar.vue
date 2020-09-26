@@ -4,9 +4,11 @@
     <v-navigation-drawer v-model="drawer" fixed temporary right>
       <v-container>
         <v-list-item v-if="isLogin">
-          <v-list-item-content>
-            <v-list-item-title class="title grey--text text--darken-2"><v-icon>mdi-account</v-icon>{{ username }}</v-list-item-title>
-          </v-list-item-content>
+          <router-link to="/myPage">
+            <v-list-item-content>
+              <v-list-item-title class="title grey--text text--darken-2"><v-icon>mdi-account</v-icon>{{ username }}</v-list-item-title>
+            </v-list-item-content>
+          </router-link>
         </v-list-item>
         <v-btn v-if="isLogin" outlined rounded @click="logout" class="font-weight-bold mb-3" width="100%" color="warning">ログアウト</v-btn>
         <v-btn v-if="!isLogin" outlined rounded @click="showLogin" class="font-weight-bold mb-2 mt-1" width="100%" color="warning">ログイン</v-btn>
@@ -26,7 +28,9 @@
         </router-link>
       </div>
       <div v-if="isLogin" class="hidden-sm-and-down">
-        <v-icon>mdi-account</v-icon>{{ username }}
+        <router-link to="/myPage">
+          <v-icon>mdi-account</v-icon>{{ username }}
+        </router-link>
       </div>
       <v-spacer></v-spacer>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"/>
@@ -65,7 +69,7 @@ export default {
         { title: "特定商取引法に基づく表記", to: "/preRegist"},
         { title: "プライバシーポリシー", to: "/preRegist"},
         { title: "お問い合わせ", to: "/preRegist"},
-        { title: "退会", to: "/Withdrawal"},
+        { title: "退会", to: "/withdrawal"},
       ]
     }
   },
